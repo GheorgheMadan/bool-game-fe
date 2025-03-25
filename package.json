@@ -21,12 +21,22 @@
     "react-bootstrap": "^2.10.9",
     "react-dom": "^19.0.0",
 <<<<<<< HEAD
+<<<<<<< HEAD
     "react-icons": "^5.5.0",
     "react-router-dom": "^7.4.0"
 =======
     "react-router-dom": "^7.4.0",
     "styled-components": "^6.1.16"
 >>>>>>> b0d9d4d2e8ab613037fc2286d083a5801fd4bc0d
+=======
+<<<<<<< Updated upstream
+    "react-router-dom": "^7.4.0",
+    "styled-components": "^6.1.16"
+=======
+    "react-icons": "^5.5.0",
+    "react-router-dom": "^7.4.0"
+>>>>>>> Stashed changes
+>>>>>>> 295c698d9011e5152bcf8bf3d839c60b48aa7adb
   },
   "devDependencies": {
     "@eslint/js": "^9.21.0",
