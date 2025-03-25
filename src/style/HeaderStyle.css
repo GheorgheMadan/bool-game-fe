@@ -1,8 +1,6 @@
 header {
     margin: 0 auto;
-    width: 95%;
-    /* debug */
-    border: 1px solid red;
+    width: 80%;
     height: 80px;
 }
 
@@ -13,27 +11,114 @@ header .container-nav {
     justify-content: space-between;
 }
 
+.logo {
+    font-size: 30px;
+    font-weight: 700;
+}
 
 
-/* Tablet - min-width parte da qui */
-@media (min-width: 768px) {
-    header {
-        width: 80%;
 
+/* NAVBAR SEZIONE INPUT E BUTTON */
+.container-search {
+    position: relative;
+    display: flex;
+    align-items: center;
+    min-height: 30px;
+}
+
+/* BORDER BOTTOM INIZIALMENTE INVISIBILE */
+.container-search::after {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: rgb(201, 201, 201);
+
+}
+
+
+/* INPUT INIZIALMENTE NASCOSTO */
+.container-nav input {
+    border: none;
+    width: 0;
+    height: 40px;
+    padding: 0;
+    opacity: 0;
+    box-shadow: 0 4px 10px rgba(92, 92, 92, 0.2);
+    border-radius: 10px;
+}
+
+.container-nav button {
+    border: none;
+    background-color: white;
+}
+
+.container-icons {
+    display: flex;
+}
+
+.icon {
+    font-size: 20px;
+    margin-left: 15px;
+    cursor: pointer;
+}
+
+.font-container a {
+    color: black;
+}
+
+.icon:hover {
+    color: rgb(94, 10, 173);
+    transform: scale(1.2);
+}
+
+.active {
+    color: rgb(94, 10, 173);
+}
+
+.font-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.font-container span {
+    font-size: 10px;
+    margin-left: 8px;
+}
+
+/* ANIMAZIONE DELL'INPUT */
+@keyframes expandInput {
+    0% {
+        width: 0;
+        opacity: 0;
+        padding: 0;
     }
 
-    .burger-menu {
-        display: none;
+    100% {
+        width: 300px;
+        opacity: 1;
+        padding: 5px 10px;
     }
 }
 
-/* Desktop */
-@media (min-width: 1024px) {
-    header {
-        width: 80%;
+/* ANIMAZIONE DEL BORDER */
+@keyframes expandBorder {
+    0% {
+        width: 0;
     }
 
-    .burger-menu {
-        display: none;
+    100% {
+        width: 100%;
     }
+}
+
+/* ATTIVAZIONE ANIMAZIONI */
+.container-search input {
+    animation: expandInput 0.4s ease-in-out forwards;
+}
+
+.container-search::after {
+    animation: expandBorder 0.4s ease-in-out forwards;
 }

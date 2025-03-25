@@ -1,39 +1,37 @@
 import '../style/HeaderStyle.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars } from '@fortawesome/free-solid-svg-icons';
+import { faSearch, faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 import { useState } from 'react';
+import { NavLink } from 'react-router';
+
 
 export default function NavBar() {
 
-    // setto lo stato del componente EditMovieForm a false per non renderizzarlo all'avvio della pagina
     const [isOpen, setIsOpen] = useState(false)
+    // funzione per aprire la search bar 
+    function toggleSearch() {
+        setIsOpen(!isOpen);
+    }
 
-    // funzione per aprire il componente EditMovieForm
-    function openMenu() {
-        setIsOpen(true)
-    }
-    // funzione per chiudere il componente EditMovieForm
-    function closeMenu() {
-        setIsOpen(false)
-    }
 
     return (
         <>
             <div className='container-nav'>
-                <div>
-                    <FontAwesomeIcon icon={faBars} onClick={openMenu} className='burger-menu' />
-                    logo
+                <div className='logo'>
+                    Next Level Shop
                 </div>
-                <div>
-                    <input type="text" />
-                    <button>Cerca</button>
+                <div className='container-icons'>
+                    <div className={isOpen && 'container-search'}>
+                        {isOpen && <input type="text" placeholder='Cerca...' />}
+                        <button onClick={toggleSearch}><FontAwesomeIcon icon={faSearch} className='icon' /></button>
+
+                    </div>
+                    <div className='font-container'>
+                        <NavLink to='/cart'><FontAwesomeIcon icon={faShoppingCart} className='icon' /></NavLink>
+                        <span>Carrello</span>
+                    </div>
                 </div>
             </div>
-            {isOpen &&
-                <div>
-                    <FontAwesomeIcon icon={faBars} onClick={closeMenu} className='burger-menu' />
-                    <span>sezione playstation</span>
-                </div>}
         </>
     )
 }
