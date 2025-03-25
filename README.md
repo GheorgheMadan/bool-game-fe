@@ -7,3 +7,4 @@ Librerie installate:
     npm install bootstrap
     npm install axios
     npm install react-bootstrap bootstrap
+    npm install react-icons
