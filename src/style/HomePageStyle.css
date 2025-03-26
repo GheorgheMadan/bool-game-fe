@@ -47,6 +47,18 @@
     object-fit: contain;
 }
 
+.bundle-img,
+.bundle-img2,
+.game-img {
+    transition: transform 0.4s ease;
+}
+
+.bundle-img:hover,
+.bundle-img2:hover,
+.game-img:hover {
+    transform: translateY(-10px);
+}
+
 .bundle-title {
     font-size: 2.5rem;
     font-weight: bold;
