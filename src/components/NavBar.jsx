@@ -20,10 +20,14 @@ export default function NavBar() {
             <div className='container-nav'>
                 <div className='logo'>Next Level Shop</div>
                 <div className='container-link'>
-                    <NavLink to='/' className='icon'><FontAwesomeIcon icon={faHome} /></NavLink>
-                    <NavLink to='/playstation' className='icon'><FontAwesomeIcon icon={faPlaystation} /></NavLink>
-                    <NavLink to='/xbox' className='icon'><FontAwesomeIcon icon={faXbox} /></NavLink>
-                    <NavLink to='/nintendo' className='icon'>Nintendo</NavLink>
+                    <NavLink to='/' className='icon '><FontAwesomeIcon icon={faHome} /></NavLink>
+                    <NavLink to='/playstation' className='icon playstation'><FontAwesomeIcon icon={faPlaystation} /></NavLink>
+                    <NavLink to='/xbox' className='icon xbox'><FontAwesomeIcon icon={faXbox} /></NavLink>
+                    <NavLink to='/nintendo' className='icon'>
+                        <div className='nintendo'>
+                            <img src="../logo/nintendo_logo_icon.webp" alt="" />
+                        </div>
+                    </NavLink>
                 </div>
                 <div className='container-icons'>
                     <div className={`container-search ${isOpen ? 'open' : ''}`}>
@@ -32,7 +36,7 @@ export default function NavBar() {
                             <FontAwesomeIcon icon={faSearch} className='icon' />
                         </button>
                     </div>
-                    <div>
+                    <div className='container-cart'>
                         <NavLink to='/cart'>
                             <FontAwesomeIcon icon={faShoppingCart} className='icon' />
                         </NavLink>

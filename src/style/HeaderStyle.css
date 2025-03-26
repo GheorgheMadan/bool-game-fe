@@ -25,11 +25,52 @@ header .container-nav {
     align-items: center;
 }
 
+/* LOGO NINTENDO */
+.container-link img {
+    width: 24px;
+    margin-bottom: 2px;
+}
+
+.container-link a .nintendo.active {
+    background-color: red;
+    border-radius: 60%;
+}
+
+/* LOGO PLAYSTATION */
+.container-link .playstation.active {
+    color: rgba(7, 7, 168, 0.87);
+}
+
+/* LOGO XBOX */
+.container-link .xbox.active {
+    color: rgb(0, 117, 0);
+}
+
 .container-link a {
     color: black;
     text-decoration: none;
     font-weight: 600;
-    font-size: 15px;
+    font-size: 20px;
+    position: relative;
+    padding-bottom: 21px;
+    margin-top: 21px;
+}
+
+.container-link a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 5px;
+    background-color: rgb(94, 10, 173);
+    transform: scaleX(0);
+    transition:
+        transform 0.3s ease-in-out;
+}
+
+.container-link a:hover::after {
+    transform: scaleX(1);
 }
 
 a.active {
@@ -106,8 +147,9 @@ a.active {
     color: black;
 }
 
-.container-icons a.active {
+.container-cart a.active {
     color: rgb(94, 10, 173);
+    border: none;
 }
 
 
