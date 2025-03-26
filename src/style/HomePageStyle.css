@@ -38,24 +38,32 @@
 .game-img {
     width: 65%;
     object-fit: contain;
-    margin-top: 50px;
+    margin-top: 40px;
+}
+
+.game-img2 {
+    width: 50%;
+    object-fit: contain;
+    margin-top: 40px;
 }
 
 .bundle-img2 {
-    height: 100%;
+    height: 110%;
     width: 100%;
     object-fit: contain;
 }
 
 .bundle-img,
 .bundle-img2,
-.game-img {
+.game-img,
+.game-img2 {
     transition: transform 0.4s ease;
 }
 
 .bundle-img:hover,
 .bundle-img2:hover,
-.game-img:hover {
+.game-img:hover,
+.game-img2:hover {
     transform: translateY(-10px);
 }
 
@@ -69,14 +77,12 @@
 
 .container-text {
     position: absolute;
-    bottom: 30px;
-    right: 30px;
-    top: 270px;
+    bottom: 20px;
+    right: 0;
 }
 
 .container-text2 {
     position: absolute;
-    bottom: 30px;
-    left: 50px;
-    top: 350px;
+    bottom: 20px;
+    left: 0;
 }
