@@ -12,6 +12,7 @@ const Footer = () => {
   return (
     <div className="footer">
       <div className="sb_footer section_padding">
+        <div className="overlay"></div>
         <div className="sb_footer-links">
           <div className="sb_footer-links_div">
             <h4>SERVIZI</h4>
@@ -85,33 +86,33 @@ const Footer = () => {
 
         <div className="sb_footer-below">
           <div className="sb_footer-copyright">
-            © {new Date().getFullYear()} BoolGame. All right reserved.
+            <div> ©{new Date().getFullYear()} NextLevelShop. All right reserved.</div>
+            <ul>
+              <li>
+                <a href="/terms">
+                  <p>Terms & Conditions</p>
+                </a>
+              </li>
+              <li>
+                <a href="/privacy">
+                  <p>Privacy</p>
+                </a>
+              </li>
+              <li>
+                <a href="/security">
+                  <p>Security</p>
+                </a>
+              </li>
+              <li>
+                <a href="/cookie">
+                  <p>Cookie Declaration</p>
+                </a>
+              </li>
+            </ul>
           </div>
         </div>
-        <div className="sb_footer-below-links">
-          <a href="/terms">
-            <div>
-              <p>Terms & Conditions</p>
-            </div>
-          </a>
-          <a href="/privacy">
-            <div>
-              <p>Privacy</p>
-            </div>
-          </a>
-          <a href="/security">
-            <div>
-              <p>Security</p>
-            </div>
-          </a>
-          <a href="/cookie">
-            <div>
-              <p>Cookie Declaration</p>
-            </div>
-          </a>
-        </div>
       </div>
-    </div>
+    </div >
   );
 };
 
