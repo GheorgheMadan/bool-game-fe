@@ -6,6 +6,7 @@
 
 .section_padding {
     padding: 4rem 4rem;
+    position: relative;
 }
 
 .footer {
@@ -25,7 +26,7 @@
     bottom: 50px;
     left: 4%;
     width: 92%;
-    height: 33%;
+    height: 75%;
     z-index: 2;
 }
 
