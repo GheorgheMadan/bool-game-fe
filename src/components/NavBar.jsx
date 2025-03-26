@@ -4,7 +4,7 @@ import { faSearch, faShoppingCart, faHome } from "@fortawesome/free-solid-svg-ic
 import { faPlaystation, faXbox } from '@fortawesome/free-brands-svg-icons';
 import { useState } from 'react';
 import { NavLink } from 'react-router';
-
+import { BsNintendoSwitch } from "react-icons/bs";
 
 export default function NavBar() {
 
@@ -20,13 +20,11 @@ export default function NavBar() {
             <div className='container-nav'>
                 <div className='logo'>Next Level Shop</div>
                 <div className='container-link'>
-                    <NavLink to='/' className='icon '><FontAwesomeIcon icon={faHome} /></NavLink>
+                    <NavLink to='/' className='icon home'><FontAwesomeIcon icon={faHome} /></NavLink>
                     <NavLink to='/playstation' className='icon playstation'><FontAwesomeIcon icon={faPlaystation} /></NavLink>
                     <NavLink to='/xbox' className='icon xbox'><FontAwesomeIcon icon={faXbox} /></NavLink>
-                    <NavLink to='/nintendo' className='icon'>
-                        <div className='nintendo'>
-                            <img src="../logo/nintendo_logo_icon.webp" alt="" />
-                        </div>
+                    <NavLink to='/nintendo' className='icon nintendo'>
+                        <BsNintendoSwitch />
                     </NavLink>
                 </div>
                 <div className='container-icons'>

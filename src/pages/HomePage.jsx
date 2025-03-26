@@ -1,11 +1,13 @@
-// import del componente Jumbo
-
+import '../style/HomePageStyle.css'
+import CardHomePage from '../components/CardHomePage'
+// import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function HomePage() {
     return (
         <>
-
-            <h1>QUESTA è LA HOME PAGE</h1>
+            <div className='general-container'>
+                <CardHomePage />
+            </div>
         </>
     )
 }
