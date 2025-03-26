@@ -1,0 +1,70 @@
+.general-container {
+    width: 70%;
+    margin: 0 auto;
+    /* background-color: aqua; */
+    /* text-align: center; */
+    padding-top: 60px;
+}
+
+
+.container-cards {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 20px;
+    margin: 50px 0;
+    height: 430px;
+    margin-bottom: 100px;
+    position: relative;
+}
+
+.div-1 {
+    width: 70%;
+    /* border: 1px solid black; */
+}
+
+.div-2 {
+    width: 30%;
+    /* border: 1px solid black; */
+    text-align: center;
+
+}
+
+.bundle-img {
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+}
+
+.game-img {
+    width: 65%;
+    object-fit: contain;
+    margin-top: 50px;
+}
+
+.bundle-img2 {
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+}
+
+.bundle-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #0c0806;
+    text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
+}
+
+.container-text {
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
+    top: 270px;
+}
+
+.container-text2 {
+    position: absolute;
+    bottom: 30px;
+    left: 50px;
+    top: 350px;
+}

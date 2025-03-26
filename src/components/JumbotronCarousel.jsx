@@ -5,6 +5,7 @@ import { Carousel } from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from "react-router-dom";
 
+
 const JumbotronCarousel = () => {
     const location = useLocation(); // Ottiene l'URL attuale
 
