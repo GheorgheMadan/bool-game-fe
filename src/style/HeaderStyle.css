@@ -11,43 +11,84 @@ header .container-nav {
     justify-content: space-between;
 }
 
+/* SEZIONE LOGO */
 .logo {
     font-size: 30px;
     font-weight: 700;
 }
 
+/* SEZIONE NAVIGAZIONE LINK */
+.container-link {
+    display: flex;
+    gap: 20px;
+    height: 100%;
+    align-items: center;
+}
+
+.container-link a {
+    color: black;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 15px;
+}
+
+a.active {
+    color: rgb(94, 10, 173);
+}
 
 
 /* NAVBAR SEZIONE INPUT E BUTTON */
 .container-search {
     position: relative;
+    /* Permette a ::after di essere posizionato in modo assoluto rispetto a questo elemento */
     display: flex;
+    /* Mette input e bottone sulla stessa linea */
     align-items: center;
+    /* Centra verticalmente gli elementi */
     min-height: 30px;
+    /* Imposta un'altezza minima per evitare problemi di ridimensionamento */
+    overflow: hidden;
+    /* Evita che elementi interni (es. input) causino spostamenti indesiderati */
+    width: auto;
+    /* Adatta la larghezza automaticamente al contenuto */
 }
 
 /* BORDER BOTTOM INIZIALMENTE INVISIBILE */
 .container-search::after {
     content: "";
+    /* Crea un elemento vuoto per il bordo inferiore */
     position: absolute;
-    bottom: -2px;
+    /* Permette di posizionarlo sotto il container-search */
+    bottom: 2px;
+    /* Sposta il bordo appena sotto il contenitore */
     left: 0;
+    /* Parte da sinistra */
     width: 0;
+    /* Inizialmente il bordo è nascosto */
     height: 2px;
+    /* Altezza della linea */
     background-color: rgb(201, 201, 201);
-
+    /* Colore del bordo */
 }
 
-
 /* INPUT INIZIALMENTE NASCOSTO */
-.container-nav input {
+.container-search input {
     border: none;
-    width: 0;
+    /* Rimuove il bordo predefinito */
+    max-width: 0;
+    /* L'input inizia chiuso, senza occupare spazio */
     height: 40px;
+    /* Altezza fissa */
     padding: 0;
+    /* Nessun padding iniziale */
     opacity: 0;
-    box-shadow: 0 4px 10px rgba(92, 92, 92, 0.2);
-    border-radius: 10px;
+    /* Nasconde l'input */
+
+    /* Aggiunge un'ombra sottile */
+    transition: max-width 0.4s ease-in-out, opacity 0.2s ease-in-out, padding 0.2s ease-in-out;
+    /* Effetti di animazione per apertura/chiusura */
+    flex: 1;
+    /* L'input può espandersi senza spostare gli altri elementi */
 }
 
 .container-nav button {
@@ -57,7 +98,18 @@ header .container-nav {
 
 .container-icons {
     display: flex;
+    align-items: center;
+    /* Mantiene tutto allineato */
 }
+
+.container-icons a {
+    color: black;
+}
+
+.container-icons a.active {
+    color: rgb(94, 10, 173);
+}
+
 
 .icon {
     font-size: 20px;
@@ -65,43 +117,12 @@ header .container-nav {
     cursor: pointer;
 }
 
-.font-container a {
-    color: black;
-}
-
 .icon:hover {
     color: rgb(94, 10, 173);
     transform: scale(1.2);
+    filter: drop-shadow(0px 10px 10px rgba(0, 0, 0, 0.5));
 }
 
-.active {
-    color: rgb(94, 10, 173);
-}
-
-.font-container {
-    display: flex;
-    flex-direction: column;
-}
-
-.font-container span {
-    font-size: 10px;
-    margin-left: 8px;
-}
-
-/* ANIMAZIONE DELL'INPUT */
-@keyframes expandInput {
-    0% {
-        width: 0;
-        opacity: 0;
-        padding: 0;
-    }
-
-    100% {
-        width: 300px;
-        opacity: 1;
-        padding: 5px 10px;
-    }
-}
 
 /* ANIMAZIONE DEL BORDER */
 @keyframes expandBorder {
@@ -115,10 +136,16 @@ header .container-nav {
 }
 
 /* ATTIVAZIONE ANIMAZIONI */
-.container-search input {
-    animation: expandInput 0.4s ease-in-out forwards;
+.container-search.open input {
+    max-width: 300px;
+    /* Si espande senza influenzare il layout */
+    opacity: 1;
+    padding: 5px 10px;
+    background-color: rgba(255, 255, 255, 0);
+
+
 }
 
-.container-search::after {
-    animation: expandBorder 0.4s ease-in-out forwards;
+.container-search.open::after {
+    animation: expandBorder 0.1s ease-in-out forwards;
 }
