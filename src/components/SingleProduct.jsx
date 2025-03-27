@@ -21,17 +21,29 @@ export default function SingleProduct() {
     }
     useEffect(() => { productsData() }, [])
 
-    const gamesData = () => {
+    // const gamesData = () => {
+    //     axios.get('http://localhost:3000/api/products/search?category=gioco')
+    //         .then(res => {
+    //             setQuery2(res.data);
+    //             console.log(res.data)
+    //         }
+    //         )
+    //         .catch(err => console.error(err)
+    //         )
+    // }
+    // useEffect(() => { gamesData() }, [])
+
+    function fetchGames() {
         axios.get('http://localhost:3000/api/products/search?category=gioco')
             .then(res => {
-                setQuery2(res.data);
-                console.log(res.data)
+                setQuery2(res.data[0]);
+                // console.log(res.data)
             }
             )
             .catch(err => console.error(err)
             )
     }
-    useEffect(() => { gamesData() }, [])
+    useEffect(() => { fetchGames() }, [])
 
     return (
         // videogame card //
@@ -69,7 +81,7 @@ export default function SingleProduct() {
                         <Accordion.Item eventKey="0">
                             <Accordion.Header>Sezione 1</Accordion.Header>
                             <Accordion.Body>
-                                Contenuto della prima sezione. Qui puoi aggiungere qualsiasi informazione.
+                                {query2.description}
                             </Accordion.Body>
                         </Accordion.Item>
 
