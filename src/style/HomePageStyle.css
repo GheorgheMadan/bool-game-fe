@@ -1,3 +1,11 @@
+main {
+    background-image: url(../public/progetto-senza-titolo.png);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+}
+
 .general-container {
     width: 70%;
     margin: 0 auto;
