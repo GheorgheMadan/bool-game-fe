@@ -1,6 +1,6 @@
 import axios from "axios"
 import { useState, useEffect, useContext } from "react"
-import GlobalContext from '../contexts/GlobalContext';
+import GlobalContext from '../../contexts/GlobalContext';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function CardHomePage() {

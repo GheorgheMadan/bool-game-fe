@@ -1,5 +1,4 @@
 import '../style/HomePageStyle.css'
-import CardHomePage from '../components/CardHomePage'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import CardHomePage from '../components/homepageComponents/CardHomePage'
