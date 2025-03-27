@@ -7,7 +7,7 @@ import DefaultLayout from './Layouts/DefaultLayout'
 // import delle pagine
 import HomePage from './pages/HomePage'
 import XboxPage from './pages/XboxPage'
-import PLaystationPage from './pages/PlaystationPage'
+import PlaystationPage from './pages/PlaystationPage'
 import NintendoPage from './pages/NintendoPage'
 import CartPage from './pages/CartPage'
 import ProductPage from './pages/ProductPage'
@@ -26,7 +26,7 @@ function App() {
           <Routes>
             <Route element={<DefaultLayout />}>
               <Route index element={<HomePage />} />
-              <Route path='/playstation' element={<PLaystationPage />} />
+              <Route path='/playstation' element={<PlaystationPage />} />
               <Route path='/xbox' element={<XboxPage />} />
               <Route path='/nintendo' element={<NintendoPage />} />
               <Route path='/cart' element={<CartPage />} />
