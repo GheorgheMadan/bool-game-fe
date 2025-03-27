@@ -2,18 +2,19 @@ import '../../style/HeaderStyle.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 import { useState } from 'react';
-import { NavLink } from 'react-router';
+import { NavLink } from 'react-router-dom';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
-const initialInput = {
-    text: ''
-}
+import { useContext } from 'react';
+import GlobalContextResults from '../../contexts/GlobalContextResult';
 
 export default function SearchBar() {
-    const [searchResults, setSearchResults] = useState([])
+    const { setResults } = useContext(GlobalContextResults)
     const [isOpen, setIsOpen] = useState(false)
-    const [input, setInput] = useState(initialInput)
+    const [input, setInput] = useState('')
 
+    const navigate = useNavigate()
     // funzione per aprire la search bar 
     function toggleSearch() {
         setIsOpen(!isOpen);
@@ -21,19 +22,23 @@ export default function SearchBar() {
 
     function search(e) {
         e.preventDefault()
-        axios.get(`http://localhost:3000/api/products/search?name=${input.text}`)
-            .then(res => {
-                setSearchResults(res.data)
+        axios.get(`http://localhost:3000/api/products/search?name=${input}`)
+            .then(response => {
+                setResults(response.data)
+                navigate('/search')
+                setInput('')
+                // console.log(response.data);
+
             })
-            .catch(err => console.error(err)
-            )
+            .catch(err => console.error(err))
+        setInput('')
     }
     // funzione per ricavare i dati dell'input
     function handleChange(e) {
         const value = e.target.value
-        setInput({ text: value })
+        setInput(value)
     }
-    console.log(searchResults);
+    console.log(input);
 
     return (
         <div className='container-icons'>
@@ -42,7 +47,7 @@ export default function SearchBar() {
                     <input
                         type="text"
                         name='text'
-                        value={input.text}
+                        value={input}
                         onChange={handleChange}
                         placeholder='Cerca...' />
                 </form>
@@ -56,5 +61,6 @@ export default function SearchBar() {
                 </NavLink>
             </div>
         </div>
+
     )
 }
