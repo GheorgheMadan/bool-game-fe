@@ -1,53 +1,113 @@
 /* container per i prodotti */
 .products-container {
     padding: 2rem;
+    background-color: #1e4296;
+    text-align: center;
 }
 
 /* lista di prodotti */
 .product-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 2rem;
 }
 
-/* card del prodotto */
 .product-card {
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s ease;
+    height: 400px;
+    /* Aumento l'altezza per maggiore spazio */
+    width: 340px;
+    /* Mantenuto lo stesso per il controllo dimensionale */
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
     padding: 1.5rem;
-    text-align: center;
-    color: white;
+    border-radius: 10px;
+    /* Angoli arrotondati per un look più morbido */
+    border: 1px solid #ddd;
+    background-color: #fff;
+    /* Colore di sfondo bianco */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* Ombra morbida per dare profondità */
+    overflow: hidden;
+    /* Nasconde gli eventuali overflow dell'immagine */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    /* Disposizione verticale */
+    align-items: center;
+    position: relative;
+    opacity: 0.95;
+    /* Leggera trasparenza per effetto elegante */
 }
 
-/* hover sulle card */
 .product-card:hover {
-    transform: translateY(-10px);
+    transform: translateY(-15px);
+    /* Leggero sollevamento */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    /* Ombra più intensa per effetto hover */
+    background-color: #f7f7f7;
+    /* Colore di sfondo leggermente diverso su hover */
+    opacity: 1;
+    /* Aumento dell'opacità per effetto visivo */
 }
 
 /* immagine prodotto */
 .product-card img {
     width: 100%;
-    height: auto;
-    border-radius: 10px;
+    /* Aumento la larghezza al 100% per sfruttare tutta la card */
+    height: 65%;
+    /* Ridotto un po' per lasciare spazio per il nome e la descrizione */
+    object-fit: cover;
+    border-radius: 8px;
+    /* Angoli arrotondati per l'immagine */
+    transition: transform 0.3s ease-in-out;
+    /* Aggiunta transizione per l'immagine */
 }
 
-/* nome e descrizione */
+.product-card img:hover {
+    transform: scale(1.1);
+    /* Effetto zoom sull'immagine al passaggio del mouse */
+}
+
+/* Dettagli testo prodotto */
 .product-card h3 {
     font-size: 1.2rem;
+    /* Dimensione font più grande per il nome del prodotto */
+    color: #333;
+    /* Colore del testo grigio scuro */
     margin-top: 1rem;
+    text-align: center;
+    font-weight: bold;
+    /* Grassetto per maggiore enfasi */
+    transition: color 0.3s ease;
+    /* Transizione per il colore del testo */
 }
 
 .product-card p {
-    font-size: 1rem;
-    color: #888;
-    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    color: #666;
+    /* Colore del testo più chiaro per la descrizione */
+    text-align: center;
+    margin-top: 0.5rem;
+    line-height: 1.4;
+    /* Aumento dell'altezza della linea per migliorare la leggibilità */
 }
 
+/* Prezzo */
 .product-card span {
-    font-size: 1.5rem;
-    color: #f39c12;
-    /* Colore accento per il prezzo */
+    font-size: 1.3rem;
+    color: #e91e63;
+    /* Colore del prezzo più vivace */
     font-weight: bold;
+    position: absolute;
+    bottom: 0;
+    text-align: center;
+    width: 100%;
+    /* Centra il prezzo nella card */
+}
+
+/* Opzioni per una card attiva o selezionata */
+.product-card.active {
+    border-color: #e91e63;
+    /* Cambia il bordo se la card è attiva o selezionata */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
 }

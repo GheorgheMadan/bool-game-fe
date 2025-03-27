@@ -4,56 +4,52 @@ import '../style/PlaystationPageStyle.css';
 
 const PlaystationProducts = () => {
     const [products, setProducts] = useState([]);
-    const [filteredProducts, setFilteredProducts] = useState([]);
 
     useEffect(() => {
         axios.get('http://localhost:3000/api/products/')
             .then(response => {
-                setProducts(response.data);
-                filterProducts(response.data);
+                // Filtra i prodotti prima, poi ordina in base agli ID
+                const filteredProducts = filterProducts(response.data);
+                const sortedProducts = sortProductsById(filteredProducts);
+                setProducts(sortedProducts);
             })
             .catch(error => console.error(error));
     }, []);
 
+    // Funzione per filtrare i prodotti in base ai criteri specificati
     const filterProducts = (allProducts) => {
-        const filtered = allProducts.filter(product => {
-            // Converte la stringa JSON di supported_consoles in un array
-            let supportedConsoles = [];
-            if (product.supported_consoles) {
-                try {
-                    supportedConsoles = JSON.parse(product.supported_consoles);
-                } catch (error) {
-                    console.error("Errore nel parsing di supported_consoles:", error);
-                }
-            }
+        return allProducts.filter(product => {
+            const supportedConsoles = JSON.parse(product.supported_consoles || '[]'); // Assicurati che supported_consoles sia un array
 
-            // Primo filtro: prodotti della categoria "console" e nome che include "Play"
-            if (product.category_name === "console" && product.name.includes("Play")) {
-                return true;
-            }
-
-            // Secondo filtro: prodotti con compatibilità PS5
-            if (product.compatibility === "PS5") {
-                return true;
-            }
-
-            // Terzo filtro: supported_consoles che includono "PlayStation"
-            if (Array.isArray(supportedConsoles) && supportedConsoles.some(console => console.includes("PlayStation"))) {
-                return true;
-            }
-
-            return false;
+            return (
+                (product.category_name === "console" && product.name.includes("Play")) ||
+                product.compatibility === "PS5" ||
+                (Array.isArray(supportedConsoles) && supportedConsoles.some(console => console.includes("PlayStation")))
+            );
         });
+    };
 
+    // Funzione per ordinare i prodotti in base agli ID (dal 119-139, 101-118, 1-100)
+    const sortProductsById = (filteredProducts) => {
+        const range1 = filteredProducts.filter(product => product.id >= 119 && product.id <= 139);
+        const range2 = filteredProducts.filter(product => product.id >= 101 && product.id <= 118);
+        const range3 = filteredProducts.filter(product => product.id >= 1 && product.id <= 100);
 
-        setFilteredProducts(filtered);
+        // Ordina ogni gruppo per ID
+        const sortedRange1 = range1.sort((a, b) => a.id - b.id);
+        const sortedRange2 = range2.sort((a, b) => a.id - b.id);
+        const sortedRange3 = range3.sort((a, b) => a.id - b.id);
+
+        // Combina i gruppi in ordine
+        return [...sortedRange1, ...sortedRange2, ...sortedRange3];
     };
 
     return (
         <div className="products-container">
-            {filteredProducts.length > 0 ? (
+            <h1>benvenuto nel mondo Playstation</h1>
+            {products.length > 0 ? (
                 <div className="product-list">
-                    {filteredProducts.map(product => (
+                    {products.map(product => (
                         <div key={product.id} className="product-card">
                             <img src={product.image_url} alt={product.name} />
                             <h3>{product.name}</h3>
@@ -66,6 +62,6 @@ const PlaystationProducts = () => {
             )}
         </div>
     );
-};
+}
 
 export default PlaystationProducts;
