@@ -1,4 +1,6 @@
 import '../style/HomePageStyle.css'
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 import CardHomePage from '../components/homepageComponents/CardHomePage'
 // import 'bootstrap/dist/css/bootstrap.min.css';
 import XboxGamesList from '../components/homepageComponents/XboxGamesList'
