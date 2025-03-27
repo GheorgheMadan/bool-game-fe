@@ -10,7 +10,7 @@ export default function CardHomePage() {
         axios.get('http://localhost:3000/api/products/128')
             .then(res => {
                 setQuery(res.data);
-                console.log(res.data)
+                // console.log(res.data)
             }
             )
             .catch(err => console.error(err)
@@ -22,7 +22,7 @@ export default function CardHomePage() {
         axios.get('http://localhost:3000/api/products/138')
             .then(res => {
                 setQuery2(res.data);
-                console.log(res.data)
+                // console.log(res.data)
             }
             )
             .catch(err => console.error(err)
