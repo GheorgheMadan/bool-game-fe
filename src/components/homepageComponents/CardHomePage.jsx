@@ -40,7 +40,6 @@ export default function CardHomePage() {
                 </div>
                 <div className='div-2'>
                     <img src={query.images?.[3]} alt={query.name} className="game-img" />
-
                 </div>
                 <div className="container-text">
                     <h3 className="bg-light rounded shadow p-2">{query.name}</h3>
@@ -50,7 +49,6 @@ export default function CardHomePage() {
                     </div>
                 </div>
             </section>
-
             <section className="container-cards">
                 <div className='div-2'>
                     <img src={query2.images?.[1]} alt={query2.name} className="game-img2" />
