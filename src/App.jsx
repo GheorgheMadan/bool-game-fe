@@ -14,11 +14,7 @@ import XboxPage from './pages/XboxPage'
 import PlaystationPage from './pages/PlaystationPage'
 import NintendoPage from './pages/NintendoPage'
 import CartPage from './pages/CartPage'
-<<<<<<< HEAD
 import CheckoutPage from './pages/CheckoutPage'
-=======
-import ProductPage from './pages/ProductPage'
->>>>>>> e3f51e356e05e2300b8ac3387ebb9c473302535f
 
 // import del GlobalContext
 import { GlobalProvider } from './contexts/GlobalContext'
@@ -33,7 +29,6 @@ function App() {
       {/* Avvolgiamo l'intera app con il GlobalProvider */}
       <GlobalProvider>
         <BrowserRouter>
-<<<<<<< HEAD
           <Elements stripe={stripePromise}>
             <Routes>
               <Route element={<DefaultLayout />}>
@@ -46,18 +41,6 @@ function App() {
               </Route>
             </Routes>
           </Elements>
-=======
-          <Routes>
-            <Route element={<DefaultLayout />}>
-              <Route index element={<HomePage />} />
-              <Route path='/playstation' element={<PLaystationPage />} />
-              <Route path='/xbox' element={<XboxPage />} />
-              <Route path='/nintendo' element={<NintendoPage />} />
-              <Route path='/cart' element={<CartPage />} />
-              <Route path='/product' element={<ProductPage />} />
-            </Route>
-          </Routes>
->>>>>>> e3f51e356e05e2300b8ac3387ebb9c473302535f
         </BrowserRouter>
       </GlobalProvider>
     </>
