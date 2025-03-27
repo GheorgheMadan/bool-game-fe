@@ -1,0 +1,25 @@
+/* img {
+    width: 10%;
+    height: 10%;
+} */
+
+/* .image-container {
+    height: 150px;
+} */
+
+.card-body-dx {
+    width: 60%;
+}
+
+.card img {
+    width: 10%;
+    height: 10%;
+}
+
+.card-body-sx {
+    width: 30%;
+}
+
+.card {
+    width: 100%;
+}
