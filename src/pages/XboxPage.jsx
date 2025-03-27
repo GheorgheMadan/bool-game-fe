@@ -1,7 +1,11 @@
+import XboxProducts from "../components/PrincipalPageComponents/CardXboxPage";
+
+
+
 export default function XboxPage() {
     return (
         <>
-            <h1>Xbox Page</h1>
+            < XboxProducts />
         </>
     )
 }

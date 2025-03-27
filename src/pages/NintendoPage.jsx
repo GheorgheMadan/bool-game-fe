@@ -1,7 +1,11 @@
-export default function NintendoPage() {
+import NintendoProducts from "../components/PrincipalPageComponents/CardNintendoPage";
+
+
+
+export default function XboxPage() {
     return (
         <>
-            <h1>Nintendo Page</h1>
+            < NintendoProducts />
         </>
     )
 }
