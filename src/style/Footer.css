@@ -9,8 +9,13 @@
     position: relative;
 }
 
-.footer {
+footer {
     background-image: url("/footer/footer.jpg");
+}
+
+.container-footer {
+    width: 75%;
+    margin: 0 auto;
 }
 
 .sb_footer {
@@ -40,6 +45,10 @@
     text-align: left;
     margin-bottom: 2rem;
     z-index: 2;
+}
+
+.sb_footer-links_div a p:hover {
+    color: white;
 }
 
 .sb_footer-links_div {
