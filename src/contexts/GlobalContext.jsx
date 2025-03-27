@@ -1,108 +1,108 @@
-import React, { createContext, useState, useEffect } from 'react';
-import axios from 'axios';
+import React,
+{
+    createContext,
+    useState,
+    useEffect
+}
 
+    from 'react';
+
+// Creo il contesto globale per condividere lo stato del carrello e le funzioni in tutta l'app
 const GlobalContext = createContext();
 
-export const GlobalProvider = ({ children }) => {
-    const [cart, setCart] = useState([]);
-    const [products, setProducts] = useState([]);
+// Componente che fornisce il contesto ai figli
+export const GlobalProvider = ({
+    children
 
+}) => {
+    // Stato del carrello inizializzato come array vuoto
+    const [cart,
+        setCart] = useState([]);
+
+    // Carica il carrello dal localStorage al caricamento del componente
     useEffect(() => {
+
+        // Recupera il carrello salvato in localStorage, se presente
         const savedCart = JSON.parse(localStorage.getItem('cart')) || [];
-        setCart(savedCart);
+        setCart(savedCart); // Imposta lo stato del carrello con i dati recuperati
+    }
 
-        const savedProducts = JSON.parse(localStorage.getItem('products')) || [];
-        setProducts(savedProducts);
-    }, []);
+        , []);
 
-    // Funzione per aggiornare lo stock nel database
-    const updateProductStock = async (productId, quantityChange) => {
-        try {
-            const response = await axios.post(`/api/products/${productId}/updateStock`, {
-                quantityChange
-            });
-
-            if (response.data.success) {
-                const updatedProduct = response.data.product;
-                return updatedProduct;
-            } else {
-                alert('Errore nell\'aggiornamento dello stock');
-                return null;
-            }
-        } catch (error) {
-            console.error('Errore nella chiamata API:', error);
-            return null;
-        }
-    };
-
-    const addToCart = async (product) => {
+    // Funzione per aggiungere un prodotto al carrello
+    const addToCart = (product) => {
+        // Crea una copia dell'array cart
         const updatedCart = [...cart];
+
+        // Trovo l'indice del prodotto nel carrello
         const existingProductIndex = updatedCart.findIndex(item => item.id === product.id);
 
-        if (product.stock <= 0) {
-            alert('Prodotto esaurito!');
-            return;
-        }
-
+        // Se il prodotto è già nel carrello, incrementa la quantità
         if (existingProductIndex !== -1) {
             updatedCart[existingProductIndex].quantity += 1;
-        } else {
-            updatedCart.push({ ...product, quantity: 1 });
         }
 
-        // Aggiorna lo stock nel database
-        const updatedProduct = await updateProductStock(product.id, -1);
-        if (updatedProduct) {
-            setCart(updatedCart);
-            localStorage.setItem('cart', JSON.stringify(updatedCart));
-            setProducts(products.map(p => p.id === updatedProduct.id ? updatedProduct : p));
-            localStorage.setItem('products', JSON.stringify(products));
+        else {
+
+            // Se il prodotto non è presente, aggiungilo con quantità 1
+            updatedCart.push({
+                ...product, quantity: 1
+            });
         }
-    };
 
-    const removeFromCart = async (productId) => {
-        const productToRemove = cart.find(item => item.id === productId);
-        if (!productToRemove) return;
+        // Aggiorna lo stato del carrello e salva nel localStorage
+        setCart(updatedCart);
+        localStorage.setItem('cart', JSON.stringify(updatedCart));
+    }
 
+        ;
+
+    // Funzione per rimuovere un prodotto dal carrello
+    const removeFromCart = (productId) => {
+        // Crea un nuovo array senza il prodotto specificato
         const updatedCart = cart.filter(item => item.id !== productId);
 
-        // Ripristina lo stock nel database
-        const updatedProduct = await updateProductStock(productId, productToRemove.quantity);
-        if (updatedProduct) {
-            setCart(updatedCart);
-            localStorage.setItem('cart', JSON.stringify(updatedCart));
-            setProducts(products.map(p => p.id === updatedProduct.id ? updatedProduct : p));
-            localStorage.setItem('products', JSON.stringify(products));
-        }
-    };
+        // Aggiorna lo stato del carrello e salva nel localStorage
+        setCart(updatedCart);
+        localStorage.setItem('cart', JSON.stringify(updatedCart));
+    }
 
-    const updateQuantity = async (productId, newQuantity) => {
+        ;
+
+    // Funzione per aggiornare la quantità di un prodotto nel carrello
+    const updateQuantity = (productId, newQuantity) => {
+        // Se la nuova quantità è inferiore a 1, non fare nulla
         if (newQuantity < 1) return;
 
-        const productToUpdate = cart.find(item => item.id === productId);
-        if (!productToUpdate) return;
-
-        const quantityDifference = newQuantity - productToUpdate.quantity;
-
-        // Aggiusta lo stock nel database
-        const updatedProduct = await updateProductStock(productId, -quantityDifference);
-        if (updatedProduct) {
-            const updatedCart = cart.map(item =>
-                item.id === productId ? { ...item, quantity: newQuantity } : item
-            );
-
-            setCart(updatedCart);
-            localStorage.setItem('cart', JSON.stringify(updatedCart));
-            setProducts(products.map(p => p.id === updatedProduct.id ? updatedProduct : p));
-            localStorage.setItem('products', JSON.stringify(products));
+        // Crea un nuovo array aggiornando la quantità del prodotto
+        const updatedCart = cart.map(item => item.id === productId ? {
+            ...item, quantity: newQuantity
         }
-    };
 
-    return (
-        <GlobalContext.Provider value={{ cart, addToCart, removeFromCart, updateQuantity }}>
-            {children}
-        </GlobalContext.Provider>
-    );
-};
+            : item);
+
+        // Aggiorna lo stato del carrello e salva nel localStorage
+        setCart(updatedCart);
+        localStorage.setItem('cart', JSON.stringify(updatedCart));
+    }
+
+        ;
+
+    return ( // Fornisce il contesto ai componenti figli
+
+        <GlobalContext.Provider value={
+            {
+                cart, addToCart, removeFromCart, updateQuantity
+            }
+        }
+
+        > {
+                children
+            }
+
+        </GlobalContext.Provider>);
+}
+
+    ;
 
 export default GlobalContext;
