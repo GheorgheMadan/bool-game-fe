@@ -35,8 +35,11 @@ export default function SingleProduct() {
         // videogame card //
         <div className="card">
             <div className="d-flex col-2-xl">
+                <div className="card-body-sx">
                 <h5 className="card-title">{query.name}</h5>
                 <p className="card-text">{query.description}</p>
+                </div>
+                <div className="card-body-dx"></div>
             </div>
             <img src={query.image_url} className="card-img-top" alt={query.name} />
         </div>
