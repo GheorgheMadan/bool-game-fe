@@ -20,7 +20,6 @@ import ProductPage from './pages/ProductPage'
 // import del GlobalContext
 import { GlobalProvider } from './contexts/GlobalContext'
 
-
 // carica Stripe con la chiave pubblica
 const stripePromise = loadStripe('pk_test_51R4oHvPXYjIqouRcxeNvWgRuFnQ1vo8PlqPEzVS6mDT2ix4nlzdDPaqwSVD5oHDfiTx0xdfcL0IzUQTsy4IU1bvA0079IF49Us');
 
