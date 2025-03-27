@@ -33,7 +33,6 @@ export const GlobalProvider = ({ children }) => {
         if (existingProductIndex !== -1) {
             updatedCart[existingProductIndex].quantity += 1;
         }
-
         else {
 
             // Se il prodotto non è presente, aggiungilo con quantità 1
