@@ -27,12 +27,24 @@ const PlaystationProducts = () => {
                 }
             }
 
-            return (
-                (Array.isArray(supportedConsoles) && supportedConsoles.some(console => console.includes("PlayStation"))) ||
-                product.compatibility === "PS5" ||
-                (product.category_name === "console" && product.name.includes("Play"))
-            );
+            // Primo filtro: prodotti della categoria "console" e nome che include "Play"
+            if (product.category_name === "console" && product.name.includes("Play")) {
+                return true;
+            }
+
+            // Secondo filtro: prodotti con compatibilità PS5
+            if (product.compatibility === "PS5") {
+                return true;
+            }
+
+            // Terzo filtro: supported_consoles che includono "PlayStation"
+            if (Array.isArray(supportedConsoles) && supportedConsoles.some(console => console.includes("PlayStation"))) {
+                return true;
+            }
+
+            return false;
         });
+
 
         setFilteredProducts(filtered);
     };
