@@ -1,19 +1,51 @@
 /* container per i prodotti */
-.products-container {
+.nintendo-products-container {
     padding: 2rem;
-    background-color: #1e4296;
+    background: linear-gradient(135deg, #e70014);
+    /* Gradiente animato */
+    background-size: 400% 400%;
+    animation: backgroundAnimation 6s infinite alternate ease-in-out;
     text-align: center;
+
+}
+
+/* Animazione del background */
+@keyframes backgroundAnimation {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    100% {
+        background-position: 100% 50%;
+    }
+}
+
+.nintendo-h2 {
+    font-size: 30px;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-align: center;
+    color: #fff;
+    /* Colore acceso per risaltare */
+    margin-bottom: 25px;
+    padding-bottom: 10px;
+    border-bottom: 3px solid black;
+    /* Linea inferiore colorata */
+    text-shadow: 3px 3px 5px black;
+    /* Effetto luce */
+    letter-spacing: 2px;
+    position: relative;
 }
 
 /* lista di prodotti */
-.product-list {
+.nintendo-product-list {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: 2rem;
 }
 
-.product-card {
+.nintendo-product-card {
     height: 400px;
     /* Aumento l'altezza per maggiore spazio */
     width: 340px;
@@ -39,7 +71,7 @@
     /* Leggera trasparenza per effetto elegante */
 }
 
-.product-card:hover {
+.nintendo-product-card:hover {
     transform: translateY(-15px);
     /* Leggero sollevamento */
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
@@ -51,7 +83,7 @@
 }
 
 /* immagine prodotto */
-.product-card img {
+.nintendo-product-card img {
     width: 100%;
     /* Aumento la larghezza al 100% per sfruttare tutta la card */
     height: 65%;
@@ -63,13 +95,13 @@
     /* Aggiunta transizione per l'immagine */
 }
 
-.product-card img:hover {
+.nintendo-product-card img:hover {
     transform: scale(1.1);
     /* Effetto zoom sull'immagine al passaggio del mouse */
 }
 
 /* Dettagli testo prodotto */
-.product-card h3 {
+.nintendo-product-card h3 {
     font-size: 1.2rem;
     /* Dimensione font più grande per il nome del prodotto */
     color: #333;
@@ -82,7 +114,7 @@
     /* Transizione per il colore del testo */
 }
 
-.product-card p {
+.nintendo-product-card p {
     font-size: 0.9rem;
     color: #666;
     /* Colore del testo più chiaro per la descrizione */
@@ -93,7 +125,7 @@
 }
 
 /* Prezzo */
-.product-card span {
+.nintendo-product-card span {
     font-size: 1.3rem;
     color: #e91e63;
     /* Colore del prezzo più vivace */
@@ -106,7 +138,7 @@
 }
 
 /* Opzioni per una card attiva o selezionata */
-.product-card.active {
+.nintendo-product-card.active {
     border-color: #e91e63;
     /* Cambia il bordo se la card è attiva o selezionata */
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);

@@ -1,4 +1,4 @@
-import PlaystationProducts from "../components/CardPlayStationPage"
+import PlaystationProducts from "../components/PrincipalPageComponents/CardPlaystationPage";
 
 
 
