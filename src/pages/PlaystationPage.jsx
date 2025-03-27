@@ -1,7 +1,11 @@
+import PlaystationProducts from "../components/CardPlayStationPage"
+
+
+
 export default function PlaystationPage() {
     return (
         <>
-            <h1>PLaystation Page</h1>
+            <PlaystationProducts />
         </>
     )
 }
