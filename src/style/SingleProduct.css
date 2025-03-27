@@ -1,25 +1,98 @@
-/* img {
-    width: 10%;
-    height: 10%;
-} */
+/* .card {
+     width: 100%;
+ }
 
-/* .image-container {
-    height: 150px;
-} */
+ .card-body-dx {
+     width: 60%;
+ }
 
-.card-body-dx {
+ .card-body-sx {
+     width: 50%;
+ } */
+
+
+
+.image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.image-small {
+    width: 50%;
+    height: 50%;
+    object-fit: contain;
+}
+
+.card-body-right p {
+    margin-top: 50px;
+}
+
+.card-body-left {
     width: 60%;
 }
 
-.card img {
-    width: 10%;
-    height: 10%;
+.card-body-right {
+    position: relative;
 }
 
-.card-body-sx {
-    width: 30%;
+.card-right-img {
+    width: 50%;
+    height: 50%;
+    border: 1px solid black;
+    position: absolute;
+    top: 0px;
+    right: 50px;
 }
 
-.card {
-    width: 100%;
+.total-price {
+    width: 300px;
+    border: 1px solid black;
+    border-radius: 50px;
+    text-align: center;
+    margin-left: 70px;
+    margin-top: 50px;
+    background-color: black;
+    color: white;
+    padding: 5px;
+}
+
+.shipping-cost {
+    margin-top: 30px;
+    margin-left: 70px;
+}
+
+.tax {
+    margin-left: 70px;
+    margin-top: 20px;
+}
+
+.shipping-free {
+    margin-left: 70px;
+    margin-top: 10px;
+    color: gray;
+}
+
+.available {
+    width: 300px;
+    border: 1px solid black;
+    border-radius: 50px;
+    text-align: center;
+    margin-left: 70px;
+    margin-top: 30px;
+    background-color: green;
+    color: white;
+    padding: 5px;
+}
+
+.add-cart {
+    width: 300px;
+    border: 1px solid black;
+    border-radius: 50px;
+    text-align: center;
+    margin-left: 70px;
+    margin-top: 30px;
+    background-color: red;
+    color: white;
+    padding: 5px;
 }
