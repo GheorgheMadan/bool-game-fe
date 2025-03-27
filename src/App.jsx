@@ -10,7 +10,7 @@ import XboxPage from './pages/XboxPage'
 import PLaystationPage from './pages/PlaystationPage'
 import NintendoPage from './pages/NintendoPage'
 import CartPage from './pages/CartPage'
-
+import ProductPage from './pages/ProductPage'
 
 // import del GlobalContext
 import GlobalContext from './contexts/GlobalContext'
@@ -30,6 +30,7 @@ function App() {
               <Route path='/xbox' element={<XboxPage />} />
               <Route path='/nintendo' element={<NintendoPage />} />
               <Route path='/cart' element={<CartPage />} />
+              <Route path='/product' element={<ProductPage />} />
             </Route>
           </Routes>
         </BrowserRouter>

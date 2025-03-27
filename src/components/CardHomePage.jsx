@@ -53,7 +53,7 @@ export default function CardHomePage() {
 
             <section className="container-cards">
                 <div className='div-2'>
-                    <img src={query2.images?.[1]} alt={query2.name} className="game-img" />
+                    <img src={query2.images?.[1]} alt={query2.name} className="game-img2" />
                 </div>
                 <div className="div-1">
                     <img src={query2.images?.[0]} alt={query2.name} className="bundle-img2" />
