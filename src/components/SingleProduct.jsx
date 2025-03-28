@@ -1,50 +1,35 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { useParams } from 'react-router-dom'; // Importa useParams
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Accordion } from "react-bootstrap";
 import "../style/SingleProduct.css";
 
-export default function SingleProduct({ productId }) {
+export default function SingleProduct() {
+    const { productId } = useParams(); // Ottieni l'ID del prodotto dai parametri dell'URL
+    const [data, setData] = useState(null);
+    const [error, setError] = useState(null);
 
-    const [data, setData] = useState([])
+    useEffect(() => {
+        if (productId) {
+            axios.get(`http://localhost:3000/api/products/${productId}`)
+                .then(res => setData(res.data))
+                .catch(err => setError("Errore nel recupero del prodotto."));
+        }
+    }, [productId]);
 
-    const productsData = () => {
-        axios.get('http://localhost:3000/api/products')
-            .then(res => {
-                setData(res.data[38]);
-                console.log(res.data)
-            }
-            )
-            .catch(err => console.error(err)
-            )
+    if (error) {
+        return <div>{error}</div>;
     }
-    useEffect(() => { productsData() }, [])
 
-    // const [product, setProduct] = useState(null);
-
-    // useEffect(() => {
-    //     axios.get(`http://localhost:3000/api/products/${productId}`)
-    //         .then(res => {
-    //             console.log("Dati prodotto:", res.data); // Debug
-    //             if (res.data && res.data.id) {  // Verifica che i dati siano validi
-    //                 setProduct(res.data);
-    //             } else {
-    //                 console.error("Dati prodotto non validi:", res.data);
-    //                 setError("Prodotto non trovato");
-    //             }
-    //         })
-    //         .catch(err => console.error(err));
-    //     setError("Errore nel caricamento del prodotto");
-    // }, [productId]);
-
-    // if (!product) return (<div>Caricamento...</div>);
+    if (!data) {
+        return <div>Caricamento prodotto...</div>;
+    }
 
     // Converti il prezzo in numero UNA VOLTA all'inizio
     const priceNumber = data.price ? Number(data.price) : 0;
-
     // Calcola il costo di spedizione (gratis se prezzo > 39.99)
     const shippingCost = priceNumber > 39.99 ? 0 : 9.99;
-
     // Calcola il prezzo totale (prezzo + tasse + spedizione)
     const totalPrice = (priceNumber + 1.50 + shippingCost).toFixed(2);
 
