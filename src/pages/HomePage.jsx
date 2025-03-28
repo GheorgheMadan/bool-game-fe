@@ -1,5 +1,8 @@
 import '../style/HomePageStyle.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import React from 'react';
+
+
 
 import CardHomePage from '../components/homepageComponents/CardHomePage'
 // import 'bootstrap/dist/css/bootstrap.min.css';
@@ -9,6 +12,8 @@ import PlaystationGamesList from '../components/homepageComponents/PlaystationGa
 import NintendoGamesList from '../components/homepageComponents/NintendoGamesList'
 import NintendoItems from '../components/homepageComponents/NintendoItems';
 export default function HomePage() {
+
+
     return (
         <>
             <div className='general-container'>
