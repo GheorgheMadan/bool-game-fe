@@ -18,7 +18,7 @@ export default function SearchResults() {
                                 <img src={result.image_url} alt={result.name} />
                             </div>
                             <span>{result.name}</span>
-                            <div>{result.price}€</div>
+                            <div className='prezzo'>{result.price}€</div>
                         </div>
                     );
                 })}
