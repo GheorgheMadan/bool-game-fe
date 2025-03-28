@@ -12,11 +12,22 @@ export default function HomePage() {
         <>
             <div className='general-container'>
                 <NewReleasedList />
+            </div>
+            <div className='general-container'>
                 <CardHomePage />
+            </div>
+            <div className='general-container'>
                 <XboxGamesList />
-                <PlaystationGamesList />
+            </div>
+            <section className="bg-play">
+                <div className='general-container'>
+                    <PlaystationGamesList />
+                </div>
+            </section>
+            <div className='general-container'>
                 <NintendoGamesList />
             </div>
+
         </>
     )
 }
