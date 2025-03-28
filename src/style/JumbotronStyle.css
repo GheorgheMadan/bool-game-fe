@@ -5,16 +5,27 @@
     align-items: center;
 }
 
+.leftContainer {
+    height: 100%;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+}
+
 .container-details-jumbo {
     font-size: 15px;
     font-weight: 600;
     margin: auto 0;
     width: 300px;
-
 }
 
 .container-details-jumbo h4 {
     margin-bottom: 15px;
+}
+
+.bgLogo {
+    background-color: rgba(255, 255, 255, 0.288);
 }
 
 .xbox-logo {
@@ -27,6 +38,53 @@
     margin: 0 auto;
 }
 
+.redButton {
+    background-color: rgb(194, 13, 13);
+    border: rgb(194, 13, 13);
+}
+
+.yellowBtn,
+.greenBtn,
+.redButton,
+.animationButton {
+    transition: transform 0.5s ease;
+}
+
+.yellowBtn:hover,
+.greenBtn:hover,
+.redButton:hover,
+.animationButton:hover {
+    transform: scale(1.1);
+}
+
+.redButton:hover {
+    background-color: rgb(224, 60, 60);
+    border: rgb(224, 60, 60);
+}
+
+.greenBtn {
+    background-color: green;
+    border: green;
+}
+
+.greenBtn:hover {
+    background-color: rgb(6, 180, 6);
+    border: rgb(6, 180, 6);
+}
+
+.yellowBtn {
+    background-color: #ffc107;
+    border: #ffc107;
+}
+
+.yellowBtn:hover {
+    background-color: #ffc107;
+    border: #ffc107;
+}
+
+.blackText {
+    color: black;
+}
 
 
 @media screen and (max-width: 1000px) {
