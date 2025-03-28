@@ -17,7 +17,7 @@ import PlaystationPage from './pages/PlaystationPage'
 import NintendoPage from './pages/NintendoPage'
 import CartPage from './pages/CartPage'
 import CheckoutPage from './pages/CheckoutPage'
-import ProductPage from './pages/ProductPage'
+import SingleProduct from './components/SingleProduct';
 import SearchResultPage from './pages/SearchResultPage';
 
 // import del GlobalContext
@@ -46,7 +46,7 @@ function App() {
                 <Route element={<LayoutSearchCart />}>
                   <Route path='/search' element={<SearchResultPage />} />
                   <Route path='/cart' element={<CartPage />} />
-                  <Route path='/product' element={<ProductPage />} />
+                  <Route path='/products/:productId' element={<SingleProduct />} />
                 </Route>
               </Routes>
             </Elements>
