@@ -41,12 +41,12 @@ function App() {
                   <Route path='/playstation' element={<PlaystationPage />} />
                   <Route path='/xbox' element={<XboxPage />} />
                   <Route path='/nintendo' element={<NintendoPage />} />
-                  <Route path='/product' element={<ProductPage />} />
                   <Route path='/checkout' element={<CheckoutPage stripePromise={stripePromise} />} />
                 </Route>
                 <Route element={<LayoutSearchCart />}>
                   <Route path='/search' element={<SearchResultPage />} />
                   <Route path='/cart' element={<CartPage />} />
+                  <Route path='/product' element={<ProductPage />} />
                 </Route>
               </Routes>
             </Elements>
