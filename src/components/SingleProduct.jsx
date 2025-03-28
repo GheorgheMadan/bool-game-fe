@@ -11,7 +11,7 @@ export default function SingleProduct({ productId }) {
     const productsData = () => {
         axios.get('http://localhost:3000/api/products')
             .then(res => {
-                setData(res.data[0]);
+                setData(res.data[3]);
                 console.log(res.data)
             }
             )
