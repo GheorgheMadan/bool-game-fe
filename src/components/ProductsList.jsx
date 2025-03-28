@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import SingleProduct from './SingleProduct';
+import "../style/SingleProduct.css";
 
 export default function ProductsList() {
 
@@ -16,7 +17,7 @@ export default function ProductsList() {
     useEffect(() => { fetchProducts() }, []);
 
     return (
-        <div className="container-lg mb-3 mt-3">
+        <div className="sfondo">
             <h1 className="text-center">Videogiochi</h1>
             <div className="row">
                 {products.map((product) => {
