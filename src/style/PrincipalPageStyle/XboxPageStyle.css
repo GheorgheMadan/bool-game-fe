@@ -1,12 +1,15 @@
 /* container per i prodotti */
-.xbox-products-page-container {
+.xbox-products-container {
     padding: 2rem;
     background: linear-gradient(135deg, #0e6f0e, #107C10, #0e6f0e);
     /* Gradiente animato */
     background-size: 400% 400%;
     animation: backgroundAnimation 6s infinite alternate ease-in-out;
-    text-align: center;
+}
 
+.xbox-products-container-2 {
+    width: 80%;
+    margin: auto;
 }
 
 /* Animazione del background */
@@ -20,7 +23,7 @@
     }
 }
 
-.xbox-product-page-h2 {
+.xbox-product-h2 {
     font-size: 30px;
     font-weight: bold;
     text-transform: uppercase;
@@ -37,18 +40,44 @@
     position: relative;
 }
 
+.xbox-product-section {
+    margin: 2rem 0;
+    padding: 1rem;
+    border-radius: 10px;
+    /* Angoli arrotondati per un look più morbido */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    /* Ombra morbida per dare profondità */
+    backdrop-filter: blur(10px);
+}
+
+.xbox-product-section>h3 {
+    color: #fff;
+    /* Colore del testo bianco per contrasto con lo sfondo */
+    font-size: 1.8rem;
+    /* Dimensione del font per il titolo della sezione */
+    font-weight: bold;
+    /* Grassetto per il titolo */
+    margin-bottom: 1rem;
+    /* Margine inferiore per distanziare dal contenuto */
+    text-transform: uppercase;
+    /* Trasformazione del testo in maiuscolo */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    /* Ombra del testo per dare profondità */
+    padding: 0.5rem 0;
+}
+
 /* lista di prodotti */
-.xbox-product-page-list {
+.xbox-product-list {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 2rem;
+    gap: 1.5rem;
 }
 
-.xbox-product-page-card {
-    height: 400px;
+.xbox-product-card {
+    height: 300px;
     /* Aumento l'altezza per maggiore spazio */
-    width: 340px;
+    width: 200px;
     /* Mantenuto lo stesso per il controllo dimensionale */
     transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
     padding: 1.5rem;
@@ -71,7 +100,7 @@
     /* Leggera trasparenza per effetto elegante */
 }
 
-.xbox-product-page-card:hover {
+.xbox-product-card:hover {
     transform: translateY(-15px);
     /* Leggero sollevamento */
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
@@ -83,7 +112,7 @@
 }
 
 /* immagine prodotto */
-.xbox-product-page-card img {
+.xbox-product-card img {
     width: 100%;
     /* Aumento la larghezza al 100% per sfruttare tutta la card */
     height: 65%;
@@ -95,56 +124,45 @@
     /* Aggiunta transizione per l'immagine */
 }
 
-.xbox-product-page-card img:hover {
+.xbox-product-card img:hover {
     transform: scale(1.1);
     /* Effetto zoom sull'immagine al passaggio del mouse */
 }
 
 /* Dettagli testo prodotto */
-.xbox-product-page-card h3 {
-    font-size: 1.2rem;
+.xbox-product-card h3 {
+    font-size: 1rem;
     /* Dimensione font più grande per il nome del prodotto */
     color: #333;
     /* Colore del testo grigio scuro */
-    margin-top: 1rem;
+    margin-top: 0.5rem;
     text-align: center;
     font-weight: bold;
     /* Grassetto per maggiore enfasi */
     transition: color 0.3s ease;
     /* Transizione per il colore del testo */
-}
-
-.xbox-product-page-card p {
-    font-size: 0.9rem;
-    color: #666;
-    /* Colore del testo più chiaro per la descrizione */
-    text-align: center;
-    margin-top: 0.5rem;
-    line-height: 1.4;
-    /* Aumento dell'altezza della linea per migliorare la leggibilità */
+    line-height: 1.1;
 }
 
 /* Prezzo */
-.xbox-product-page-card span {
-    font-size: 1.3rem;
+.xbox-product-card span {
+    font-size: 1.2rem;
     color: #e91e63;
     /* Colore del prezzo più vivace */
     font-weight: bold;
     position: absolute;
     bottom: 0;
     text-align: center;
-    width: 100%;
-    /* Centra il prezzo nella card */
 }
 
 /* Opzioni per una card attiva o selezionata */
-.xbox-product-page-card.active {
+.xbox-product-card.active {
     border-color: #e91e63;
     /* Cambia il bordo se la card è attiva o selezionata */
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
 }
 
-.xbox-product-page-link {
+.xbox-product-link {
     text-decoration: none;
     color: inherit;
     /* Mantiene il colore del testo ereditato */
