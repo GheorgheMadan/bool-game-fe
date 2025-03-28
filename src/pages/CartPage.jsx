@@ -1,9 +1,12 @@
 import React from 'react';
 import { useCart } from '../contexts/CartContext'; // Importiamo il contesto del carrello per gestire lo stato del carrello
+import { useNavigate } from 'react-router-dom';
 
 const CartPage = () => {
     // Estraiamo le funzioni e lo stato del carrello dal contesto
-    const { cart, increaseQuantity, decreaseQuantity, removeFromCart } = useCart();
+    const { cart, increaseQuantity, decreaseQuantity, clearCart } = useCart();
+
+    const navigate = useNavigate();
 
     // Funzione per aumentare la quantità di un prodotto nel carrello
     const handleIncrease = (productId) => {
@@ -17,13 +20,25 @@ const CartPage = () => {
 
     // Funzione per rimuovere un prodotto dal carrello
     const handleRemove = (productId) => {
-        removeFromCart(productId);
+        clearCart(productId);
     };
 
     // Funzione per calcolare il totale del carrello
     const calculateTotal = () => {
         return cart.reduce((total, product) => total + product.price * product.quantity, 0).toFixed(2);
     };
+
+    // Funzione per andare alla home
+    const goToHome = () => {
+        navigate('/');
+    };
+
+    // Funzione per andare al checkout e passare il carrello
+    const goToCheckout = () => {
+        navigate('/checkout', { state: { cart } });
+    };
+
+
 
     return (
         <div>
@@ -59,7 +74,9 @@ const CartPage = () => {
                         {/* Mostriamo il totale del carrello */}
                         <h3>Totale: €{calculateTotal()}</h3>
                         {/* Bottone per procedere al checkout */}
-                        <button>Procedi al checkout</button>
+                        <button onClick={goToCheckout}>Procedi al checkout</button>
+                        {/* Bottone per tornare alla home */}
+                        <button onClick={goToHome}>Torna alla home</button>
                     </div>
                 </>
             )}

@@ -1,4 +1,4 @@
-import React, { createContext, useState, useContext } from 'react';
+import React, { createContext, useState, useContext, useEffect } from 'react';
 import axios from 'axios';
 
 // Creiamo il contesto del carrello
@@ -18,6 +18,11 @@ export const CartProvider = ({ children }) => {
         } catch (error) {
             console.error('Errore nell\'aggiornamento dello stock:', error);
         }
+    };
+
+    // Funzione per salvare il carrello nel localStorage
+    const saveCartToLocalStorage = (cart) => {
+        localStorage.setItem('cart', JSON.stringify(cart));
     };
 
     // Aggiungi prodotto al carrello
@@ -41,6 +46,7 @@ export const CartProvider = ({ children }) => {
             // Aggiorna lo stock nel database
             await updateStockInDB(product.id, -1); // decremento dello stock
         }
+        saveCartToLocalStorage(cart);
     };
 
     // Aumenta la quantità di un prodotto nel carrello
@@ -71,7 +77,9 @@ export const CartProvider = ({ children }) => {
         } catch (error) {
             console.error("Errore durante il recupero dello stock:", error);
         }
+        saveCartToLocalStorage(cart);
     };
+
     // Riduci la quantità di un prodotto nel carrello
     const decreaseQuantity = async (productId) => {
         setCart((prevCart) =>
@@ -86,17 +94,29 @@ export const CartProvider = ({ children }) => {
         if (product && product.quantity > 1) {
             await updateStockInDB(productId, 1); // incremento dello stock
         }
+        saveCartToLocalStorage(cart);
     };
 
-    // Rimuovi un prodotto dal carrello
-    const removeFromCart = async (productId) => {
-        setCart((prevCart) => prevCart.filter(item => item.id !== productId));
-        await updateStockInDB(productId, 1); // incremento dello stock
+    // Svuota il carrello e ripristina lo stock nel database
+    const clearCart = async () => {
+        // Itera su ogni prodotto nel carrello
+        for (const product of cart) {
+            // Ripristina lo stock per ogni prodotto nel database
+            await updateStockInDB(product.id, product.quantity); // Aggiunge lo stock in base alla quantità del prodotto
+        }
+        // Svuota il carrello
+        setCart([]);
     };
+
+    // Recupera il carrello dal localStorage al caricamento dell'app
+    useEffect(() => {
+        const storedCart = JSON.parse(localStorage.getItem('cart')) || [];
+        setCart(storedCart);
+    }, []);
 
 
     return (
-        <CartContext.Provider value={{ cart, addToCart, increaseQuantity, decreaseQuantity, removeFromCart }}>
+        <CartContext.Provider value={{ cart, addToCart, increaseQuantity, decreaseQuantity, clearCart }}>
             {children}
         </CartContext.Provider>
     );
