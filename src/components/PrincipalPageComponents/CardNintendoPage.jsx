@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import '../../style/PrincipalPageStyle/NintendoPageStyle.css';
 
@@ -51,8 +52,10 @@ const NintendoProducts = () => {
                 <div className="nintendo-product-list">
                     {products.map(product => (
                         <div key={product.id} className="nintendo-product-card">
-                            <img src={product.image_url} alt={product.name} />
-                            <h3>{product.name}</h3>
+                            <Link to={`/products/${product.id}`} className='nintendo-product-link'>
+                                <img src={product.image_url} alt={product.name} />
+                                <h3>{product.name}</h3>
+                            </Link>
                             <span>${product.price}</span>
                         </div>
                     ))}

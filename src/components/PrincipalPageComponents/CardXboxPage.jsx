@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import '../../style/PrincipalPageStyle/XboxPageStyle.css';
 
@@ -45,14 +46,16 @@ const XboxProducts = () => {
     };
 
     return (
-        <div className="xbox-products-container">
-            <h2 className='xbox-h2'>Benvenuto nel mondo Xbox</h2>
+        <div className="xbox-products-page-container">
+            <h2 className='xbox-product-page-h2'>Benvenuto nel mondo Xbox</h2>
             {products.length > 0 ? (
-                <div className="xbox-product-list">
+                <div className="xbox-product-page-list">
                     {products.map(product => (
-                        <div key={product.id} className="xbox-product-card">
-                            <img src={product.image_url} alt={product.name} />
-                            <h3>{product.name}</h3>
+                        <div key={product.id} className="xbox-product-page-card">
+                            <Link to={`/products/${product.id}`} className='xbox-product-page-link'>
+                                <img src={product.image_url} alt={product.name} />
+                                <h3>{product.name}</h3>
+                            </Link>
                             <span>${product.price}</span>
                         </div>
                     ))}

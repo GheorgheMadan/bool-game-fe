@@ -2,11 +2,13 @@ import axios from "axios"
 import { useState, useEffect, useContext } from "react"
 import GlobalContext from '../../contexts/GlobalContext';
 import { Link } from "react-router-dom";
-
+import 'bootstrap/dist/css/bootstrap.min.css';
+// Per aggiungere i prodotti al carrello
+import { useCart } from "../../contexts/CartContext";
 export default function CardHomePage() {
 
     // Estraggo la funzione addToCart dal contesto
-    const { addToCart } = useContext(GlobalContext);
+    const { addToCart } = useCart();
 
     const [query, setQuery] = useState({})
     const [query2, setQuery2] = useState({})

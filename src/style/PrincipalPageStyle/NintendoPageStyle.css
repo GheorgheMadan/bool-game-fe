@@ -143,3 +143,13 @@
     /* Cambia il bordo se la card è attiva o selezionata */
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
 }
+
+.nintendo-product-link {
+    text-decoration: none;
+    color: inherit;
+    /* Mantiene il colore del testo ereditato */
+    transition: color 0.3s ease;
+    width: 100%;
+    height: 100%;
+
+}

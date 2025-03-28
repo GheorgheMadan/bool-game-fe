@@ -1,5 +1,8 @@
 import '../style/HomePageStyle.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import React from 'react';
+
+
 
 //COMPONENTE CHE CONTINE IN ANTEMPRIMA 2 BUNDLE 
 import CardHomePage from '../components/homepageComponents/CardHomePage'
@@ -20,6 +23,8 @@ import { Link } from 'react-router-dom';
 
 
 export default function HomePage() {
+
+
     return (
         <>
             <div className='general-container'>
