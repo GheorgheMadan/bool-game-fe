@@ -1,48 +1,37 @@
-/* .card {
-     width: 100%;
- }
-
- .card-body-dx {
-     width: 60%;
- }
-
- .card-body-sx {
-     width: 50%;
- } */
-
-
+.image-small {
+    width: 65%;
+    object-fit: contain;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
 
 .image-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    width: 100%;
 }
 
-.image-small {
-    width: 50%;
-    height: 50%;
-    object-fit: contain;
-}
-
-.card-body-right p {
-    margin-top: 50px;
+.card-text {
+    font-size: 2em;
+    background-color: yellow;
+    width: 40%;
+    padding: 9px;
+    text-align: center;
 }
 
 .card-body-left {
     width: 60%;
+    border: 1px solid black;
+    padding: 2em;
 }
 
 .card-body-right {
-    position: relative;
+    border: 1px solid black;
+    padding: 2em;
 }
 
 .card-right-img {
-    width: 50%;
+    width: 100%;
     height: 50%;
-    border: 1px solid black;
-    position: absolute;
-    top: 0px;
-    right: 50px;
 }
 
 .total-price {
@@ -50,26 +39,19 @@
     border: 1px solid black;
     border-radius: 50px;
     text-align: center;
-    margin-left: 70px;
-    margin-top: 50px;
     background-color: black;
     color: white;
     padding: 5px;
 }
 
-.shipping-cost {
+.centered-price {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
     margin-top: 30px;
-    margin-left: 70px;
-}
-
-.tax {
-    margin-left: 70px;
-    margin-top: 20px;
 }
 
 .shipping-free {
-    margin-left: 70px;
-    margin-top: 10px;
     color: gray;
 }
 
@@ -78,9 +60,17 @@
     border: 1px solid black;
     border-radius: 50px;
     text-align: center;
-    margin-left: 70px;
-    margin-top: 30px;
     background-color: green;
+    color: white;
+    padding: 5px;
+}
+
+.not-available {
+    width: 300px;
+    border: 1px solid black;
+    border-radius: 50px;
+    text-align: center;
+    background-color: red;
     color: white;
     padding: 5px;
 }
@@ -90,9 +80,29 @@
     border: 1px solid black;
     border-radius: 50px;
     text-align: center;
-    margin-left: 70px;
-    margin-top: 30px;
     background-color: red;
     color: white;
     padding: 5px;
+}
+
+.pegi-image {
+    width: 75px;
+    height: auto;
+    margin-top: 5px;
+    display: inline-block;
+    margin-left: 15px;
+}
+
+.card-title {
+    width: 100%;
+    text-align: center;
+}
+
+.hidden {
+    display: none;
+}
+
+.inline {
+    display: inline-block;
+    margin-right: 25px;
 }
