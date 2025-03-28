@@ -3,27 +3,25 @@ import { loadStripe } from '@stripe/stripe-js';
 import { useStripe, useElements, CardElement } from '@stripe/react-stripe-js';
 import axios from 'axios';
 
-// Carica Stripe con la configurazione per disabilitare i cookie
-const stripePromise = loadStripe('pk_test_51R4oHvPXYjIqouRcxeNvWgRuFnQ1vo8PlqPEzVS6mDT2ix4nlzdDPaqwSVD5oHDfiTx0xdfcL0IzUQTsy4IU1bvA0079IF49Us', {
-    stripeAccount: 'acct_1R4oHoBsHKjTjOb2',
-    advancedFraudSignals: false,  // Disabilita i cookie in Stripe Elements
-});
+// Carica Stripe con la chiave pubblica
+const stripePromise = loadStripe('pk_test_51R4oHoBsHKjTjOb27pKcmH1YbaCbCgSSrIWcwXGnYGMnBiGhcO1zJFfurj9MEEjKGmTYO6EK8AHnrEd4j7yhFfYw00KFdjDfmf');
 
 const CheckoutPage = () => {
-    const [order, setOrder] = useState(null);
-    const [clientSecret, setClientSecret] = useState('');
-    const [isProcessing, setIsProcessing] = useState(false);
+    const [order, setOrder] = useState(null); // Stato per i dettagli dell'ordine
+    const [clientSecret, setClientSecret] = useState(''); // Stato per il client secret
+    const [isProcessing, setIsProcessing] = useState(false); // Stato per il processo di pagamento
+    const [userInfo, setUserInfo] = useState({ name: '', email: '', address: '' }); // Stato per i dettagli dell'utente
 
     const stripe = useStripe();
     const elements = useElements();
 
     useEffect(() => {
-        // Recupera l'ordine e il clientSecret dal backend
+        // Recupera i dettagli dell'ordine e il clientSecret dal backend
         const fetchOrderDetails = async () => {
-            const orderId = 1; // Recupera dinamicamente l'ID dell'ordine
+            const orderId = 1; // Cambia con l'ID dell'ordine corretto
             try {
-                const { data } = await axios.post('/api/payment/create', { order_id: orderId });
-                setOrder(data.order);  // Supponiamo che l'API restituisca anche i dettagli dell'ordine
+                const { data } = await axios.post('/api/payment/process', { order_id: orderId });
+                setOrder(data.order);
                 setClientSecret(data.clientSecret);
             } catch (error) {
                 console.error("Errore nel recuperare i dettagli dell'ordine:", error);
@@ -33,6 +31,7 @@ const CheckoutPage = () => {
         fetchOrderDetails();
     }, []);
 
+    // Funzione per inviare il pagamento
     const handlePaymentSubmit = async (event) => {
         event.preventDefault();
 
@@ -42,10 +41,12 @@ const CheckoutPage = () => {
 
         setIsProcessing(true);
 
+        // Includi anche i dettagli dell'utente nel pagamento
         const { error, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
             payment_method: {
                 card: elements.getElement(CardElement),
             },
+            receipt_email: userInfo.email, // Invia l'email dell'utente per la ricevuta
         });
 
         if (error) {
@@ -53,10 +54,18 @@ const CheckoutPage = () => {
             alert('Pagamento fallito, riprova');
         } else if (paymentIntent.status === 'succeeded') {
             alert('Pagamento completato con successo!');
-            // A questo punto, invia la conferma via email tramite Nodemailer (backend)
+            // Qui puoi inviare una conferma via email, se necessario
         }
 
         setIsProcessing(false);
+    };
+
+    // Funzione per gestire il cambiamento dei dati dell'utente
+    const handleUserInfoChange = (event) => {
+        setUserInfo({
+            ...userInfo,
+            [event.target.name]: event.target.value,
+        });
     };
 
     if (!order) {
@@ -74,22 +83,63 @@ const CheckoutPage = () => {
                 ))}
             </ul>
             <div>
-                <h3>Totale: {order.total}€</h3>
-                <h3>Spese di spedizione: {order.shipping_cost}€</h3>
+                <h3>Totale: €{order.total}</h3>
+                <h3>Spese di spedizione: €{order.shipping_cost}</h3>
             </div>
+
+            <h3>Dettagli di pagamento</h3>
             <form onSubmit={handlePaymentSubmit}>
+                <div>
+                    <label htmlFor="name">Nome</label>
+                    <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        value={userInfo.name}
+                        onChange={handleUserInfoChange}
+                        required
+                    />
+                </div>
+                <div>
+                    <label htmlFor="email">Email</label>
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        value={userInfo.email}
+                        onChange={handleUserInfoChange}
+                        required
+                    />
+                </div>
+                <div>
+                    <label htmlFor="address">Indirizzo di spedizione</label>
+                    <input
+                        type="text"
+                        id="address"
+                        name="address"
+                        value={userInfo.address}
+                        onChange={handleUserInfoChange}
+                        required
+                    />
+                </div>
+
                 <CardElement />
-                <button type="submit" disabled={!stripe || isProcessing}>Paga</button>
+
+                <button type="submit" disabled={!stripe || isProcessing}>
+                    {isProcessing ? 'Elaborazione...' : 'Paga'}
+                </button>
             </form>
         </div>
     );
 };
 
 // Usa il provider per Stripe.js
+import { Elements } from '@stripe/react-stripe-js';
+
 const CheckoutPageWithStripe = () => (
-    <StripeProvider stripe={stripePromise}>
+    <Elements stripe={stripePromise}>
         <CheckoutPage />
-    </StripeProvider>
+    </Elements>
 );
 
 export default CheckoutPageWithStripe;
