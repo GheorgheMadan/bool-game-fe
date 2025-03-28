@@ -10,9 +10,14 @@ export const aggiornaQuantitaProdotto = async (productId, newQuantity, currentQu
             currentQuantity // Quantità attuale prima dell'aggiornamento
         });
 
-        console.log(response.data.message);
-        // Operazione riuscita
-        return true;
+        // Verifica la risposta e restituisce un valore booleano
+        if (response.data.success) {
+            console.log(response.data.message); // Messaggio di successo
+            return true; // Operazione riuscita
+        } else {
+            console.error(response.data.message); // Messaggio di errore
+            return false; // Operazione fallita
+        }
     } catch (error) {
         // Se si verifica un errore, lo stampa nella console
         console.error(error.response ? error.response.data.message : error.message);
