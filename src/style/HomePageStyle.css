@@ -1,39 +1,78 @@
-main {
-    /* background-image: url(../public/progetto-senza-titolo.png);
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    background-repeat: no-repeat; */
-}
-
 .general-container {
     width: 70%;
     margin: 0 auto;
     /* background-color: aqua; */
     /* text-align: center; */
     padding-top: 60px;
+
+
 }
 
 .general-container section {
     margin-bottom: 50px;
 }
 
-.general-container section h2 {
-    font-size: 40px;
+.title-h2 {
+    font-size: 28px;
     font-weight: bold;
     text-transform: uppercase;
-    text-align: center;
-    color: #000000;
-    /* Colore acceso per risaltare */
+    color: #ffffff;
     margin-bottom: 25px;
-    padding-bottom: 10px;
-    /* border-bottom: 3px solid rgb(94, 10, 173); */
-    /* Linea inferiore colorata */
     text-shadow: 3px 3px 5px rgba(65, 63, 62, 0.6);
-    /* Effetto luce */
     letter-spacing: 2px;
     position: relative;
+    z-index: 20;
 }
+
+.black-title {
+    color: #333333;
+}
+
+.general-container section a {
+    text-decoration: none;
+}
+
+@keyframes expandBackground {
+    from {
+        width: 65%;
+    }
+
+    to {
+        width: 100%;
+    }
+}
+
+.container-navigator-icons {
+    width: 65%;
+    margin: 0 auto;
+    background-color: #666666;
+    padding: 20px 20px;
+    border-radius: 40px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    transition: transform 0.5s ease;
+}
+
+.container-navigator-icons:hover {
+    animation: expandBackground 0.5s forwards;
+}
+
+.container-navigator-icons button {
+    padding: 10px 18px;
+    border-radius: 30px;
+    background-color: rgb(255, 255, 255, 0);
+    border: none;
+    transition: transform 0.5s ease;
+    color: white;
+}
+
+.container-navigator-icons button:hover {
+    background-color: rgba(255, 255, 255, 0.747);
+    transform: scale(1.2);
+    color: black;
+}
+
 
 
 /* CSS PER CardHomePage.jsx */
@@ -83,18 +122,20 @@ main {
     object-fit: contain;
 }
 
+.img-nintendo,
 .bundle-img,
 .bundle-img2,
 .game-img,
 .game-img2 {
-    transition: transform 0.4s ease;
+    transition: transform 0.5s ease;
 }
 
+.img-nintendo:hover,
 .bundle-img:hover,
 .bundle-img2:hover,
 .game-img:hover,
 .game-img2:hover {
-    transform: translateY(-10px);
+    transform: translateY(-40px);
 }
 
 .bundle-title {
@@ -134,7 +175,7 @@ main {
 }
 
 .img-gioco:hover {
-    transform: scale(1.08);
+    transform: scale(1.05);
 }
 
 
@@ -202,98 +243,176 @@ main {
 }
 
 /* SFONDO PLAYSTATION GAMES LIST*/
+
+/* REGOLE BG GENERALI  */
 .bg-play,
 .bg-xbox,
 .bg-nintendo {
     padding-bottom: 30px;
     background-repeat: no-repeat;
-    background-size: cover;
-}
-
-.bg-play {
     position: relative;
 }
 
-.bg-play::before {
+/* REGOLE BG XBOX */
+.bg-xbox::before,
+.bg-xbox::after {
     content: "";
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('../bg-playstation-section.jpg');
-    background-size: cover;
-    /* Regola l'opacità a piacere */
     z-index: -1;
-}
-
-.bg-nintendo {
-    position: relative;
-}
-
-.bg-nintendo::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url('../bg-nintendo.jpg');
-    background-size: cover;
-    background-position: center;
-    /* Regola l'opacità a piacere */
-    z-index: -1;
-}
-
-.bg-nintendo,
-.bg-play,
-.bg-xbox {
-    position: relative;
-    background-color: rgba(0, 0, 0, 0.4);
 }
 
 .bg-xbox::before {
+    background-image: url('../bg-xbox-games.jpg');
+    background-size: cover;
+    /* Applica l'effetto inclinato */
+    clip-path: polygon(0 0, 100% 10%, 100% 100%, 0 100%);
+}
+
+.bg-xbox::after {
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Applica l'effetto inclinato */
+    clip-path: polygon(0 0, 100% 10%, 100% 100%, 0 100%);
+}
+
+/* REGOLE BG PLAYSTATION */
+.bg-play::before,
+.bg-play::after {
     content: "";
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('../bg-xbox-games.jpg');
-    background-size: cover;
-    background-position: center;
-    /* Regola l'opacità a piacere */
     z-index: -1;
 }
 
+.bg-play::before {
+    background-image: url('../bg-playstation-section.jpg');
+    background-size: cover;
+    /* Applica l'effetto inclinato */
+    clip-path: polygon(0 10%, 100% 0, 100% 100%, 0 100%);
+}
+
+.bg-play::after {
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Applica l'effetto inclinato */
+    clip-path: polygon(0 10%, 100% 0, 100% 100%, 0 100%);
+
+}
+
+/* REGOLE BG NINTENDO  */
+.bg-nintendo::before,
+.bg-nintendo::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    margin-top: 20px;
+}
+
+.bg-nintendo::before {
+    background-image: url('../bg-nintendo.jpg');
+    background-size: cover;
+    background-position: center;
+    /* Applica l'effetto inclinato */
+    clip-path: polygon(0 0, 100% 10%, 100% 100%, 0 100%);
+}
+
+.bg-nintendo::after {
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Applica l'effetto inclinato */
+    clip-path: polygon(0 0, 100% 10%, 100% 100%, 0 100%);
+}
+
+
 /* SEZIONE NINTENDO ITEMS */
 .container-nintendo-items {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto auto;
-    margin-bottom: 60px;
-    /* Cambia l'altezza in base alle esigenze */
-}
+    display: flex;
+    flex-direction: column;
 
-.box {
-    text-align: center;
-}
-
-.left {
-    grid-column: 1;
-    grid-row: 1;
-}
-
-.bottom-right {
-    grid-column: 2;
-    grid-row: 2;
-}
-
-.bottom-left {
-    grid-column: 1;
-    grid-row: 3;
+    padding: 0 70px;
+    gap: 10px;
+    /* debug */
+    /* background-color: pink; */
 }
 
 .img-nintendo {
-    width: 400px;
+    width: 450px;
+}
+
+.box-nintendo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container-details-nintendo h4 {
+    font-size: 26px;
+    font-weight: 700;
+    color: #333;
+    /* Grigio scuro */
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease-in-out;
+}
+
+.container-details-nintendo h4:hover {
+    transform: scale(1.05);
+    text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.3);
+}
+
+.container-details-nintendo span {
+    font-size: 20px;
+    font-weight: bold;
+    color: #555;
+    /* Grigio antracite */
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+    display: block;
+    margin: 8px 0;
+}
+
+.container-details-nintendo a button {
+    background: #ffc107;
+    /* Grigio scuro */
+    color: white;
+    font-size: 18px;
+    font-weight: 600;
+    padding: 10px 22px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease-in-out;
+}
+
+.container-details-nintendo a button:hover {
+    background: #ffc107;
+    transform: scale(1.1);
+    box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+.container-details-nintendo a .btn-pink {
+    background-color: #e78c8f;
+}
+
+.container-details-nintendo a .btn-pink:hover {
+    background: #e78c8f;
+
+}
+
+.container-details-nintendo a .btn-blue {
+    background-color: #4d59a0;
+}
+
+.container-details-nintendo a .btn-blue:hover {
+    background: #4d59a0;
+
 }

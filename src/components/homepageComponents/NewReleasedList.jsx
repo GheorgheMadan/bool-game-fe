@@ -53,7 +53,7 @@ export default function NewReleasedList() {
     return (
         <>
             <section>
-                <h2>🆕 Ultime uscite</h2>
+                <h2 className="title-h2  black-title">🆕 Ultime uscite</h2>
                 <div className="container-trend">
                     <button onClick={nextSlide} className="next-btn">
                         <FontAwesomeIcon icon={faChevronRight} />
