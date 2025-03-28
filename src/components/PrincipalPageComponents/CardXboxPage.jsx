@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import '../style/PlaystationPageStyle.css';
+import '../../style/PrincipalPageStyle/XboxPageStyle.css';
 
-const PlaystationProducts = () => {
+const XboxProducts = () => {
     const [products, setProducts] = useState([]);
 
     useEffect(() => {
@@ -22,9 +22,9 @@ const PlaystationProducts = () => {
             const supportedConsoles = JSON.parse(product.supported_consoles || '[]'); // Assicurati che supported_consoles sia un array
 
             return (
-                (product.category_name === "console" && product.name.includes("Play")) ||
-                product.compatibility === "PS5" ||
-                (Array.isArray(supportedConsoles) && supportedConsoles.some(console => console.includes("PlayStation")))
+                (product.category_name === "console" && /Xbox/i.test(product.name)) ||
+                /Xbox/i.test(product.compatibility) ||
+                (Array.isArray(supportedConsoles) && supportedConsoles.some(console => /Xbox/i.test(console)))
             );
         });
     };
@@ -45,12 +45,12 @@ const PlaystationProducts = () => {
     };
 
     return (
-        <div className="products-container">
-            <h1>benvenuto nel mondo Playstation</h1>
+        <div className="xbox-products-container">
+            <h2 className='xbox-h2'>Benvenuto nel mondo Xbox</h2>
             {products.length > 0 ? (
-                <div className="product-list">
+                <div className="xbox-product-list">
                     {products.map(product => (
-                        <div key={product.id} className="product-card">
+                        <div key={product.id} className="xbox-product-card">
                             <img src={product.image_url} alt={product.name} />
                             <h3>{product.name}</h3>
                             <span>${product.price}</span>
@@ -64,4 +64,4 @@ const PlaystationProducts = () => {
     );
 }
 
-export default PlaystationProducts;
+export default XboxProducts;

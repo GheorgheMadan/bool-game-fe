@@ -1,19 +1,31 @@
+<<<<<<< HEAD
 .card {
     display: flex;
     gap: 20px;
 }
 
+=======
+>>>>>>> 0e9186670781e7604d6750a57fd363b32cb3c9ae
 .image-container {
     display: flex;
 }
 
 .image-small {
+<<<<<<< HEAD
     width: 100%;
     max-width: 300px;
     height: auto;
+=======
+    width: 65%;
+>>>>>>> 0e9186670781e7604d6750a57fd363b32cb3c9ae
     object-fit: contain;
+    display: block;
+    /* Necessario per margin:auto */
+    margin-left: auto;
+    margin-right: auto;
 }
 
+<<<<<<< HEAD
 .card-body-left {
     width: 40%;
 }
@@ -30,6 +42,30 @@
     display: flex;
     flex-direction: column;
     padding-left: 70px;
+=======
+.card-text {
+    font-size: 4em;
+    background-color: yellow;
+    width: 65%;
+}
+
+.card-body-left {
+    width: 60%;
+    border: 1px solid black;
+    padding: 2em;
+}
+
+.card-body-right {
+    border: 1px solid black;
+    padding: 2em;
+}
+
+.card-right-img {
+    width: 100%;
+    height: 50% border: 1px solid black;
+    border: none;
+
+>>>>>>> 0e9186670781e7604d6750a57fd363b32cb3c9ae
 }
 
 .total-price {
@@ -44,11 +80,19 @@
     margin-bottom: 15px;
 }
 
+<<<<<<< HEAD
 .shipping-cost,
 .tax,
 .shipping-free {
     margin-bottom: 10px;
     margin-top: 10px;
+=======
+.centered-price {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+>>>>>>> 0e9186670781e7604d6750a57fd363b32cb3c9ae
 }
 
 .shipping-free {
@@ -66,6 +110,16 @@
     margin: 15px 0;
 }
 
+.not-available {
+    width: 300px;
+    border: 1px solid black;
+    border-radius: 50px;
+    text-align: center;
+    background-color: red;
+    color: white;
+    padding: 5px;
+}
+
 .add-cart {
     width: 300px;
     border: 1px solid black;
@@ -74,6 +128,7 @@
     background-color: red;
     color: white;
     padding: 5px;
+<<<<<<< HEAD
     cursor: pointer;
 }
 
@@ -82,4 +137,32 @@
     /* border: 1px solid black; */
     width: 100%;
     height: 260px;
+=======
+}
+
+.pegi-image {
+    width: 75px;
+    height: auto;
+    margin-top: 5px;
+    display: inline-block;
+    margin-left: 15px;
+}
+
+.card {
+    margin-bottom: 30px;
+}
+
+.card-title {
+    width: 100%;
+    text-align: center;
+}
+
+.hidden {
+    display: none;
+}
+
+.inline {
+    display: inline-block;
+    margin-right: 25px;
+>>>>>>> 0e9186670781e7604d6750a57fd363b32cb3c9ae
 }
