@@ -1,20 +1,12 @@
 header {
-    position: fixed;
+    position: sticky;
     /* L'header rimane sempre visibile */
     top: 0;
-    /* Lo fissa in alto */
-    left: 50%;
-    /* Lo centra rispetto alla larghezza */
-    transform: translateX(-50%);
-    /* Centra esattamente l'header */
     width: 100%;
     height: 80px;
     background-color: white;
-    /* Assicurati che abbia un colore di sfondo */
     z-index: 1000;
-    /* Lo mette sopra tutti gli altri elementi */
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
-    /* Effetto ombra per separarlo dal contenuto */
 }
 
 header .container-nav {

@@ -1,7 +1,7 @@
 .container-search-page {
     width: 75%;
-    margin: 0 auto;
-    margin-top: 50px;
+    margin: 50px auto;
+
 }
 
 .container-results {
@@ -9,13 +9,57 @@
     flex-wrap: wrap;
     gap: 25px;
     justify-content: center;
+    margin-top: 30px;
 }
 
-.card-result div {
-    width: 300px;
+.card-result {
+    width: 200px;
+    cursor: pointer;
+}
+
+.card-result span {
+    font-weight: bold;
+    font-size: 1.1rem;
+    /* Rende il titolo più grande */
+    text-transform: uppercase;
+    /* Trasforma in maiuscolo */
+    letter-spacing: 1px;
+    display: block;
+    /* Distanza tra le lettere per un look più pulito */
+    color: #222;
+    /* Un colore scuro per contrasto */
+}
+
+.prezzo {
+    color: red;
+    font-size: 1.1rem;
+    /* Rende il prezzo più evidente */
+    font-weight: bold;
+    text-shadow: 1px 1px 5px rgba(255, 0, 0, 0.5);
+    display: inline-block;
+    /* Necessario per le trasformazioni */
+    transition: transform 0.9s ease-in-out;
+}
+
+.card-result span:hover {
+    color: #ff5722;
+    /* Cambia colore su hover */
+    transition: color 0.3s ease-in-out;
+}
+
+.prezzo:hover {
+    transform: rotateY(360deg) scale(1.1);
+}
+
+.card-result img:hover {
+    transform: perspective(700px) rotateY(20deg) scale(1.1) rotate(5deg);
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
 .card-result div img {
     width: 100%;
+    height: 200px;
     object-fit: cover;
+    margin-bottom: 8px;
 }
