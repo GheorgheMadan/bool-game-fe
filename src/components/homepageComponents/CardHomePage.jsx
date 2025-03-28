@@ -1,6 +1,5 @@
 import axios from "axios"
-import { useState, useEffect, useContext } from "react"
-import GlobalContext from '../../contexts/GlobalContext';
+import { useState, useEffect } from "react"
 import { Link } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 // Per aggiungere i prodotti al carrello
