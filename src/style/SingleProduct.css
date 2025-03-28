@@ -1,32 +1,51 @@
-.image-small {
-    max-width: 100%;
-    height: 350px;
-}
-
-.image-container {
-    width: 250px;
-    height: 350px;
+.image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
     margin-left: auto;
     margin-right: auto;
 }
 
+.image-try {
+    width: 350px;
+    height: 450px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.card {
+    background: none;
+}
+
 .card-text {
     font-size: 2em;
-    background-color: yellow;
-    width: 40%;
-    padding: 9px;
+    background-color: rgba(255, 166, 0, 0.697);
+    width: 60%;
+    padding: 5px;
     text-align: center;
+    border: 1px solid black;
+    border-radius: 50px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .card-body-left {
+    width: 90%;
     border: 1px solid black;
     padding: 2em;
+    background-color: rgba(0, 0, 0, 0.343);
+    font-size: 20px;
+    color: white;
 }
 
 .card-body-right {
     border: 1px solid black;
     padding: 2em;
-    width: 60%;
+    background-color: rgba(0, 0, 0, 0.343);
+    color: white;
+    font-size: 25px;
 }
 
 .card-right-img {
@@ -42,6 +61,7 @@
     background-color: black;
     color: white;
     padding: 5px;
+    margin-bottom: 2em;
 }
 
 .centered-price {
@@ -49,10 +69,7 @@
     margin-left: auto;
     margin-right: auto;
     margin-top: 30px;
-}
-
-.shipping-free {
-    color: gray;
+    font-size: 20px;
 }
 
 .available {
@@ -96,6 +113,8 @@
 .card-title {
     width: 100%;
     text-align: center;
+    font-size: 35px;
+    color: rgb(255, 225, 0)
 }
 
 .hidden {
@@ -105,4 +124,11 @@
 .inline {
     display: inline-block;
     margin-right: 25px;
+}
+
+.sfondo {
+    background-image: url("/public/walppaper-hexs.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
 }
