@@ -27,7 +27,7 @@ main {
     /* Colore acceso per risaltare */
     margin-bottom: 25px;
     padding-bottom: 10px;
-    border-bottom: 3px solid rgb(94, 10, 173);
+    /* border-bottom: 3px solid rgb(94, 10, 173); */
     /* Linea inferiore colorata */
     text-shadow: 3px 3px 5px rgba(65, 63, 62, 0.6);
     /* Effetto luce */
@@ -117,47 +117,51 @@ main {
     left: 0;
 }
 
-/* CSS PER LE SEZIONI NewReleasedList.jsx e TrendList.jsx */
+/* CSS PER i caroselli home page  */
 
-/* GESTIONE SEZIONE TENDENZE */
 .container-img {
     width: 250px;
-    height: 360px;
+    height: 330px;
 }
 
 .img-gioco {
     width: 100%;
     height: 100%;
-    /* Assicurati che l'immagine riempia l'intero contenitore */
     border-radius: 10px;
     object-fit: cover;
-    /* L'immagine coprirà l'intero contenitore senza deformarsi */
-    object-position: cover;
-    transition: transform 0.4s ease;
+    transition: transform 0.3s ease-in-out;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
 }
 
 .img-gioco:hover {
-    transform: scale(1.05);
+    transform: scale(1.08);
 }
+
 
 .container-trend-cards {
     display: flex;
     gap: 10px;
     justify-content: center;
-    transition: transform 0.6s ease-out;
+    transition: transform 1s ease-in-out;
+    /* Transizione più fluida */
+    will-change: transform;
+    scroll-behavior: smooth;
+    /* Effetto scorrimento fluido */
 }
 
 /* Animazione di scorrimento fluido per le immagini */
-@keyframes smoothSlideIn {
+@keyframes infiniteScroll {
     0% {
-        transform: translateX(50px);
-        opacity: 0;
+        transform: translateX(0);
     }
 
     100% {
-        transform: translateX(0);
-        opacity: 1;
+        transform: translateX(-100%);
     }
+}
+
+.container-trend-cards .container-img {
+    animation: smoothSlide 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .container-trend {
@@ -173,12 +177,14 @@ main {
     position: absolute;
     font-size: 30px;
     border: none;
-    top: 0;
-    opacity: 0.2;
-    background-color: rgba(128, 128, 128, 0);
-    height: 100%;
-    border-radius: 10px;
-    transition: transform 0.4s ease;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.2);
+    color: white;
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s ease-in-out;
+    z-index: 20;
 }
 
 .next-btn {
@@ -191,6 +197,89 @@ main {
 
 .next-btn:hover,
 .prev-btn:hover {
-    opacity: 1;
-    transform: scale(1.1);
+    background-color: rgba(0, 0, 0, 0.5);
+    transform: translateY(-50%) scale(1.2);
+}
+
+/* SFONDO PLAYSTATION GAMES LIST*/
+.bg-play,
+.bg-xbox,
+.bg-nintendo {
+    padding-bottom: 30px;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.bg-play {
+    background-image: url('../bg-playstation-section.jpg');
+}
+
+.bg-nintendo {
+    position: relative;
+}
+
+.bg-nintendo::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../bg-nintendo.jpg');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.6;
+    /* Regola l'opacità a piacere */
+    z-index: -1;
+}
+
+.bg-xbox {
+    position: relative;
+}
+
+.bg-xbox::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../bg-xbox-games.jpg');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.7;
+    /* Regola l'opacità a piacere */
+    z-index: -1;
+}
+
+/* SEZIONE NINTENDO ITEMS */
+.container-nintendo-items {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    margin-bottom: 60px;
+    /* Cambia l'altezza in base alle esigenze */
+}
+
+.box {
+    text-align: center;
+}
+
+.left {
+    grid-column: 1;
+    grid-row: 1;
+}
+
+.bottom-right {
+    grid-column: 2;
+    grid-row: 2;
+}
+
+.bottom-left {
+    grid-column: 1;
+    grid-row: 3;
+}
+
+.img-nintendo {
+    width: 400px;
 }
