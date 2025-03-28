@@ -7,7 +7,7 @@ import axios from 'axios';
 const stripePromise = loadStripe('pk_test_51R4oHoBsHKjTjOb27pKcmH1YbaCbCgSSrIWcwXGnYGMnBiGhcO1zJFfurj9MEEjKGmTYO6EK8AHnrEd4j7yhFfYw00KFdjDfmf');
 
 const CheckoutPage = () => {
-    const [order, setOrder] = useState(null); // Stato per i dettagli dell'ordine
+    const [cartItems, setCartItems] = useState([]); // Stato per il carrello
     const [clientSecret, setClientSecret] = useState(''); // Stato per il client secret
     const [isProcessing, setIsProcessing] = useState(false); // Stato per il processo di pagamento
     const [userInfo, setUserInfo] = useState({ name: '', email: '', address: '' }); // Stato per i dettagli dell'utente
@@ -15,20 +15,27 @@ const CheckoutPage = () => {
     const stripe = useStripe();
     const elements = useElements();
 
+    // Recupera i dettagli del carrello dal localStorage e calcola il totale
     useEffect(() => {
-        // Recupera i dettagli dell'ordine e il clientSecret dal backend
-        const fetchOrderDetails = async () => {
-            const orderId = 1; // Cambia con l'ID dell'ordine corretto
+        const savedCart = JSON.parse(localStorage.getItem('cart')) || [];
+        setCartItems(savedCart);
+
+        const total = savedCart.reduce((acc, item) => acc + item.price * item.quantity, 0);
+        const shippingCost = 10; // Puoi calcolare o impostare una spedizione fissa
+
+        // Recupera il client secret per il pagamento
+        const fetchClientSecret = async () => {
             try {
-                const { data } = await axios.post('/api/payment/process', { order_id: orderId });
-                setOrder(data.order);
+                const { data } = await axios.post('/api/payment/process', { order_id: savedCart }); // Cambia il parametro in base alla logica
                 setClientSecret(data.clientSecret);
             } catch (error) {
-                console.error("Errore nel recuperare i dettagli dell'ordine:", error);
+                console.error("Errore nel recuperare il client secret:", error);
             }
         };
 
-        fetchOrderDetails();
+        if (savedCart.length > 0) {
+            fetchClientSecret();
+        }
     }, []);
 
     // Funzione per inviare il pagamento
@@ -41,7 +48,6 @@ const CheckoutPage = () => {
 
         setIsProcessing(true);
 
-        // Includi anche i dettagli dell'utente nel pagamento
         const { error, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
             payment_method: {
                 card: elements.getElement(CardElement),
@@ -68,7 +74,11 @@ const CheckoutPage = () => {
         });
     };
 
-    if (!order) {
+    const totalAmount = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
+    const shippingCost = 10; // o calcolalo in base alla logica della tua app
+    const orderTotal = totalAmount + shippingCost;
+
+    if (!clientSecret) {
         return <div>Loading...</div>;
     }
 
@@ -76,15 +86,15 @@ const CheckoutPage = () => {
         <div>
             <h2>Riepilogo Ordine</h2>
             <ul>
-                {order.products.map((product) => (
-                    <li key={product.id}>
+                {cartItems.map((product, index) => (
+                    <li key={index}>
                         {product.name} - {product.quantity} x {product.price}€
                     </li>
                 ))}
             </ul>
             <div>
-                <h3>Totale: €{order.total}</h3>
-                <h3>Spese di spedizione: €{order.shipping_cost}</h3>
+                <h3>Totale: €{orderTotal}</h3>
+                <h3>Spese di spedizione: €{shippingCost}</h3>
             </div>
 
             <h3>Dettagli di pagamento</h3>
