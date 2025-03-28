@@ -50,7 +50,7 @@ export default function SingleProduct({ productId }) {
     return (
         <>
             {/* // videogame card // */}
-            <div className="card d-flex flex-row">
+            <div className="card mb-1 d-flex flex-row justify-content-between">
                 {/* Parte sinistra con titolo e prezzo */}
                 <div className="card-body-left">
                     <p className="card-text">
@@ -104,7 +104,7 @@ export default function SingleProduct({ productId }) {
                 {/* Parte destra con immagine e info extra */}
                 <div className="card-body-right justify-content-center d-flex-xl flex-wrap">
                     <h5 className="card-title font-bold text-xl mb-2">{data.name}</h5>
-                    <div>
+                    <div className="image-container">
                         <img className="image-small mr-4" src={data.image_url} alt={data.name} />
                     </div>
                     <div className="card-right-img">

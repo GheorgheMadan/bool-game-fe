@@ -1,22 +1,21 @@
-.image-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
 .image-small {
     width: 65%;
     object-fit: contain;
     display: block;
-    /* Necessario per margin:auto */
     margin-left: auto;
     margin-right: auto;
 }
 
+.image-container {
+    width: 100%;
+}
+
 .card-text {
-    font-size: 4em;
+    font-size: 2em;
     background-color: yellow;
-    width: 65%;
+    width: 40%;
+    padding: 9px;
+    text-align: center;
 }
 
 .card-body-left {
@@ -32,9 +31,7 @@
 
 .card-right-img {
     width: 100%;
-    height: 50% border: 1px solid black;
-    border: none;
-
+    height: 50%;
 }
 
 .total-price {
@@ -94,10 +91,6 @@
     margin-top: 5px;
     display: inline-block;
     margin-left: 15px;
-}
-
-.card {
-    margin-bottom: 30px;
 }
 
 .card-title {
