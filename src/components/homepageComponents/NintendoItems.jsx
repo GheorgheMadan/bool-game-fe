@@ -1,5 +1,8 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
+import { Link } from "react-router-dom"
+
+
 export default function NintendoItems() {
 
     const [item, setItem] = useState({})
@@ -31,10 +34,54 @@ export default function NintendoItems() {
     useEffect(() => { getNintendoItem2() }, [])
 
     return (
-        <div class="container-nintendo-items">
-            <div class="box left"><img src={item.image_url} alt="" className="img-nintendo" /></div>
-            <div class="box bottom-right"><img src={item1.image_url} alt="" className="img-nintendo" /></div>
-            <div class="box bottom-left"><img src={item2.image_url} alt="" className="img-nintendo" /></div>
-        </div>
+        <section>
+            <Link>
+                <h2 className="black-title title-h2">Scegli la tua Nintendo Switch Lite: Scopri le colorazioni disponibili!</h2>
+            </Link>
+            <div class="container-nintendo-items">
+                <div class="box-nintendo">
+                    <div>
+                        <Link>
+                            <img src={item.image_url} alt={item.name} className="img-nintendo" />
+                        </Link>
+                    </div>
+                    <div className="container-details-nintendo">
+                        <h4>{item.name}</h4>
+                        <span>€ {item.price}</span>
+                        <Link>
+                            <button className="btn-blue">Acquista ora!</button>
+                        </Link>
+                    </div>
+                </div>
+                <div class="box-nintendo">
+                    <div className="container-details-nintendo">
+                        <h4>{item1.name}</h4>
+                        <span>€ {item1.price}</span>
+                        <Link>
+                            <button className="btn-pink">Acquista ora!</button>
+                        </Link>
+                    </div>
+                    <div>
+                        <Link>
+                            <img src={item1.image_url} alt={item1.name} className="img-nintendo" />
+                        </Link>
+                    </div>
+                </div>
+                <div class="box-nintendo">
+                    <div>
+                        <Link>
+                            <img src={item2.image_url} alt={item2.name} className="img-nintendo" />
+                        </Link>
+                    </div>
+                    <div className="container-details-nintendo">
+                        <h4>{item2.name}</h4>
+                        <span>€ {item2.price}</span>
+                        <Link>
+                            <button>Acquista ora!</button>
+                        </Link>
+                    </div>
+                </div>
+            </div>
+        </section>
     )
 }
