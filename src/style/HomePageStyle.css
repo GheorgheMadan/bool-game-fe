@@ -194,9 +194,84 @@
 }
 
 /* SFONDO PLAYSTATION GAMES LIST*/
-.bg-play {
-    background-image: url('../bg-playstation-section.jpg');
+.bg-play,
+.bg-xbox,
+.bg-nintendo {
     padding-bottom: 30px;
     background-repeat: no-repeat;
     background-size: cover;
+}
+
+.bg-play {
+    background-image: url('../bg-playstation-section.jpg');
+}
+
+.bg-nintendo {
+    position: relative;
+}
+
+.bg-nintendo::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../bg-nintendo.jpg');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.6;
+    /* Regola l'opacità a piacere */
+    z-index: -1;
+}
+
+.bg-xbox {
+    position: relative;
+}
+
+.bg-xbox::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../bg-xbox-games.jpg');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.7;
+    /* Regola l'opacità a piacere */
+    z-index: -1;
+}
+
+/* SEZIONE NINTENDO ITEMS */
+.container-nintendo-items {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    margin-bottom: 60px;
+    /* Cambia l'altezza in base alle esigenze */
+}
+
+.box {
+    text-align: center;
+}
+
+.left {
+    grid-column: 1;
+    grid-row: 1;
+}
+
+.bottom-right {
+    grid-column: 2;
+    grid-row: 2;
+}
+
+.bottom-left {
+    grid-column: 1;
+    grid-row: 3;
+}
+
+.img-nintendo {
+    width: 400px;
 }
