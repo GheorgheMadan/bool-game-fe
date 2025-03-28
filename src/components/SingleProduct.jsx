@@ -4,15 +4,14 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Accordion } from "react-bootstrap";
 import '../style/SingleProduct.css'
 
-export default function SingleProduct() {
+export default function SingleProduct({ productId }) {
 
-    const [query, setQuery] = useState({})
-    const [query2, setQuery2] = useState({})
+    const [data, setData] = useState([])
 
     const productsData = () => {
-        axios.get('http://localhost:3000/api/products/1')
+        axios.get('http://localhost:3000/api/products')
             .then(res => {
-                setQuery(res.data);
+                setData(res.data[0]);
                 console.log(res.data)
             }
             )
@@ -21,83 +20,109 @@ export default function SingleProduct() {
     }
     useEffect(() => { productsData() }, [])
 
-    // const gamesData = () => {
-    //     axios.get('http://localhost:3000/api/products/search?category=gioco')
-    //         .then(res => {
-    //             setQuery2(res.data);
-    //             console.log(res.data)
-    //         }
-    //         )
-    //         .catch(err => console.error(err)
-    //         )
-    // }
-    // useEffect(() => { gamesData() }, [])
+    // const [product, setProduct] = useState(null);
 
-    function fetchGames() {
-        axios.get('http://localhost:3000/api/products/search?category=gioco')
-            .then(res => {
-                setQuery2(res.data[0]);
-                // console.log(res.data)
-            }
-            )
-            .catch(err => console.error(err)
-            )
-    }
-    useEffect(() => { fetchGames() }, [])
+    // useEffect(() => {
+    //     axios.get(`http://localhost:3000/api/products/${productId}`)
+    //         .then(res => {
+    //             console.log("Dati prodotto:", res.data); // Debug
+    //             if (res.data && res.data.id) {  // Verifica che i dati siano validi
+    //                 setProduct(res.data);
+    //             } else {
+    //                 console.error("Dati prodotto non validi:", res.data);
+    //                 setError("Prodotto non trovato");
+    //             }
+    //         })
+    //         .catch(err => console.error(err));
+    //     setError("Errore nel caricamento del prodotto");
+    // }, [productId]);
+
+    // if (!product) return (<div>Caricamento...</div>);
+
+    // Calcola il costo di spedizione (gratis se prezzo > 39.99)
+    const shippingCost = data.price && Number(data.price) > 39.99 ? 0 : 9.99;
+
+    // Calcola il prezzo totale (prezzo + tasse + spedizione)
+    const totalPrice = data.price
+        ? (Number(data.price) + 1.50 + shippingCost).toFixed(2)
+        : "0.00";
 
     return (
-        // videogame card //
-
-
-        <div className="card d-flex flex-row p-4 border rounded-lg shadow-lg items-start">
-            {/* Parte sinistra con titolo e prezzo */}
-            <div className="card-body-left flex flex-col items-start">
-                <h5 className="card-title font-bold text-lg mb-2">{query.name}</h5>
-                <p className="card-text font-semibold text-gray-700 text-lg">
-                    {query.price}
-                    <p>lorem Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta excepturi ducimus architecto iure doloribus consequuntur animi corrupti fuga. Laborum aut magnam deleniti sequi expedita quod molestiae, animi atque repellat doloremque.
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa non quod officia. Adipisci saepe fugiat, beatae illo rerum ipsa impedit, commodi blanditiis reprehenderit at officia odio odit, porro quibusdam dolorum.
-                        lorem
+        <>
+            {/* // videogame card // */}
+            <div className="card d-flex flex-row">
+                {/* Parte sinistra con titolo e prezzo */}
+                <div className="card-body-left">
+                    <p className="card-text">
+                        <strong>Prezzo: {data.price} €</strong></p>
+                    <p>Compatibile con: {data.supported_consoles}</p>
+                    <p>Genere: {data.game_genre}</p>
+                    <p className="inline"> PEGI:
+                        {data.pegi_rating === 3 ? (
+                            <img className="pegi-image" src="/pegi/PEGI_3.png" alt="PEGI 3" />
+                        ) : data.pegi_rating === 7 ? (
+                            <img className="pegi-image" src="/pegi/PEGI_7.png" alt="PEGI 7" />
+                        ) : data.pegi_rating === 12 ? (
+                            <img className="pegi-image" src="/pegi/PEGI_12.png" alt="PEGI 12" />
+                        ) : data.pegi_rating === 16 ? (
+                            <img className="pegi-image" src="/pegi/PEGI_16.png" alt="PEGI 16" />
+                        ) : data.pegi_rating === 18 ? (
+                            <img className="pegi-image" src="/pegi/PEGI_18.png" alt="PEGI 18" />
+                        ) : (
+                            data.pegi_rating
+                        )}
                     </p>
-                </p>
-            </div>
-
-            {/* Parte destra con immagine e info extra */}
-            <div className="card-body-right flex-xl flex-row items-start px-4">
-                <img className="image-small mr-4" src={query.image_url} alt={query.name} />
-
-                <div className="card-right-img">
-                    <div className="total-price">Prezzo totale: """"</div>
-                    <div className="shipping-cost"> Costo spedizione $9.99</div>
-                    <div className="tax">Tasse % 1,50</div>
-                    <div className="shipping-free">Spedizione gratuita per ordini superiori a 40$</div>
-                    <div className="available">Disponiblie</div>
-                    <button className="add-cart">Aggiungi al carrello</button>
-                </div>
-
-                {/* <p>{query2.description}</p> */}
-                <div>
-                    <Accordion defaultActiveKey="0">
-                        <Accordion.Item eventKey="0">
-                            <Accordion.Header>Sezione 1</Accordion.Header>
-                            <Accordion.Body>
-                                {query2.description}
-                            </Accordion.Body>
-                        </Accordion.Item>
-
+                    {/* 0 = no, 1 = si */}
+                    <p className="inline">Online:  {data.online_mode === 1 ? (
+                        <img className="pegi-image" src="/pegi/online.png" alt="online" />)
+                        : data.online_mode === 0 ? (
+                            <img className="pegi-image" src="/pegi/offline.png" alt="offline" />
+                        ) : (
+                            data.online_mode
+                        )}
+                    </p>
+                    <p className="inline"> Modalità di gioco: {data.multiplayer === 1 ? (
+                        <img className="pegi-image" src="/pegi/multiplayer.png" alt="multiplayer" />)
+                        : data.multiplayer === 0 ? (
+                            <img className="pegi-image" src="/pegi/singleplayer.png" alt="singleplayer" />
+                        ) : (
+                            data.multiplayer
+                        )}
+                    </p>
+                    <p>Publisher:  {data.publisher}</p>
+                    <p>Data di uscita: {new Date(data.release_date).toLocaleDateString('it-IT')}</p>
+                    <Accordion defaultActiveKey="0  ">
                         <Accordion.Item eventKey="1">
-                            <Accordion.Header>Sezione 2</Accordion.Header>
+                            <Accordion.Header><strong>Scopri di più</strong></Accordion.Header>
                             <Accordion.Body>
-                                Contenuto della seconda sezione.
+                                {data.description}
                             </Accordion.Body>
                         </Accordion.Item>
-
-
                     </Accordion>
                 </div>
 
+                {/* Parte destra con immagine e info extra */}
+                <div className="card-body-right justify-content-center d-flex-xl flex-wrap">
+                    <h5 className="card-title font-bold text-xl mb-2">{data.name}</h5>
+                    <div>
+                        <img className="image-small mr-4" src={data.image_url} alt={data.name} />
+                    </div>
+                    <div className="card-right-img">
+                        <div className="total-price centered-price">Prezzo totale: {totalPrice} €</div>
+                        <div className="shipping-cost centered-price">    Costo spedizione: {shippingCost.toFixed(2)} €
+                            {shippingCost === 0 && " (gratis)"}
+                        </div>
+                        <div className="shipping-free centered-price">Spedizione gratuita per ordini superiori a 40€</div>
+                        <div className="tax centered-price">Tasse % 1,50</div>
+                        <div className={`centered-price ${data.stock < 1 ? "hidden" : "available"}`}>
+                            {data.stock < 1 ? "Non disponibile" : "Disponibile"}</div>
+                        <div className={`centered-price ${data.stock > 0 ? "hidden" : "not-available"}`}>
+                            Non Disponibile</div>
+                        <button className="add-cart centered-price">Aggiungi al carrello</button>
+                    </div>
+                </div>
             </div>
-        </div>
 
+        </>
     )
 }

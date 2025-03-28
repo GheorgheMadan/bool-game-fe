@@ -76,12 +76,14 @@ export const GlobalProvider = ({ children }) => {
         localStorage.setItem('cart', JSON.stringify(updatedCart));
     };
 
-    return (
-        <GlobalContext.Provider value={{ cart, addToCart, removeFromCart, updateQuantity }}>
-            {children}
-        </GlobalContext.Provider>
-    );
+    return ( // Fornisce il contesto ai componenti figli
 
-}
+        <GlobalContext.Provider value={
+            { cart, addToCart, removeFromCart, updateQuantity }
+        }
+
+        > {children}
+        </GlobalContext.Provider>);
+};
 
 export default GlobalContext;
