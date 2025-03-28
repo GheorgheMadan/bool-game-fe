@@ -7,17 +7,20 @@ import XboxGamesList from '../components/homepageComponents/XboxGamesList'
 import NewReleasedList from '../components/homepageComponents/NewReleasedList'
 import PlaystationGamesList from '../components/homepageComponents/PlaystationGamesList'
 import NintendoGamesList from '../components/homepageComponents/NintendoGamesList'
+import NintendoItems from '../components/homepageComponents/NintendoItems';
 export default function HomePage() {
     return (
         <>
             <div className='general-container'>
                 <NewReleasedList />
             </div>
+            <section className='bg-xbox'>
+                <div className='general-container'>
+                    <XboxGamesList />
+                </div>
+            </section>
             <div className='general-container'>
                 <CardHomePage />
-            </div>
-            <div className='general-container'>
-                <XboxGamesList />
             </div>
             <section className="bg-play">
                 <div className='general-container'>
@@ -25,8 +28,13 @@ export default function HomePage() {
                 </div>
             </section>
             <div className='general-container'>
-                <NintendoGamesList />
+                <NintendoItems />
             </div>
+            <section className='bg-nintendo'>
+                <div className='general-container'>
+                    <NintendoGamesList />
+                </div>
+            </section>
 
         </>
     )
