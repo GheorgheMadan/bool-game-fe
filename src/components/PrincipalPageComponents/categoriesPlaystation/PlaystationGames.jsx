@@ -36,21 +36,25 @@ export default function PlaystationGames() {
     };
     return (
         <>
-            {/* Sezione per giochi */}
-            < div className="playstation-product-section" >
-                <h3>Giochi</h3>
-                <div className="playstation-product-list">
-                    {sortedRange3.map(product => (
-                        <div key={product.id} className="playstation-product-card">
-                            <Link to={`/products/${product.id}`} className='playstation-product-link'>
-                                <img src={product.image_url} alt={product.name} />
-                                <h3>{product.name}</h3>
-                            </Link>
-                            <span>${product.price}</span>
+            <div className="playstation-products-container">
+                {/* Sezione per giochi */}
+                <div className='playstation-products-container-2'>
+                    < div className="playstation-product-section" >
+                        <h3>Giochi</h3>
+                        <div className="playstation-product-list">
+                            {sortedRange3.map(product => (
+                                <div key={product.id} className="playstation-product-card">
+                                    <Link to={`/products/${product.id}`} className='playstation-product-link'>
+                                        <img src={product.image_url} alt={product.name} />
+                                        <h3>{product.name}</h3>
+                                    </Link>
+                                    <span>${product.price}</span>
+                                </div>
+                            ))}
                         </div>
-                    ))}
+                    </div >
                 </div>
-            </div >
+            </div>
         </>
     )
 }

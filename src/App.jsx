@@ -29,7 +29,14 @@ import SearchResultPage from './pages/SearchResultPage';
 import PlaystationConsoles from './components/PrincipalPageComponents/categoriesPlaystation/PlaystationConsoles'
 import PlaystationGames from './components/PrincipalPageComponents/categoriesPlaystation/PlaystationGames'
 import PlaystationAccessories from './components/PrincipalPageComponents/categoriesPlaystation/PlaystationAccessories'
-
+// import categorie xbox 
+import XboxConsoles from './components/PrincipalPageComponents/categoriesXbox/XboxConsoles';
+import XboxAccessories from './components/PrincipalPageComponents/categoriesXbox/XboxAccessories';
+import XboxGames from './components/PrincipalPageComponents/categoriesXbox/XboxAccessories';
+// import categorie nintendo
+import NintendoConsoles from './components/PrincipalPageComponents/categoriesNintendo/NintendoConsoles';
+import NintendoAccessories from './components/PrincipalPageComponents/categoriesNintendo/NintendoAccessories';
+import NintendoGames from './components/PrincipalPageComponents/categoriesNintendo/NintendoGames';
 
 // carica Stripe con la chiave pubblica
 const stripePromise = loadStripe('pk_test_51R4oHvPXYjIqouRcxeNvWgRuFnQ1vo8PlqPEzVS6mDT2ix4nlzdDPaqwSVD5oHDfiTx0xdfcL0IzUQTsy4IU1bvA0079IF49Us');
@@ -47,11 +54,7 @@ function App() {
                 <Routes>
                   <Route element={<DefaultLayout />}>
                     <Route index element={<HomePage />} />
-                    <Route path='/playstation' element={<PlaystationPage />}>
-                      {/* <Route path='/playstation/playstation-console' element={<PlaystationConsoles />} />
-                      <Route path='/playstation/playstation-games' element={<PlaystationGames />} />
-                      <Route path='/playstation/playstation-accessories' element={<PlaystationAccessories />} /> */}
-                    </Route>
+                    <Route path='/playstation' element={<PlaystationPage />} />
                     <Route path='/xbox' element={<XboxPage />} />
                     <Route path='/nintendo' element={<NintendoPage />} />
                     <Route path='/checkout' element={<CheckoutPage stripePromise={stripePromise} />} />
@@ -60,6 +63,15 @@ function App() {
                     <Route path='/search' element={<SearchResultPage />} />
                     <Route path='/cart' element={<CartPage />} />
                     <Route path='/products/:productId' element={<SingleProduct />} />
+                    <Route path='/playstation/consoles' element={<PlaystationConsoles />} />
+                    <Route path='/playstation/games' element={<PlaystationGames />} />
+                    <Route path='/playstation/accessories' element={<PlaystationAccessories />} />
+                    <Route path='/xbox/console' element={<XboxConsoles />} />
+                    <Route path='/xbox/games' element={<XboxGames />} />
+                    <Route path='/xbox/accessories' element={<XboxAccessories />} />
+                    <Route path='/nintendo/consoles' element={<NintendoConsoles />} />
+                    <Route path='/nintendo/games' element={<NintendoGames />} />
+                    <Route path='/nintendo/accessories' element={<NintendoAccessories />} />
                   </Route>
                 </Routes>
               </Elements>

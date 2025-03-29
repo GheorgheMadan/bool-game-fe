@@ -10,6 +10,10 @@
     margin-bottom: 50px;
 }
 
+a {
+    text-decoration: none;
+}
+
 .title-h2 {
     font-size: 28px;
     font-weight: bold;
@@ -18,7 +22,7 @@
     text-shadow: 3px 3px 5px rgba(65, 63, 62, 0.6);
     letter-spacing: 2px;
     position: relative;
-    z-index: 20;
+    z-index: 10;
 }
 
 .xbox-title {
@@ -43,7 +47,7 @@
     color: #333333;
 }
 
-.general-container section a {
+.container-nav-home .general-container section a {
     text-decoration: none;
 }
 
@@ -62,7 +66,7 @@
     width: 65%;
     margin: 0 auto;
     background-color: #666666;
-    padding: 20px 20px;
+    padding: 10px 10px;
     border-radius: 40px;
     display: flex;
     justify-content: center;
@@ -70,25 +74,20 @@
     transition: transform 0.5s ease;
 }
 
-.container-navigator-icons a {
-    text-decoration: none;
-    color: white;
-}
-
 .container-navigator-icons:hover {
     animation: expandBackground 0.5s forwards;
 }
 
-.container-navigator-icons button,
-a {
+.container-navigator-icons button {
     padding: 10px 18px;
     border-radius: 30px;
     background-color: rgb(255, 255, 255, 0);
     border: none;
     transition: transform 0.5s ease;
+    color: white
 }
 
-.container-navigator-icons button a:hover {
+.container-navigator-icons button:hover {
     background-color: rgba(255, 255, 255, 0.747);
     transform: scale(1.2);
     color: black;
@@ -97,26 +96,46 @@ a {
 .dropdown-menu {
     display: flex;
     flex-direction: column;
-    /* Dispone gli item in colonna */
-    margin-top: 8px;
-    padding: 0;
     list-style-type: none;
-    background-color: white;
+    /* background-color: white; */
     box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
-    border-radius: 4px;
-    width: 100%;
-    z-index: 1;
+    border-radius: 15px;
+    z-index: 20;
 }
 
-.dropdown-item {
-    padding: 12px 20px;
+.dropdown-item1 {
+    display: block;
     cursor: pointer;
     font-size: 14px;
-    width: 100%;
+    padding: 5px 5px;
+    margin-left: 20px;
+    z-index: 20;
+    border-bottom: 1px solid rgb(221, 221, 221);
+    transition: transform 0.3s ease;
+    opacity: 0;
+    animation: fadeInScale 0.5s ease-out forwards;
 }
 
-.dropdown-item:hover {
-    background-color: #f1f1f1;
+.dropdown-item1 a {
+    color: black;
+}
+
+
+
+.dropdown-item1 a:hover {
+    transform: scale(1.05);
+}
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
 /* CSS PER CardHomePage.jsx */
