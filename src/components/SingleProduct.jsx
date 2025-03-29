@@ -60,7 +60,7 @@ export default function SingleProduct() {
                     {/* Parte sinistra con titolo e dettagli */}
                     <div className="card-body-left">
                         <h5 className="card-title mb-2">{data.name}</h5>
-                        <div className="image-try mb-5 mt-4">
+                        <div className="image-try">
                             <img className="image mr-4" src={data.image_url} alt={data.name} />
                         </div>
 
@@ -164,6 +164,20 @@ export default function SingleProduct() {
                             </button>
                         </div>
                     </div>
+                    {filteredGames
+                        .slice(index, index + 5)
+                        .map((game) => (
+                            <>
+                                <div key={game.id} className="container-img">
+                                    <Link to={`/products/${game.id}`}>
+                                        <img className="img-gioco "
+                                            src={game.image_url}
+                                            alt={game.name}
+                                        />
+                                    </Link>
+                                </div>
+                            </>
+                        ))}
                 </div>
             </div>
         </>
