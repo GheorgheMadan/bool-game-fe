@@ -3,9 +3,7 @@
     margin: 0 auto;
     /* background-color: aqua; */
     /* text-align: center; */
-    padding-top: 60px;
-
-
+    padding-top: 20px;
 }
 
 .general-container section {
@@ -32,6 +30,7 @@
     text-decoration: none;
 }
 
+/* GESTIONE NAVIGAZIONE HOME PAGE */
 @keyframes expandBackground {
     from {
         width: 65%;
@@ -54,25 +53,46 @@
     transition: transform 0.5s ease;
 }
 
+.container-navigator-icons a {
+    text-decoration: none;
+    color: white;
+}
+
 .container-navigator-icons:hover {
     animation: expandBackground 0.5s forwards;
 }
 
-.container-navigator-icons button {
+.container-navigator-icons button,
+a {
     padding: 10px 18px;
     border-radius: 30px;
     background-color: rgb(255, 255, 255, 0);
     border: none;
     transition: transform 0.5s ease;
-    color: white;
 }
 
-.container-navigator-icons button:hover {
+.container-navigator-icons button a:hover {
     background-color: rgba(255, 255, 255, 0.747);
     transform: scale(1.2);
     color: black;
 }
 
+.dropdown-container {
+    display: flex;
+    gap: 20px;
+    width: 38%;
+    margin: 0 auto;
+    justify-content: space-between;
+}
+
+.dropdown {
+    display: flex;
+    flex-direction: column;
+    z-index: 90;
+    background-color: pink;
+    border-radius: 10px;
+
+}
 
 
 /* CSS PER CardHomePage.jsx */
