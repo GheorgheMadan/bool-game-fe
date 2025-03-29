@@ -87,7 +87,8 @@ const JumbotronCarousel = () => {
                 buttonText: "Scopri di più",
                 buttonLink: "/death-stranding-2",
                 animationButton: "animationButton",
-                blackText: "blackText"
+                blackText: "blackText",
+                logoPLay: "logoPlay"
             },
             {
                 src: "./jumbotronoImage/playstation_jumbotron/play_controller.jpg",
@@ -98,7 +99,8 @@ const JumbotronCarousel = () => {
                 buttonText: "Acquista ora",
                 buttonLink: "/ps5-controller",
                 animationButton: "animationButton",
-                blackText: "blackText"
+                blackText: "blackText",
+                logoPLay: "logoPlay"
             },
             {
                 src: "./jumbotronoImage/playstation_jumbotron/play_4_5.jpg",
@@ -109,7 +111,8 @@ const JumbotronCarousel = () => {
                 buttonText: "Esplora",
                 buttonLink: "/playstation",
                 animationButton: "animationButton",
-                blackText: "blackText"
+                blackText: "blackText",
+                logoPLay: "logoPlay"
             },
             {
                 src: "./jumbotronoImage/playstation_jumbotron/play_vr.jpg",
@@ -119,7 +122,8 @@ const JumbotronCarousel = () => {
                 text: "Immersione totale nel mondo dei giochi con PlayStation VR. Esplora mondi fantastici come se fossi davvero lì.",
                 buttonText: "Acquista ora",
                 buttonLink: "/playstation-vr",
-                animationButton: "animationButton"
+                animationButton: "animationButton",
+                logoPLay: "logoPlay"
             }
         ],
         "/xbox": [
@@ -157,7 +161,6 @@ const JumbotronCarousel = () => {
                 buttonLink: "/xbox",
                 xboxLogo: "xbox-logo",
                 greenBtn: "greenBtn animationButton"
-
             },
             {
                 src: "./jumbotronoImage/xbox_jumbotron/xbox.jpg",
@@ -181,7 +184,8 @@ const JumbotronCarousel = () => {
                 text: "Gioca ovunque con la console ibrida. Nintendo Switch ti permette di giocare sia a casa che in movimento, senza compromessi sulla qualità.",
                 buttonText: "Acquista ora",
                 buttonLink: "/nintendo-switch",
-                yellowBtn: "yellowBtn"
+                yellowBtn: "yellowBtn",
+                nintendoLogo: "nintendoLogo"
             },
             {
                 src: "./jumbotronoImage/nintendo_jumbotron/nintendo_donkey_kong_Country_Returns.jpg",
@@ -191,7 +195,8 @@ const JumbotronCarousel = () => {
                 text: "Un ritorno all'avventura per tutti. Scopri le meraviglie di Donkey Kong Country in un viaggio che ti lascerà senza fiato.",
                 buttonText: "Gioca ora",
                 buttonLink: "/donkey-kong",
-                yellowBtn: "yellowBtn"
+                yellowBtn: "yellowBtn",
+                nintendoLogo: "nintendoLogo"
             },
             {
                 src: "./jumbotronoImage/nintendo_jumbotron/nintendo_games.jpg",
@@ -201,7 +206,8 @@ const JumbotronCarousel = () => {
                 text: "Scopri titoli incredibili per Nintendo Switch. Una vasta gamma di giochi per tutti i gusti, dalla fantasia all'azione.",
                 buttonText: "Esplora ora",
                 buttonLink: "/nintendo-games",
-                yellowBtn: "yellowBtn"
+                yellowBtn: "yellowBtn",
+                nintendoLogo: "nintendoLogo"
             },
             {
                 src: "./jumbotronoImage/nintendo_jumbotron/xenoblade_chronicles_game.jpg",
@@ -211,7 +217,8 @@ const JumbotronCarousel = () => {
                 text: "Un'epica avventura ti aspetta. Xenoblade Chronicles è un'avventura che ti porterà in un mondo di fantasy e azione senza precedenti.",
                 buttonText: "Gioca ora",
                 buttonLink: "/xenoblade",
-                yellowBtn: "yellowBtn"
+                yellowBtn: "yellowBtn",
+                nintendoLogo: "nintendoLogo"
             }
         ]
     };
@@ -233,7 +240,7 @@ const JumbotronCarousel = () => {
                     )}
                     <Carousel.Caption className={`carousel-caption ${image.leftContainer || ""}`} >
                         <div className="container-details-jumbo" >
-                            <div className={`${image.xboxLogo || ""} ${image.bgLogo || ""}`}></div>
+                            <div className={`${image.xboxLogo || ""} ${image.bgLogo || ""}  ${image.logoPLay || ""} ${image.nintendoLogo || ""}`}></div>
                             <h4 className={image.blackText}>{image.title}</h4>
                             <p className={image.blackText}>{image.text}</p>
                             {image.link && (

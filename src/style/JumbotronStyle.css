@@ -22,22 +22,40 @@
 
 .container-details-jumbo h4 {
     margin-bottom: 15px;
+    font-weight: 900;
 }
 
 .bgLogo {
     background-color: rgba(255, 255, 255, 0.288);
 }
 
-.xbox-logo {
-    background-image: url('../Xbox_2019_horizontal.svg');
+
+/* REGOLE LOGO NEL JUMBOTRON */
+.nintendoLogo,
+.xbox-logo,
+.logoPlay {
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
     width: 150px;
-    height: 100px;
+    height: 85px;
     margin: 0 auto;
 }
 
+.nintendoLogo {
+    background-image: url('../logo/Nintendo-Logo.png');
+}
+
+.xbox-logo {
+    background-image: url('../logo/Xbox_2019_horizontal.svg');
+}
+
+.logoPlay {
+    background-image: url('../logo/PlayStation_logo.svg');
+
+}
+
+/* REGOLE BUTTON JUMBOTRON */
 .redButton {
     background-color: rgb(194, 13, 13);
     border: rgb(194, 13, 13);
@@ -48,6 +66,7 @@
 .redButton,
 .animationButton {
     transition: transform 0.5s ease;
+    font-weight: 900;
 }
 
 .yellowBtn:hover,
