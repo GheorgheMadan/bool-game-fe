@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import '../../../style/PrincipalPageStyle/PlaystationPageStyle.css';
 
-
 export default function PlaystationAccessories() {
 
     const [sortedRange2, setSortedRange2] = useState([]);
@@ -39,21 +38,25 @@ export default function PlaystationAccessories() {
 
     return (
         <>
-            {/* Sezione per accessori */}
-            < div className="playstation-product-section" >
-                <h3>Accessori</h3>
-                <div className="playstation-product-list">
-                    {sortedRange2.map(product => (
-                        <div key={product.id} className="playstation-product-card">
-                            <Link to={`/products/${product.id}`} className='playstation-product-link'>
-                                <img src={product.image_url} alt={product.name} />
-                                <h3>{product.name}</h3>
-                            </Link>
-                            <span>${product.price}</span>
+            <div className="playstation-products-container">
+                <div className='playstation-products-container-2 '>
+                    < div className="playstation-product-section" >
+                        {/* Sezione per accessori */}
+                        <h3>Accessori</h3>
+                        <div className="playstation-product-list">
+                            {sortedRange2.map(product => (
+                                <div key={product.id} className="playstation-product-card">
+                                    <Link to={`/products/${product.id}`} className='playstation-product-link'>
+                                        <img src={product.image_url} alt={product.name} />
+                                        <h3>{product.name}</h3>
+                                    </Link>
+                                    <span>${product.price}</span>
+                                </div>
+                            ))}
                         </div>
-                    ))}
-                </div>
-            </div >
+                    </div>
+                </div >
+            </div>
         </>
     )
 }
