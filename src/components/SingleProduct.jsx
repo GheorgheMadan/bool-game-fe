@@ -6,15 +6,21 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "../style/SingleProduct.css";
 
 export default function SingleProduct() {
-    const { productId } = useParams(); // Ottieni l'ID del prodotto dai parametri dell'URL
+    // Ottieni l'ID del prodotto dai parametri dell'URL
+    const { productId } = useParams();
     const [data, setData] = useState(null);
+    const [category, setCategory] = useState(null);
     const [error, setError] = useState(null);
 
     useEffect(() => {
         if (productId) {
             axios.get(`http://localhost:3000/api/products/${productId}`)
+                // return axios.get(`http://localhost:3000/api/products/${productId}`)                   SECONDA CHIAMATA PER LE CATEGORIES
                 .then(res => setData(res.data))
-                .catch(err => setError("Errore nel recupero del prodotto."));
+                // if (res.data && res.data.length > 0) {
+                //     setCategory(res.data[0].category_name);
+                // }
+                .catch(err => setError("Errore nel recupero del prodotto o della categoria."));
         }
     }, [productId]);
 
@@ -33,6 +39,11 @@ export default function SingleProduct() {
     // Calcola il prezzo totale (prezzo + tasse + spedizione)
     const totalPrice = (priceNumber + 1.50 + shippingCost).toFixed(2);
 
+    // Determina se il prodotto è un gioco
+    const isGame = category === "gioco";
+    const isConsole = category === "console";
+    const isAccessory = category === "accessorio";
+
     return (
         <>
             {/* // videogame card // */}
@@ -44,6 +55,11 @@ export default function SingleProduct() {
                         <div className="image-try mb-5 mt-4">
                             <img className="image mr-4" src={data.image_url} alt={data.name} />
                         </div>
+
+                        {/*  CATEGORIES CHECK
+                       {isGame && (
+                            <> */}
+
                         <p className="inline"> PEGI:
                             {data.pegi_rating === 3 ? (
                                 <img className="pegi-image" src="/pegi/PEGI_3.png" alt="PEGI 3" />
@@ -76,6 +92,13 @@ export default function SingleProduct() {
                                 data.multiplayer
                             )}
                         </p>
+                        {/* )} */}
+                        {/* </> */}
+                        {/* 
+                        {isAccessory && (
+                            <p>Compatibilità: {data.compatibility}</p>
+                        )} */}
+
                         <p>Descrizione: {data.description}</p>
                     </div>
 
@@ -88,9 +111,21 @@ export default function SingleProduct() {
                             <p>Compatibile con: {
                                 data.supported_consoles
                                     ? JSON.parse(data.supported_consoles || "[]").map(console => console.trim()).join(", ")
-                                    : "Nessuna console specificata"
-                            }</p>                            <p>Genere: {data.game_genre}</p>
+                                    : "nessuna console specificata"
+                            }</p>
+
+                            {/* {isGame && (
+                                <> */}
+
+                            <p>Genere: {data.game_genre}</p>
                             <p>Publisher:  {data.publisher}</p>
+                            {/* </> */}
+
+                            {/* Mostra info specifiche per console */}
+                            {/* {isConsole && (
+            <p>Specifiche tecniche: {data.tech_specs}</p>
+        )} */}
+
                             <p>Data di uscita: {new Date(data.release_date).toLocaleDateString('it-IT')}</p>
                             <div className="centered-price">    Costo spedizione: {shippingCost.toFixed(2)} €
                                 {shippingCost === 0 && " (gratis)"}
