@@ -33,47 +33,49 @@ const JumbotronCarousel = () => {
                 buttonText: "Scopri di più",
                 buttonLink: "/playstation",
                 animationButton: "animationButton",
-                blackText: "blackText"
+                blackText: "blackText",
+                logoPLay: "logoPlay"
             },
             {
                 src: "./jumbotronoImage/ac_shadows_jumbo.jpg",
                 alt: "AC Shadows Image",
-                link: "/assassins-creed",  // aggiunto link
+                link: "/products/11",  // aggiunto link
                 title: "Assassin's Creed Shadows",
                 text: "Un'avventura epica ti aspetta in Assassin's Creed Shadows, dove ogni decisione conta e la storia prende vita. Preparati a diventare un leggendario assassino.",
                 buttonText: "Gioca ora",
-                buttonLink: "/assassins-creed",
+                buttonLink: "/products/11",
                 redButton: "redButton animationButton"
             },
             {
                 src: "./jumbotronoImage/bleach_jumbo.jpg",
                 alt: "Bleach Image",
-                link: "/bleach",  // aggiunto link
+                link: "/products/13",  // aggiunto link
                 title: "Bleach: L'avventura continua",
                 text: "Entra nel mondo di Bleach con nuovi episodi e avventure, dove gli spiriti e i combattimenti sono sempre più intensi. Un viaggio che non finisce mai!",
                 buttonText: "Scopri ora",
-                buttonLink: "/bleach",
+                buttonLink: "/products/13",
                 redButton: "redButton",
                 leftContainer: "leftContainer"
             },
             {
                 src: "./jumbotronoImage/nintendo_jumbotron/nintendo_switch.jpg",
                 alt: "Nintendo Image",
-                link: "/nintendo",
+                link: "/products/129",
                 title: "Scopri il Nintendo Switch",
                 text: "Gioca ovunque con Nintendo Switch! La console portatile che ti permette di giocare sia a casa che in viaggio, con giochi per tutti i gusti.",
                 buttonText: "Acquista ora",
-                buttonLink: "/nintendo",
-                yellowBtn: "yellowBtn"
+                buttonLink: "/products/129",
+                yellowBtn: "yellowBtn",
+                nintendoLogo: "nintendoLogo"
             },
             {
                 src: "./jumbotronoImage/wwe_2k25_jumbo.jpg",
                 alt: "WWE 2K25 Image",
-                link: "/wwe2k25",  // aggiunto link
+                link: "/products/14",  // aggiunto link
                 title: "WWE 2K25: Scopri la nuova edizione",
                 text: "Il ring è pronto, combatti ora! Scopri tutte le novità di WWE 2K25, il gioco che porta l'azione e i combattimenti a un nuovo livello.",
                 buttonText: "Gioca ora",
-                buttonLink: "/wwe2k25",
+                buttonLink: "/products/14",
                 redButton: "redButton animationButton"
             }
         ],
@@ -81,11 +83,11 @@ const JumbotronCarousel = () => {
             {
                 src: "./jumbotronoImage/playstation_jumbotron/death_stranding_2.jpg",
                 alt: "Death Stranding 2",
-                link: "/death-stranding-2",  // aggiunto link
+                link: "/products/12",  // aggiunto link
                 title: "Death Stranding 2",
                 text: "Un nuovo capitolo dell'avventura straordinaria di Death Stranding, dove il destino del mondo è nelle tue mani. Un'esperienza di gioco unica ed emozionante.",
-                buttonText: "Scopri di più",
-                buttonLink: "/death-stranding-2",
+                buttonText: "Gioca ora",
+                buttonLink: "/products/12",
                 animationButton: "animationButton",
                 blackText: "blackText",
                 logoPLay: "logoPlay"
@@ -93,11 +95,11 @@ const JumbotronCarousel = () => {
             {
                 src: "./jumbotronoImage/playstation_jumbotron/play_controller.jpg",
                 alt: "PS Controller",
-                link: "/ps5-controller",  // aggiunto link
+                link: "/products/107",  // aggiunto link
                 title: "Scopri il nuovo controller PS5",
                 text: "Un'esperienza di gioco ancora più immersiva con il nuovo controller PS5. La tecnologia avanzata ti farà sentire ogni colpo, ogni movimento.",
                 buttonText: "Acquista ora",
-                buttonLink: "/ps5-controller",
+                buttonLink: "/products/107",
                 animationButton: "animationButton",
                 blackText: "blackText",
                 logoPLay: "logoPlay"
@@ -105,7 +107,7 @@ const JumbotronCarousel = () => {
             {
                 src: "./jumbotronoImage/playstation_jumbotron/play_4_5.jpg",
                 alt: "PS4/5",
-                link: "/playstation",  // aggiunto link
+                link: "/playstation/consoles",  // aggiunto link
                 title: "PlayStation 4 e 5",
                 text: "Gioca con i titoli più recenti su PS4 o PS5. Un catalogo di giochi che soddisferà ogni tipo di gamer, con esperienze coinvolgenti e grafiche mozzafiato.",
                 buttonText: "Esplora",
@@ -117,11 +119,11 @@ const JumbotronCarousel = () => {
             {
                 src: "./jumbotronoImage/playstation_jumbotron/play_vr.jpg",
                 alt: "PS VR",
-                link: "/playstation-vr",  // aggiunto link
+                link: "/products/111",  // aggiunto link
                 title: "Vivi la realtà virtuale con PS VR",
                 text: "Immersione totale nel mondo dei giochi con PlayStation VR. Esplora mondi fantastici come se fossi davvero lì.",
                 buttonText: "Acquista ora",
-                buttonLink: "/playstation-vr",
+                buttonLink: "/products/111",
                 animationButton: "animationButton",
                 logoPLay: "logoPlay"
             }
@@ -130,11 +132,11 @@ const JumbotronCarousel = () => {
             {
                 src: "./jumbotronoImage/xbox_jumbotron/xbox_console.jpg",
                 alt: "Xbox Console",
-                link: "/xbox",  // aggiunto link
+                link: "/products/137",  // aggiunto link
                 title: "Scopri la nuova Xbox Series X/S",
                 text: "Console ad alte prestazioni per giochi incredibili. La Xbox Series X/S è la console definitiva per chi cerca potenza e velocità.",
-                buttonText: "Acquista ora",
-                buttonLink: "/xbox",
+                buttonText: "Acquista ora!",
+                buttonLink: "/products/137",
                 xboxLogo: "xbox-logo",
                 blackText: "blackText",
                 greenBtn: "greenBtn animationButton"
@@ -154,11 +156,11 @@ const JumbotronCarousel = () => {
             {
                 src: "./jumbotronoImage/xbox_jumbotron/xbox_series_x_s.jpg",
                 alt: "Xbox Series X/S",
-                link: "/xbox",  // aggiunto link
+                link: "/xbox/consoles",  // aggiunto link
                 title: "Xbox Series X/S",
                 text: "La console perfetta per ogni gamer. Con prestazioni straordinarie e giochi esclusivi, Xbox Series X/S è il futuro del gaming.",
                 buttonText: "Scopri di più",
-                buttonLink: "/xbox",
+                buttonLink: "/xbox/consoles",
                 xboxLogo: "xbox-logo",
                 greenBtn: "greenBtn animationButton"
             },
@@ -179,11 +181,11 @@ const JumbotronCarousel = () => {
             {
                 src: "./jumbotronoImage/nintendo_jumbotron/nintendo_switch.jpg",
                 alt: "Nintendo Switch",
-                link: "/nintendo-switch",  // aggiunto link
+                link: "/products/129",  // aggiunto link
                 title: "Nintendo Switch",
                 text: "Gioca ovunque con la console ibrida. Nintendo Switch ti permette di giocare sia a casa che in movimento, senza compromessi sulla qualità.",
                 buttonText: "Acquista ora",
-                buttonLink: "/nintendo-switch",
+                buttonLink: "/products/129",
                 yellowBtn: "yellowBtn",
                 nintendoLogo: "nintendoLogo"
             },
@@ -229,8 +231,8 @@ const JumbotronCarousel = () => {
     return (
 
         <Carousel key={location.pathname}>
-            {images.map((image) => (
-                <Carousel.Item >
+            {images.map((image, index) => (
+                <Carousel.Item key={index}>
                     {image.link ? (
                         <Link to={image.link}>
                             <img className="d-block w-100 img-jumbotron" src={image.src} alt={image.alt} />
