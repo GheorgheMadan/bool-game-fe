@@ -6,9 +6,8 @@ export default function LayoutSearchCart() {
     return (
         <>
             <Header />
-            <main><div className="sfondo">
+            <main>
                 <Outlet />
-            </div>
             </main>
             <Footer />
         </>
