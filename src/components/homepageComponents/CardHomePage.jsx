@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 // Per aggiungere i prodotti al carrello
 import { useCart } from "../../contexts/CartContext";
+
+
 export default function CardHomePage() {
 
     // Estraggo la funzione addToCart dal contesto
