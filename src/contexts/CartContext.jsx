@@ -126,6 +126,7 @@ export const CartProvider = ({ children }) => {
             const updatedCart = cart.filter(product => product.id !== productId);
             setCart(updatedCart); // Aggiorna lo stato del carrello
         }
+
     };
 
     return (
