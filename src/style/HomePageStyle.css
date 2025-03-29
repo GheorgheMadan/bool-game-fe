@@ -14,12 +14,26 @@
     font-size: 28px;
     font-weight: bold;
     text-transform: uppercase;
-    color: #ffffff;
     margin-bottom: 25px;
     text-shadow: 3px 3px 5px rgba(65, 63, 62, 0.6);
     letter-spacing: 2px;
     position: relative;
     z-index: 20;
+}
+
+.xbox-title {
+    color: rgb(6, 243, 6);
+    text-shadow: 3px 3px 3px green;
+}
+
+.ps-title {
+    color: rgb(0, 132, 255);
+    text-shadow: 3px 3px 3px white
+}
+
+.switch-title {
+    color: red;
+    text-shadow: 3px 3px 3px yellow;
 }
 
 .black-title {
