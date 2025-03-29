@@ -77,23 +77,30 @@ a {
     color: black;
 }
 
-.dropdown-container {
-    display: flex;
-    gap: 20px;
-    width: 38%;
-    margin: 0 auto;
-    justify-content: space-between;
-}
-
-.dropdown {
+.dropdown-menu {
     display: flex;
     flex-direction: column;
-    z-index: 90;
-    background-color: pink;
-    border-radius: 10px;
-
+    /* Dispone gli item in colonna */
+    margin-top: 8px;
+    padding: 0;
+    list-style-type: none;
+    background-color: white;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    width: 100%;
+    z-index: 1;
 }
 
+.dropdown-item {
+    padding: 12px 20px;
+    cursor: pointer;
+    font-size: 14px;
+    width: 100%;
+}
+
+.dropdown-item:hover {
+    background-color: #f1f1f1;
+}
 
 /* CSS PER CardHomePage.jsx */
 .container-cards {
