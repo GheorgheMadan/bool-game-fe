@@ -8,7 +8,7 @@
 }
 
 .image-try {
-    width: 350px;
+    width: 400px;
     height: 450px;
     margin-left: auto;
     margin-right: auto;
@@ -19,9 +19,8 @@
 }
 
 .card-text {
-    font-size: 2em;
+    font-size: 1em;
     background-color: rgba(255, 166, 0, 0.697);
-    width: 60%;
     padding: 5px;
     text-align: center;
     border: 1px solid black;
@@ -127,7 +126,7 @@
 }
 
 .sfondo {
-    background-image: url("/public/walppaper-hexs.png");
+    background-image: url("/abstract-vector-wallpaper.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;

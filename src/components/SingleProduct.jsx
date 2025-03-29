@@ -1,8 +1,8 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { useParams } from 'react-router-dom'; // Importa useParams
+// Importa useParams
+import { useParams } from 'react-router-dom';
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Accordion } from "react-bootstrap";
 import "../style/SingleProduct.css";
 
 export default function SingleProduct() {
@@ -40,8 +40,6 @@ export default function SingleProduct() {
                 <div className="card d-flex flex-row justify-content-between">
                     {/* Parte sinistra con titolo e prezzo */}
                     <div className="card-body-left">
-                        <p className="card-text">
-                            <strong>Prezzo: {data.price} €</strong></p>
                         <h5 className="card-title mb-2">{data.name}</h5>
                         <div className="image-try mb-5 mt-4">
                             <img className="image mr-4" src={data.image_url} alt={data.name} />
@@ -84,6 +82,8 @@ export default function SingleProduct() {
                     {/* Parte destra con immagine e info extra */}
                     <div className="card-body-right justify-content-center d-flex-xl flex-wrap">
                         <div className="card-right-img">
+                            <p className="card-text">
+                                <strong>Prezzo: {data.price} €</strong></p>
                             <div className="total-price centered-price">Prezzo totale: {totalPrice} €</div>
                             <p>Compatibile con: {
                                 data.supported_consoles
