@@ -128,6 +128,7 @@ const JumbotronCarousel = () => {
                 logoPLay: "logoPlay"
             }
         ],
+
         "/xbox": [
             {
                 src: "./jumbotronoImage/xbox_jumbotron/xbox_console.jpg",

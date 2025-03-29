@@ -25,6 +25,11 @@ import CheckoutPage from './pages/CheckoutPage'
 import SingleProduct from './components/SingleProduct';
 import SearchResultPage from './pages/SearchResultPage';
 
+// import categorie Playstation
+import PlaystationConsoles from './components/PrincipalPageComponents/categoriesPlaystation/PlaystationConsoles'
+import PlaystationGames from './components/PrincipalPageComponents/categoriesPlaystation/PlaystationGames'
+import PlaystationAccessories from './components/PrincipalPageComponents/categoriesPlaystation/PlaystationAccessories'
+
 
 // carica Stripe con la chiave pubblica
 const stripePromise = loadStripe('pk_test_51R4oHvPXYjIqouRcxeNvWgRuFnQ1vo8PlqPEzVS6mDT2ix4nlzdDPaqwSVD5oHDfiTx0xdfcL0IzUQTsy4IU1bvA0079IF49Us');
@@ -42,7 +47,11 @@ function App() {
                 <Routes>
                   <Route element={<DefaultLayout />}>
                     <Route index element={<HomePage />} />
-                    <Route path='/playstation' element={<PlaystationPage />} />
+                    <Route path='/playstation' element={<PlaystationPage />}>
+                      {/* <Route path='/playstation/playstation-console' element={<PlaystationConsoles />} />
+                      <Route path='/playstation/playstation-games' element={<PlaystationGames />} />
+                      <Route path='/playstation/playstation-accessories' element={<PlaystationAccessories />} /> */}
+                    </Route>
                     <Route path='/xbox' element={<XboxPage />} />
                     <Route path='/nintendo' element={<NintendoPage />} />
                     <Route path='/checkout' element={<CheckoutPage stripePromise={stripePromise} />} />
