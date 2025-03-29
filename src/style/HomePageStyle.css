@@ -3,9 +3,7 @@
     margin: 0 auto;
     /* background-color: aqua; */
     /* text-align: center; */
-    padding-top: 60px;
-
-
+    padding-top: 20px;
 }
 
 .general-container section {
@@ -32,6 +30,7 @@
     text-decoration: none;
 }
 
+/* GESTIONE NAVIGAZIONE HOME PAGE */
 @keyframes expandBackground {
     from {
         width: 65%;
@@ -54,26 +53,54 @@
     transition: transform 0.5s ease;
 }
 
+.container-navigator-icons a {
+    text-decoration: none;
+    color: white;
+}
+
 .container-navigator-icons:hover {
     animation: expandBackground 0.5s forwards;
 }
 
-.container-navigator-icons button {
+.container-navigator-icons button,
+a {
     padding: 10px 18px;
     border-radius: 30px;
     background-color: rgb(255, 255, 255, 0);
     border: none;
     transition: transform 0.5s ease;
-    color: white;
 }
 
-.container-navigator-icons button:hover {
+.container-navigator-icons button a:hover {
     background-color: rgba(255, 255, 255, 0.747);
     transform: scale(1.2);
     color: black;
 }
 
+.dropdown-menu {
+    display: flex;
+    flex-direction: column;
+    /* Dispone gli item in colonna */
+    margin-top: 8px;
+    padding: 0;
+    list-style-type: none;
+    background-color: white;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    width: 100%;
+    z-index: 1;
+}
 
+.dropdown-item {
+    padding: 12px 20px;
+    cursor: pointer;
+    font-size: 14px;
+    width: 100%;
+}
+
+.dropdown-item:hover {
+    background-color: #f1f1f1;
+}
 
 /* CSS PER CardHomePage.jsx */
 .container-cards {

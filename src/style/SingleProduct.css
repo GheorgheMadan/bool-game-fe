@@ -1,10 +1,14 @@
 .image {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
     display: block;
     margin-left: auto;
     margin-right: auto;
+}
+
+a {
+    text-decoration: none;
 }
 
 .image-try {
@@ -16,6 +20,7 @@
 
 .card {
     background: none;
+    border: none;
 }
 
 .card-text {
@@ -23,7 +28,6 @@
     background-color: rgba(255, 166, 0, 0.697);
     padding: 5px;
     text-align: center;
-    border: 1px solid black;
     border-radius: 50px;
     text-align: center;
     margin-left: auto;
@@ -32,25 +36,29 @@
 }
 
 .card-body-left {
-    width: 90%;
-    border: 1px solid black;
+    width: 70%;
+    box-shadow: 18px 18px 18px rgba(255, 166, 0, 0.697);
     padding: 2em;
     background-color: rgba(0, 0, 0, 0.343);
     font-size: 20px;
     color: white;
+    margin-right: 3em;
+    text-shadow: 1px 1px 1px black;
 }
 
 .card-body-right {
-    border: 1px solid black;
+    box-shadow: 18px 18px 18px rgba(255, 166, 0, 0.697);
     padding: 2em;
     background-color: rgba(0, 0, 0, 0.343);
     color: white;
     font-size: 25px;
+    width: 30%;
 }
 
 .card-right-img {
     width: 100%;
     height: 50%;
+    text-shadow: 1px 1px 1px black;
 }
 
 .total-price {
@@ -73,37 +81,31 @@
 }
 
 .available {
-    width: 300px;
-    border: 1px solid black;
-    border-radius: 50px;
+    width: 170px;
     text-align: center;
-    background-color: green;
-    color: white;
-    padding: 5px;
+    color: rgb(56, 255, 30);
+    background-color: rgba(3, 194, 3, 0.678);
+    border-radius: 15px;
 }
 
 .not-available {
-    width: 300px;
-    border: 1px solid black;
-    border-radius: 50px;
+    width: 185px;
+    border-radius: 15px;
     text-align: center;
     background-color: red;
-    color: white;
-    padding: 5px;
+    color: rgb(247, 90, 90);
 }
 
 .add-cart {
-    width: 300px;
     border: 1px solid black;
-    border-radius: 50px;
     text-align: center;
-    background-color: red;
+    background-color: rgb(255, 174, 0);
     color: white;
-    padding: 5px;
+    padding: 8px;
 }
 
 .pegi-image {
-    width: 75px;
+    width: 50px;
     height: auto;
     margin-top: 5px;
     display: inline-block;
@@ -114,7 +116,7 @@
     width: 100%;
     text-align: center;
     font-size: 35px;
-    color: rgb(255, 225, 0)
+    color: rgb(255, 230, 0);
 }
 
 .hidden {
@@ -131,4 +133,8 @@
     background-repeat: repeat;
     background-size: cover;
     width: 100%;
+}
+
+.single-product-container {
+    padding: 2em;
 }

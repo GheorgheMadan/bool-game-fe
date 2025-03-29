@@ -38,26 +38,30 @@ export default function NintendoItems() {
             <Link>
                 <h2 className="black-title title-h2">Scegli la tua Nintendo Switch Lite: Scopri le colorazioni disponibili!</h2>
             </Link>
-            <div class="container-nintendo-items">
-                <div class="box-nintendo">
+            <div className="container-nintendo-items">
+                <div className="box-nintendo">
                     <div>
-                        <Link>
+                        <Link to={`/products/${item.id}`}>
                             <img src={item.image_url} alt={item.name} className="img-nintendo" />
                         </Link>
                     </div>
                     <div className="container-details-nintendo">
-                        <h4>{item.name}</h4>
+                        <Link to={`/products/${item.id}`}>
+                            <h4>{item.name}</h4>
+                        </Link>
                         <span>€ {item.price}</span>
-                        <Link>
+                        <Link to={`/products/${item.id}`}>
                             <button className="btn-blue">Acquista ora!</button>
                         </Link>
                     </div>
                 </div>
-                <div class="box-nintendo">
+                <div className="box-nintendo">
                     <div className="container-details-nintendo">
-                        <h4>{item1.name}</h4>
+                        <Link to={`/products/${item1.id}`}>
+                            <h4>{item1.name}</h4>
+                        </Link>
                         <span>€ {item1.price}</span>
-                        <Link>
+                        <Link to={`/products/${item1.id}`}>
                             <button className="btn-pink">Acquista ora!</button>
                         </Link>
                     </div>
@@ -67,16 +71,18 @@ export default function NintendoItems() {
                         </Link>
                     </div>
                 </div>
-                <div class="box-nintendo">
+                <div className="box-nintendo">
                     <div>
-                        <Link>
+                        <Link to={`/products/${item2.id}`}>
                             <img src={item2.image_url} alt={item2.name} className="img-nintendo" />
                         </Link>
                     </div>
                     <div className="container-details-nintendo">
-                        <h4>{item2.name}</h4>
+                        <Link to={`/products/${item2.id}`}>
+                            <h4>{item2.name}</h4>
+                        </Link>
                         <span>€ {item2.price}</span>
-                        <Link>
+                        <Link to={`/products/${item2.id}`}>
                             <button>Acquista ora!</button>
                         </Link>
                     </div>
