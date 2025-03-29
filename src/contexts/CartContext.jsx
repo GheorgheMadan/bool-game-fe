@@ -97,15 +97,19 @@ export const CartProvider = ({ children }) => {
         saveCartToLocalStorage(cart);
     };
 
-    // Svuota il carrello e ripristina lo stock nel database
-    const clearCart = async () => {
-        // Itera su ogni prodotto nel carrello
-        for (const product of cart) {
-            // Ripristina lo stock per ogni prodotto nel database
-            await updateStockInDB(product.id, product.quantity); // Aggiunge lo stock in base alla quantità del prodotto
+    // Funzione per rimuovere un singolo prodotto dal carrello e ripristinare lo stock
+    const clearCart = async (productId) => {
+        // Trova il prodotto da rimuovere
+        const productToRemove = cart.find(product => product.id === productId);
+
+        if (productToRemove) {
+            // Ripristina lo stock per il prodotto rimosso
+            await updateStockInDB(productId, productToRemove.quantity);
+
+            // Rimuovi il prodotto dal carrello
+            const updatedCart = cart.filter(product => product.id !== productId);
+            setCart(updatedCart); // Aggiorna lo stato del carrello
         }
-        // Svuota il carrello
-        setCart([]);
     };
 
     // Recupera il carrello dal localStorage al caricamento dell'app

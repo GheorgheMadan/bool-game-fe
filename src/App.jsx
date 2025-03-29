@@ -34,9 +34,9 @@ function App() {
   return (
     <>
       <GlobalContextResults.Provider value={{ results, setResults }}>
-        {/* AvvolgO l'intera app con il GlobalProvider e CartProvider */}
+        {/* Avvolgo l'intera app con il GlobalProvider e CartProvider */}
         <GlobalProvider>
-          <CartProvider> {/* AvvolgO con CartProvider per gestire il carrello */}
+          <CartProvider>
             <BrowserRouter>
               <Elements stripe={stripePromise}>
                 <Routes>

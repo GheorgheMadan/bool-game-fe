@@ -48,7 +48,7 @@ const CartPage = () => {
             ) : (
                 <>
                     <ul>
-                        {cart.map((product) => ( // Mappa ogni prodotto nel carrello
+                        {cart.map((product) => (
                             <li key={product.id}>
                                 <div>
                                     {/* Immagine del prodotto */}
