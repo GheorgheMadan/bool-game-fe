@@ -24,16 +24,19 @@
 .xbox-title {
     color: rgb(6, 243, 6);
     text-shadow: 3px 3px 3px green;
+    -webkit-text-stroke: 1px black;
 }
 
 .ps-title {
     color: rgb(0, 132, 255);
-    text-shadow: 3px 3px 3px white
+    text-shadow: 3px 3px 3px white;
+    -webkit-text-stroke: 1px black;
 }
 
 .switch-title {
     color: red;
-    text-shadow: 3px 3px 3px yellow;
+    text-shadow: 3px 3px 3px white;
+    -webkit-text-stroke: 1px black;
 }
 
 .black-title {
