@@ -97,12 +97,11 @@ a {
 }
 
 .add-cart {
-    width: 400px;
     border: 1px solid black;
     text-align: center;
     background-color: rgb(255, 174, 0);
     color: white;
-    padding: 5px;
+    padding: 8px;
 }
 
 .pegi-image {

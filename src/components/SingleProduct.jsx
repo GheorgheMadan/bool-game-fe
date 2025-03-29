@@ -60,7 +60,7 @@ export default function SingleProduct() {
                     {/* Parte sinistra con titolo e dettagli */}
                     <div className="card-body-left">
                         <h5 className="card-title mb-2">{data.name}</h5>
-                        <div className="image-try mb-5 mt-4">
+                        <div className="image-try">
                             <img className="image mr-4" src={data.image_url} alt={data.name} />
                         </div>
 
