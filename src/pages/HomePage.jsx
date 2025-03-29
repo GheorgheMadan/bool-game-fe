@@ -17,34 +17,15 @@ import NintendoGamesList from '../components/homepageComponents/NintendoGamesLis
 // COMPONENTE CHE CONTIENE IN ANTEMPRIMA 3 CONSOLE DELLA NINTENDO
 import NintendoItems from '../components/homepageComponents/NintendoItems';
 
-import { Joystick, Gamepad2, Disc } from "lucide-react";
-import { Link } from 'react-router-dom';
-
-
-
+import HomepageNav from '../components/homepageComponents/HompageNav';
 export default function HomePage() {
+
 
 
     return (
         <>
             <div className='general-container'>
-                <div className='container-navigator-icons'>
-                    <Link>
-                        <button>
-                            <Joystick size={30} />  Console
-                        </button>
-                    </Link>
-                    <Link>
-                        <button>
-                            <Gamepad2 size={30} />  Accessori
-                        </button>
-                    </Link>
-                    <Link>
-                        <button>
-                            <Disc size={30} />  Giochi
-                        </button>
-                    </Link>
-                </div>
+                <HomepageNav />
             </div>
             <div className='general-container'>
                 <NewReleasedList />
