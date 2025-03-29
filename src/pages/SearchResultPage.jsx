@@ -3,6 +3,7 @@
 import { useContext } from 'react';
 import GlobalContextResults from '../contexts/GlobalContextResult';
 import '../style/SearchResultsStyle.css'
+import { Link } from 'react-router-dom';
 export default function SearchResults() {
     const { results } = useContext(GlobalContextResults)
     console.log(results);
@@ -15,7 +16,9 @@ export default function SearchResults() {
                     return (
                         <div key={result.id} className='card-result'>
                             <div>
-                                <img src={result.image_url} alt={result.name} />
+                                <Link to={`/products/${result.id}`}>
+                                    <img src={result.image_url} alt={result.name} />
+                                </Link>
                             </div>
                             <span>{result.name}</span>
                             <div className='prezzo'>{result.price}€</div>

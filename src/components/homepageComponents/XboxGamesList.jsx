@@ -71,7 +71,7 @@ export default function XboxGamesList() {
                             .map((game) => (
                                 <>
                                     <div key={game.id} className="container-img">
-                                        <Link>
+                                        <Link to={`/products/${game.id}`}>
                                             <img className="img-gioco "
                                                 src={game.image_url}
                                                 alt={game.name}
