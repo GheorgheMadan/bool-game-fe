@@ -110,6 +110,7 @@ export const CartProvider = ({ children }) => {
             const updatedCart = cart.filter(product => product.id !== productId);
             setCart(updatedCart); // Aggiorna lo stato del carrello
         }
+
     };
 
     // Recupera il carrello dal localStorage al caricamento dell'app
