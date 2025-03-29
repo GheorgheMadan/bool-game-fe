@@ -1,54 +1,138 @@
 import React, { useEffect, useState } from 'react';
-import { useCart } from '../contexts/CartContext'; // Importiamo il contesto del carrello
-import { useNavigate } from 'react-router-dom'; // Per navigare alle pagine
+import { useCart } from '../contexts/CartContext';
+import axios from 'axios';
+import { loadStripe } from "@stripe/stripe-js";
+import { useNavigate } from 'react-router-dom';
+
+// Chiave pubblica Stripe
+const stripePromise = loadStripe("pk_test_51R4oHoBsHKjTjOb27pKcmH1YbaCbCgSSrIWcwXGnYGMnBiGhcO1zJFfurj9MEEjKGmTYO6EK8AHnrEd4j7yhFfYw00KFdjDfmf");
 
 const CheckoutPage = () => {
-    // Estraiamo il carrello dal contesto
+    // Estraiamo il carrello e la funzione clearCart dal contesto
     const { cart, clearCart } = useCart();
+    const [loading, setLoading] = useState(false);
     const [total, setTotal] = useState(0);
+    const [paymentStatus, setPaymentStatus] = useState(null);
+
+    // Stato per gestire i dettagli dell'utente
+    const [userDetails, setUserDetails] = useState({
+        firstName: '',
+        lastName: '',
+        address: '',
+        city: '',
+        postalCode: '',
+        state: '',
+        email: '',
+        fiscalCode: '',
+    });
     const navigate = useNavigate();
 
-    // Calcola il totale del carrello
+    // Calcola il totale del carrello quando cambia
     useEffect(() => {
         const calculatedTotal = cart.reduce(
             (total, product) => total + product.price * product.quantity, 0
         );
-        setTotal(calculatedTotal.toFixed(2)); // Impostiamo il totale con 2 decimali
+        setTotal(calculatedTotal.toFixed(2));
+        // Log del totale calcolato
+        console.log('Totale carrello:', calculatedTotal.toFixed(2));
     }, [cart]);
 
-    // Funzione per gestire il pagamento (simulato)
+    // Funzione per gestire il pagamento
     const handleCheckout = async () => {
+
+        setLoading(true);
+
+        // Controlla che tutti i campi siano compilati
+        for (let key in userDetails) {
+            if (!userDetails[key]) {
+                alert(`Campo ${key} mancante`);
+                setLoading(false);
+                return;
+            }
+        }
+
         try {
-            // Simuliamo una chiamata di pagamento (potresti voler usare Stripe qui)
-            console.log('Processando il pagamento...');
+            console.log('Avvio del pagamento...');
 
-            // Svuotiamo il carrello dopo il pagamento
-            await clearCart();
+            // Invia i dati al backend per creare la sessione di pagamento con Stripe
+            const { data } = await axios.post('http://localhost:3000/api/payment/create-checkout-session', {
+                cartItems: cart,
+                userDetails,
+            });
+            console.log('Sessione di pagamento creata:', data);
 
-            // Simuliamo una navigazione alla pagina di conferma
-            navigate('/order-confirmation');
+            // Se la sessione è stata creata con successo, reindirizza alla pagina di pagamento Stripe
+            if (data.sessionId) {
+                const stripe = await stripePromise;
+                const { error } = await stripe.redirectToCheckout({ sessionId: data.sessionId });
+
+                if (error) {
+                    console.error('Errore Stripe:', error);
+                    setLoading(false);
+                    setPaymentStatus('error');
+                }
+            }
         } catch (error) {
-            console.error('Errore nel pagamento:', error);
+            console.error('Errore durante il checkout:', error);
+            setLoading(false);
+            setPaymentStatus('error');
         }
     };
 
+    // Aggiorna lo stato dei campi di input quando l'utente digita
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setUserDetails({ ...userDetails, [name]: value });
+    };
+
+    // Funzione per ripristinare lo stock dopo il pagamento
+    const adjustStock = async () => {
+        try {
+            console.log('Ripristino dello stock...');
+            await axios.post('http://localhost:3000/api/stock/adjust', {
+                cartItems: cart,
+            });
+            console.log('Stock ripristinato con successo');
+        } catch (error) {
+            console.error('Errore durante il ripristino dello stock:', error);
+        }
+    };
+
+    // Se il pagamento è andato a buon fine, svuota il carrello, ripristina lo stock e reindirizza
+    useEffect(() => {
+        if (paymentStatus === 'success') {
+            clearCart();  // Pulisce il carrello dopo il pagamento
+            adjustStock(); // Ripristina lo stock
+            navigate('/'); // Reindirizza alla home appena il pagamento è completato
+        }
+    }, [paymentStatus, clearCart, navigate]);
+
+    // Mostra un messaggio di caricamento durante il processo di pagamento
+    if (loading) return <div>Caricamento...</div>;
+
     return (
+
         <div>
-            <h2>Dettagli Ordine</h2>
-            {cart.length === 0 ? (
-                <p>Il carrello è vuoto.</p>
-            ) : (
+            <h1>Checkout</h1>
+
+            {paymentStatus === 'error' && (
                 <div>
+                    <h2>Errore nel pagamento. Riprova.</h2>
+                </div>
+            )}
+
+            {/* Sezione riepilogo carrello */}
+            <div>
+                <h2>Carrello</h2>
+                {cart.length === 0 ? (
+                    <p>Il carrello è vuoto.</p>
+                ) : (
                     <ul>
                         {cart.map((product) => (
                             <li key={product.id}>
                                 <div>
-                                    <img
-                                        src={product.image_url}
-                                        alt={product.name}
-                                        width="100"
-                                    />
-                                    <h3>{product.name}</h3>
+                                    <img src={product.image_url || '/default-image.jpg'} alt={product.name || 'Prodotto'} width="100" />
+                                    <h3>{product.name || 'Nome prodotto non disponibile'}</h3>
                                     <p>Prezzo: €{product.price}</p>
                                     <p>Quantità: {product.quantity}</p>
                                     <p>Totale: €{(product.price * product.quantity).toFixed(2)}</p>
@@ -56,178 +140,87 @@ const CheckoutPage = () => {
                             </li>
                         ))}
                     </ul>
+                )}
+            </div>
 
-                    <div>
-                        <h3>Totale: €{total}</h3>
-
-                        {/* Bottone per procedere al pagamento */}
-                        <button onClick={handleCheckout}>Procedi al pagamento</button>
-                    </div>
-                </div>
-            )}
-
-            {/* Bottone per tornare alla home */}
-            <button onClick={() => navigate('/')}>Torna alla Home</button>
+            {/* Form dati utente e pulsante per procedere al pagamento */}
+            <div>
+                <h3>Totale: €{total}</h3>
+                {cart.length > 0 && !paymentStatus && (
+                    <form onSubmit={handleCheckout}>
+                        <h2>Inserisci i tuoi dati</h2>
+                        <input
+                            type="text"
+                            name="firstName"
+                            value={userDetails.firstName}
+                            onChange={handleInputChange}
+                            placeholder="Nome"
+                            required
+                        />
+                        <input
+                            type="text"
+                            name="lastName"
+                            value={userDetails.lastName}
+                            onChange={handleInputChange}
+                            placeholder="Cognome"
+                            required
+                        />
+                        <input
+                            type="text"
+                            name="address"
+                            value={userDetails.address}
+                            onChange={handleInputChange}
+                            placeholder="Indirizzo"
+                            required
+                        />
+                        <input
+                            type="text"
+                            name="city"
+                            value={userDetails.city}
+                            onChange={handleInputChange}
+                            placeholder="Città"
+                            required
+                        />
+                        <input
+                            type="text"
+                            name="postalCode"
+                            value={userDetails.postalCode}
+                            onChange={handleInputChange}
+                            placeholder="CAP"
+                            required
+                        />
+                        <input
+                            type="text"
+                            name="state"
+                            value={userDetails.state}
+                            onChange={handleInputChange}
+                            placeholder="Stato"
+                            required
+                        />
+                        <input
+                            type="email"
+                            name="email"
+                            value={userDetails.email}
+                            onChange={handleInputChange}
+                            placeholder="Email"
+                            required
+                        />
+                        <input
+                            type="text"
+                            name="fiscalCode"
+                            value={userDetails.fiscalCode}
+                            onChange={handleInputChange}
+                            placeholder="Codice Fiscale"
+                            required
+                        />
+                        <button type="submit" disabled={loading}>
+                            {loading ? 'Caricamento...' : 'Procedi al pagamento'}
+                        </button>
+                    </form>
+                )}
+            </div>
         </div>
     );
 };
 
 export default CheckoutPage;
-
-
-
-// import React, { useState, useEffect } from 'react';
-// import { loadStripe } from '@stripe/stripe-js';
-// import { useStripe, useElements, CardElement } from '@stripe/react-stripe-js';
-// import axios from 'axios';
-
-// // Carica Stripe con la chiave pubblica
-// const stripePromise = loadStripe('pk_test_51R4oHoBsHKjTjOb27pKcmH1YbaCbCgSSrIWcwXGnYGMnBiGhcO1zJFfurj9MEEjKGmTYO6EK8AHnrEd4j7yhFfYw00KFdjDfmf');
-
-// const CheckoutPage = () => {
-//     const [cartItems, setCartItems] = useState([]); // Stato per il carrello
-//     const [clientSecret, setClientSecret] = useState(''); // Stato per il client secret
-//     const [isProcessing, setIsProcessing] = useState(false); // Stato per il processo di pagamento
-//     const [userInfo, setUserInfo] = useState({ name: '', email: '', address: '' }); // Stato per i dettagli dell'utente
-
-//     const stripe = useStripe();
-//     const elements = useElements();
-
-//     // Recupera i dettagli del carrello dal localStorage e calcola il totale
-//     useEffect(() => {
-//         const savedCart = JSON.parse(localStorage.getItem('cart')) || [];
-//         setCartItems(savedCart);
-
-//         const total = savedCart.reduce((acc, item) => acc + item.price * item.quantity, 0);
-//         const shippingCost = 10; // Puoi calcolare o impostare una spedizione fissa
-
-//         // Recupera il client secret per il pagamento
-//         const fetchClientSecret = async () => {
-//             try {
-//                 const { data } = await axios.post('/api/payment/process', { order_id: savedCart }); // Cambia il parametro in base alla logica
-//                 setClientSecret(data.clientSecret);
-//             } catch (error) {
-//                 console.error("Errore nel recuperare il client secret:", error);
-//             }
-//         };
-
-//         if (savedCart.length > 0) {
-//             fetchClientSecret();
-//         }
-//     }, []);
-
-//     // Funzione per inviare il pagamento
-//     const handlePaymentSubmit = async (event) => {
-//         event.preventDefault();
-
-//         if (!stripe || !elements) {
-//             return;
-//         }
-
-//         setIsProcessing(true);
-
-//         const { error, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
-//             payment_method: {
-//                 card: elements.getElement(CardElement),
-//             },
-//             receipt_email: userInfo.email, // Invia l'email dell'utente per la ricevuta
-//         });
-
-//         if (error) {
-//             console.error('Pagamento fallito:', error);
-//             alert('Pagamento fallito, riprova');
-//         } else if (paymentIntent.status === 'succeeded') {
-//             alert('Pagamento completato con successo!');
-//             // Qui puoi inviare una conferma via email, se necessario
-//         }
-
-//         setIsProcessing(false);
-//     };
-
-//     // Funzione per gestire il cambiamento dei dati dell'utente
-//     const handleUserInfoChange = (event) => {
-//         setUserInfo({
-//             ...userInfo,
-//             [event.target.name]: event.target.value,
-//         });
-//     };
-
-//     const totalAmount = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
-//     const shippingCost = 10; // o calcolalo in base alla logica della tua app
-//     const orderTotal = totalAmount + shippingCost;
-
-//     if (!clientSecret) {
-//         return <div>Loading...</div>;
-//     }
-
-//     return (
-//         <div>
-//             <h2>Riepilogo Ordine</h2>
-//             <ul>
-//                 {cartItems.map((product, index) => (
-//                     <li key={index}>
-//                         {product.name} - {product.quantity} x {product.price}€
-//                     </li>
-//                 ))}
-//             </ul>
-//             <div>
-//                 <h3>Totale: €{orderTotal}</h3>
-//                 <h3>Spese di spedizione: €{shippingCost}</h3>
-//             </div>
-
-//             <h3>Dettagli di pagamento</h3>
-//             <form onSubmit={handlePaymentSubmit}>
-//                 <div>
-//                     <label htmlFor="name">Nome</label>
-//                     <input
-//                         type="text"
-//                         id="name"
-//                         name="name"
-//                         value={userInfo.name}
-//                         onChange={handleUserInfoChange}
-//                         required
-//                     />
-//                 </div>
-//                 <div>
-//                     <label htmlFor="email">Email</label>
-//                     <input
-//                         type="email"
-//                         id="email"
-//                         name="email"
-//                         value={userInfo.email}
-//                         onChange={handleUserInfoChange}
-//                         required
-//                     />
-//                 </div>
-//                 <div>
-//                     <label htmlFor="address">Indirizzo di spedizione</label>
-//                     <input
-//                         type="text"
-//                         id="address"
-//                         name="address"
-//                         value={userInfo.address}
-//                         onChange={handleUserInfoChange}
-//                         required
-//                     />
-//                 </div>
-
-//                 <CardElement />
-
-//                 <button type="submit" disabled={!stripe || isProcessing}>
-//                     {isProcessing ? 'Elaborazione...' : 'Paga'}
-//                 </button>
-//             </form>
-//         </div>
-//     );
-// };
-
-// // Usa il provider per Stripe.js
-// import { Elements } from '@stripe/react-stripe-js';
-
-// const CheckoutPageWithStripe = () => (
-//     <Elements stripe={stripePromise}>
-//         <CheckoutPage />
-//     </Elements>
-// );
-
-// export default CheckoutPageWithStripe;
