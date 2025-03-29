@@ -4,8 +4,15 @@ import { useState, useEffect } from "react";
 import { useParams } from 'react-router-dom';
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../style/SingleProduct.css";
+// Per aggiungere i prodotti al carrello
+import { useCart } from "../contexts/CartContext";
+import { Link } from "react-router-dom";
 
 export default function SingleProduct() {
+
+    // Estraggo la funzione addToCart dal contesto
+    const { addToCart } = useCart();
+
     // Ottieni l'ID del prodotto dai parametri dell'URL
     const { productId } = useParams();
     const [data, setData] = useState(null);
@@ -15,11 +22,7 @@ export default function SingleProduct() {
     useEffect(() => {
         if (productId) {
             axios.get(`http://localhost:3000/api/products/${productId}`)
-                // return axios.get(`http://localhost:3000/api/products/${productId}`)                   SECONDA CHIAMATA PER LE CATEGORIES
                 .then(res => setData(res.data))
-                // if (res.data && res.data.length > 0) {
-                //     setCategory(res.data[0].category_name);
-                // }
                 .catch(err => setError("Errore nel recupero del prodotto o della categoria."));
         }
     }, [productId]);
@@ -47,7 +50,7 @@ export default function SingleProduct() {
     return (
         <>
             {/* // videogame card // */}
-            <div className="container">
+            <div className="single-product-container sfondo">
                 <div className="card d-flex flex-row justify-content-between">
                     {/* Parte sinistra con titolo e prezzo */}
                     <div className="card-body-left">
@@ -136,7 +139,9 @@ export default function SingleProduct() {
                                 {data.stock < 1 ? "Non disponibile" : "Disponibile"}</div>
                             <div className={`centered-price ${data.stock > 0 ? "hidden" : "not-available"}`}>
                                 Non Disponibile</div>
-                            <button className="add-cart centered-price">Aggiungi al carrello</button>
+                            < Link >
+                                <button onClick={() => addToCart({ id: data.id, name: data.name, price: data.price })} className="add-cart centered-price">Aggiungi al carrello</button>
+                            </Link>
                         </div>
                     </div>
                 </div>
