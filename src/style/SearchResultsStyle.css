@@ -1,7 +1,42 @@
 .container-search-page {
     width: 75%;
-    margin: 50px auto;
+    margin: 40px auto;
+}
 
+.search-title {
+    font-size: 30px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #222;
+    margin-bottom: 25px;
+    text-shadow: 3px 3px 5px rgba(65, 63, 62, 0.6);
+    letter-spacing: 2px;
+}
+
+.filter-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.filter-buttons button {
+    background: linear-gradient(135deg, #ff4b2b, #ff416c);
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 4px 8px rgba(255, 65, 108, 0.3);
+}
+
+.filter-buttons button:hover {
+    transform: translateY(-3px);
+    background: linear-gradient(135deg, #ff416c, #ff4b2b);
+    box-shadow: 0 6px 12px rgba(255, 65, 108, 0.5);
 }
 
 .container-results {
@@ -10,45 +45,31 @@
     gap: 25px;
     justify-content: center;
     margin-top: 30px;
+    padding: 2rem 1rem;
+    border-radius: 10px;
+    /* Angoli arrotondati per un look più morbido */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    /* Ombra morbida per dare profondità */
+    backdrop-filter: blur(10px);
 }
 
 .card-result {
     width: 200px;
     cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    min-height: 350px;
+    margin-bottom: 20px;
+
 }
 
-.card-result span {
-    font-weight: bold;
-    font-size: 1.1rem;
-    /* Rende il titolo più grande */
-    text-transform: uppercase;
-    /* Trasforma in maiuscolo */
-    letter-spacing: 1px;
-    display: block;
-    /* Distanza tra le lettere per un look più pulito */
-    color: #222;
-    /* Un colore scuro per contrasto */
-}
-
-.prezzo {
-    color: red;
-    font-size: 1.1rem;
-    /* Rende il prezzo più evidente */
-    font-weight: bold;
-    text-shadow: 1px 1px 5px rgba(255, 0, 0, 0.5);
-    display: inline-block;
-    /* Necessario per le trasformazioni */
-    transition: transform 0.9s ease-in-out;
-}
-
-.card-result span:hover {
-    color: #ff5722;
-    /* Cambia colore su hover */
-    transition: color 0.3s ease-in-out;
-}
-
-.prezzo:hover {
-    transform: rotateY(360deg) scale(1.1);
+.card-result div img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    margin-bottom: 8px;
 }
 
 .card-result img:hover {
@@ -57,9 +78,57 @@
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
-.card-result div img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    margin-bottom: 8px;
+.search-card-result-info {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    /* Occupa tutto lo spazio disponibile */
+}
+
+
+.search-card-name {
+    font-weight: bold;
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+    padding-left: 10px;
+    display: block;
+    color: #222;
+    transition: color 0.3s ease-in-out;
+}
+
+.search-card-name:hover {
+    color: #ff5722;
+}
+
+.prezzo {
+    color: red;
+    font-size: 1.1rem;
+    padding-left: 10px;
+    font-weight: bold;
+    text-shadow: 1px 1px 5px rgba(255, 0, 0, 0.5);
+    display: inline-block;
+    transition: transform 0.9s ease-in-out;
+}
+
+.prezzo:hover {
+    transform: rotateX(360deg) scale(1.1);
+}
+
+.search-supported-console {
+    color: black;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 10px;
+    text-align: center;
+    margin-top: auto;
+    /* Spinge l'elemento in basso */
+    padding-top: 10px;
+    /* Distanza dal contenuto sopra */
+}
+
+.search-supported-console-list {
+    color: red;
+    font-size: 15px;
+    display: inline-block;
+    margin-top: 5px;
 }
