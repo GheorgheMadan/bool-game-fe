@@ -103,7 +103,7 @@
 }
 
 .pegi-image {
-    width: 75px;
+    width: 50px;
     height: auto;
     margin-top: 5px;
     display: inline-block;
@@ -131,4 +131,8 @@
     background-repeat: repeat;
     background-size: cover;
     width: 100%;
+}
+
+.single-product-container {
+    padding: 2em;
 }
