@@ -164,20 +164,6 @@ export default function SingleProduct() {
                             </button>
                         </div>
                     </div>
-                    {filteredGames
-                        .slice(index, index + 5)
-                        .map((game) => (
-                            <>
-                                <div key={game.id} className="container-img">
-                                    <Link to={`/products/${game.id}`}>
-                                        <img className="img-gioco "
-                                            src={game.image_url}
-                                            alt={game.name}
-                                        />
-                                    </Link>
-                                </div>
-                            </>
-                        ))}
                 </div>
             </div>
         </>
