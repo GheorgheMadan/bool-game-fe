@@ -7,6 +7,7 @@ const CartContext = createContext();
 // Componente che avvolge l'intera app per fornire il carrello
 export const CartProvider = ({ children }) => {
     const [cart, setCart] = useState([]);
+    const [isCartInitialized, setIsCartInitialized] = useState(false); // Stato per tracciare l'inizializzazione del carrello
 
     // Funzione centrale per aggiornare lo stock nel database
     const updateStockInDB = async (productId, quantityChange) => {
@@ -20,10 +21,25 @@ export const CartProvider = ({ children }) => {
         }
     };
 
-    // Funzione per salvare il carrello nel localStorage
-    const saveCartToLocalStorage = (cart) => {
-        localStorage.setItem('cart', JSON.stringify(cart));
-    };
+    useEffect(() => {
+        const storedCart = JSON.parse(localStorage.getItem('cart')) || [];
+        console.log("Carrello caricato dal localStorage:", storedCart);
+        setCart(storedCart);
+        setIsCartInitialized(true); // Imposta lo stato come inizializzato
+    }, []);
+
+    // Salva il carrello nel localStorage ogni volta che cambia, ma solo dopo l'inizializzazione
+    useEffect(() => {
+        if (isCartInitialized) {
+            if (cart.length > 0) {
+                console.log("Salvo il carrello nel localStorage:", cart);
+                localStorage.setItem('cart', JSON.stringify(cart));
+            } else {
+                console.log("Rimuovo il carrello dal localStorage perché è vuoto.");
+                localStorage.removeItem('cart');
+            }
+        }
+    }, [cart, isCartInitialized]);
 
     // Aggiungi prodotto al carrello
     const addToCart = async (product) => {
@@ -46,7 +62,7 @@ export const CartProvider = ({ children }) => {
             // Aggiorna lo stock nel database
             await updateStockInDB(product.id, -1); // decremento dello stock
         }
-        saveCartToLocalStorage(cart);
+        // saveCartToLocalStorage(cart);
     };
 
     // Aumenta la quantità di un prodotto nel carrello
@@ -77,7 +93,7 @@ export const CartProvider = ({ children }) => {
         } catch (error) {
             console.error("Errore durante il recupero dello stock:", error);
         }
-        saveCartToLocalStorage(cart);
+        // saveCartToLocalStorage(cart);
     };
 
     // Riduci la quantità di un prodotto nel carrello
@@ -94,7 +110,7 @@ export const CartProvider = ({ children }) => {
         if (product && product.quantity > 1) {
             await updateStockInDB(productId, 1); // incremento dello stock
         }
-        saveCartToLocalStorage(cart);
+        // saveCartToLocalStorage(cart);
     };
 
     // Funzione per rimuovere un singolo prodotto dal carrello e ripristinare lo stock
@@ -110,14 +126,8 @@ export const CartProvider = ({ children }) => {
             const updatedCart = cart.filter(product => product.id !== productId);
             setCart(updatedCart); // Aggiorna lo stato del carrello
         }
+
     };
-
-    // Recupera il carrello dal localStorage al caricamento dell'app
-    useEffect(() => {
-        const storedCart = JSON.parse(localStorage.getItem('cart')) || [];
-        setCart(storedCart);
-    }, []);
-
 
     return (
         <CartContext.Provider value={{ cart, addToCart, increaseQuantity, decreaseQuantity, clearCart }}>

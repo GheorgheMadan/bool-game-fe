@@ -23,14 +23,12 @@ footer {
     flex-direction: column;
 }
 
-.overlay {
+.overlay-footer {
     background-color: black;
     opacity: 0.5;
     position: absolute;
-    /* invece di relative */
     bottom: 50px;
-    left: 4%;
-    width: 92%;
+    width: 100%;
     height: 75%;
     z-index: 2;
 }
@@ -45,6 +43,7 @@ footer {
     text-align: left;
     margin-bottom: 2rem;
     z-index: 2;
+    padding: 2em;
 }
 
 .sb_footer-links_div a p:hover {
@@ -150,6 +149,7 @@ hr {
     display: flex;
     justify-content: space-between;
     width: 100%;
+    padding-left: 2em;
 }
 
 .sb_footer-copyright p {
