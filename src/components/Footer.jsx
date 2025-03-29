@@ -13,7 +13,7 @@ const Footer = () => {
     <footer>
       <div className="container-footer">
         <div className="sb_footer section_padding">
-          <div className="overlay"></div>
+          <div className="overlay-footer"></div>
           <div className="sb_footer-links">
             <div className="sb_footer-links_div">
               <h4>SERVIZI</h4>
