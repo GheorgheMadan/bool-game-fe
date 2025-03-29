@@ -58,7 +58,7 @@ export default function NintendoGamesList() {
     return (
         <>
             <section>
-                <h2>GIOCHI NINTENDO</h2>
+                <h2 className="title-h2">GIOCHI NINTENDO</h2>
                 <div className="container-trend">
                     <button onClick={nextSlide} className="next-btn">
                         <FontAwesomeIcon icon={faChevronRight} />

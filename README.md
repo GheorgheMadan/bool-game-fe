@@ -9,3 +9,5 @@ Librerie installate:
     npm install axios
     npm install react-bootstrap bootstrap
     npm install react-icons
+
+     npm install lucide-react

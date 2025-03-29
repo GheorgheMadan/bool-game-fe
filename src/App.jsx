@@ -22,7 +22,7 @@ import PlaystationPage from './pages/PlaystationPage'
 import NintendoPage from './pages/NintendoPage'
 import CartPage from './pages/CartPage'
 import CheckoutPage from './pages/CheckoutPage'
-import ProductPage from './pages/ProductPage'
+import SingleProduct from './components/SingleProduct';
 import SearchResultPage from './pages/SearchResultPage';
 
 
@@ -45,12 +45,12 @@ function App() {
                     <Route path='/playstation' element={<PlaystationPage />} />
                     <Route path='/xbox' element={<XboxPage />} />
                     <Route path='/nintendo' element={<NintendoPage />} />
-                    <Route path='/product' element={<ProductPage />} />
                     <Route path='/checkout' element={<CheckoutPage stripePromise={stripePromise} />} />
                   </Route>
                   <Route element={<LayoutSearchCart />}>
                     <Route path='/search' element={<SearchResultPage />} />
                     <Route path='/cart' element={<CartPage />} />
+                    <Route path='/products/:productId' element={<SingleProduct />} />
                   </Route>
                 </Routes>
               </Elements>

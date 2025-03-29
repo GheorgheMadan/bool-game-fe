@@ -1,52 +1,48 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
+// Importa useParams
+import { useParams } from 'react-router-dom';
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Accordion } from "react-bootstrap";
 import "../style/SingleProduct.css";
 
-export default function SingleProduct({ productId }) {
+export default function SingleProduct() {
+    // Ottieni l'ID del prodotto dai parametri dell'URL
+    const { productId } = useParams();
+    const [data, setData] = useState(null);
+    const [category, setCategory] = useState(null);
+    const [error, setError] = useState(null);
 
-    const [data, setData] = useState([])
+    useEffect(() => {
+        if (productId) {
+            axios.get(`http://localhost:3000/api/products/${productId}`)
+                // return axios.get(`http://localhost:3000/api/products/${productId}`)                   SECONDA CHIAMATA PER LE CATEGORIES
+                .then(res => setData(res.data))
+                // if (res.data && res.data.length > 0) {
+                //     setCategory(res.data[0].category_name);
+                // }
+                .catch(err => setError("Errore nel recupero del prodotto o della categoria."));
+        }
+    }, [productId]);
 
-    const productsData = () => {
-        axios.get('http://localhost:3000/api/products')
-            .then(res => {
-                setData(res.data[38]);
-                console.log(res.data)
-            }
-            )
-            .catch(err => console.error(err)
-            )
+    if (error) {
+        return <div>{error}</div>;
     }
-    useEffect(() => { productsData() }, [])
 
-    // const [product, setProduct] = useState(null);
-
-    // useEffect(() => {
-    //     axios.get(`http://localhost:3000/api/products/${productId}`)
-    //         .then(res => {
-    //             console.log("Dati prodotto:", res.data); // Debug
-    //             if (res.data && res.data.id) {  // Verifica che i dati siano validi
-    //                 setProduct(res.data);
-    //             } else {
-    //                 console.error("Dati prodotto non validi:", res.data);
-    //                 setError("Prodotto non trovato");
-    //             }
-    //         })
-    //         .catch(err => console.error(err));
-    //     setError("Errore nel caricamento del prodotto");
-    // }, [productId]);
-
-    // if (!product) return (<div>Caricamento...</div>);
+    if (!data) {
+        return <div>Caricamento prodotto...</div>;
+    }
 
     // Converti il prezzo in numero UNA VOLTA all'inizio
     const priceNumber = data.price ? Number(data.price) : 0;
-
     // Calcola il costo di spedizione (gratis se prezzo > 39.99)
     const shippingCost = priceNumber > 39.99 ? 0 : 9.99;
-
     // Calcola il prezzo totale (prezzo + tasse + spedizione)
     const totalPrice = (priceNumber + 1.50 + shippingCost).toFixed(2);
+
+    // Determina se il prodotto è un gioco
+    const isGame = category === "gioco";
+    const isConsole = category === "console";
+    const isAccessory = category === "accessorio";
 
     return (
         <>
@@ -55,12 +51,15 @@ export default function SingleProduct({ productId }) {
                 <div className="card d-flex flex-row justify-content-between">
                     {/* Parte sinistra con titolo e prezzo */}
                     <div className="card-body-left">
-                        <p className="card-text">
-                            <strong>Prezzo: {data.price} €</strong></p>
                         <h5 className="card-title mb-2">{data.name}</h5>
                         <div className="image-try mb-5 mt-4">
                             <img className="image mr-4" src={data.image_url} alt={data.name} />
                         </div>
+
+                        {/*  CATEGORIES CHECK
+                       {isGame && (
+                            <> */}
+
                         <p className="inline"> PEGI:
                             {data.pegi_rating === 3 ? (
                                 <img className="pegi-image" src="/pegi/PEGI_3.png" alt="PEGI 3" />
@@ -93,19 +92,40 @@ export default function SingleProduct({ productId }) {
                                 data.multiplayer
                             )}
                         </p>
+                        {/* )} */}
+                        {/* </> */}
+                        {/* 
+                        {isAccessory && (
+                            <p>Compatibilità: {data.compatibility}</p>
+                        )} */}
+
                         <p>Descrizione: {data.description}</p>
                     </div>
 
                     {/* Parte destra con immagine e info extra */}
                     <div className="card-body-right justify-content-center d-flex-xl flex-wrap">
                         <div className="card-right-img">
+                            <p className="card-text">
+                                <strong>Prezzo: {data.price} €</strong></p>
                             <div className="total-price centered-price">Prezzo totale: {totalPrice} €</div>
                             <p>Compatibile con: {
                                 data.supported_consoles
                                     ? JSON.parse(data.supported_consoles || "[]").map(console => console.trim()).join(", ")
-                                    : "Nessuna console specificata"
-                            }</p>                            <p>Genere: {data.game_genre}</p>
+                                    : "nessuna console specificata"
+                            }</p>
+
+                            {/* {isGame && (
+                                <> */}
+
+                            <p>Genere: {data.game_genre}</p>
                             <p>Publisher:  {data.publisher}</p>
+                            {/* </> */}
+
+                            {/* Mostra info specifiche per console */}
+                            {/* {isConsole && (
+            <p>Specifiche tecniche: {data.tech_specs}</p>
+        )} */}
+
                             <p>Data di uscita: {new Date(data.release_date).toLocaleDateString('it-IT')}</p>
                             <div className="centered-price">    Costo spedizione: {shippingCost.toFixed(2)} €
                                 {shippingCost === 0 && " (gratis)"}
