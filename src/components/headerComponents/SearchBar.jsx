@@ -46,9 +46,10 @@ export default function SearchBar() {
 
     return (
         <div className='container-icons'>
-            <div className={`container-search ${isOpen ? 'open' : ''}`}>
+            <div className={`container-search-header ${isOpen ? 'open' : ''}`}>
                 <form onSubmit={search}>
                     <input
+                        className='input-search-header'
                         type="text"
                         name="text"
                         value={input}
