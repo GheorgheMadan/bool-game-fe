@@ -1,60 +1,63 @@
 .container {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    padding-left: 50px;
-    padding-right: 50px;
-    padding-top: 30px;
-    padding-bottom: 30px;
-    
-    margin-top: 50px;
-    margin-bottom: 80px;
-  
-    position: relative;
-    width: 1000px;
-    height: auto;
-  
-    border-radius: 16px;
-    background-color: white;
-    
-    border: 2px solid #1B1B1B;
-    box-sizing: border-box;
-    box-shadow: 6px 6px 0px #1B1B1B;
-    border-radius: 8px;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+
+  margin-top: 50px;
+  margin-bottom: 80px;
+
+  position: relative;
+  width: 1000px;
+  height: auto;
+
+  border-radius: 16px;
+  background-color: white;
+
+  border: 2px solid #1B1B1B;
+  box-sizing: border-box;
+  box-shadow: 6px 6px 0px #1B1B1B;
+  border-radius: 8px;
+}
 
 
-.enter_details i{
-    color: orange;
-    margin-bottom: 5px;
-  }
+.enter_details i {
+  color: orange;
+  margin-bottom: 5px;
+}
 
 
-  .personal_data {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px; /* Spazio tra gli elementi */
-    width: 100%;
-  }
-  
-
-  .personal_data label {
-    width: calc(50% - 10px); /* Due input per riga */
-    display: flex;
-    flex-direction: column;
-    font-weight: 600;
-  }
-  
-
-  textarea:focus, input:focus{
-    outline: none;
-    background: orange;
-    border: 3px solid #1B1B1B;
-    border-radius: 16px;
-  }
+.personal_data {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  /* Spazio tra gli elementi */
+  width: 100%;
+}
 
 
-  .pagamento {
+.personal_data label {
+  width: calc(50% - 10px);
+  /* Due input per riga */
+  display: flex;
+  flex-direction: column;
+  font-weight: 600;
+}
+
+
+textarea:focus,
+input:focus {
+  outline: none;
+  background: orange;
+  border: 3px solid #1B1B1B;
+  border-radius: 16px;
+}
+
+
+.pagamento {
   background-color: orange;
   border: 2px solid #1B1B1B;
   box-sizing: border-box;
@@ -80,4 +83,67 @@
   box-shadow: 0px 0px 0px 4px #C1BFFA;
 }
 
-  
+.payment-status {
+  margin-top: 20px;
+  padding: 15px;
+  text-align: center;
+  font-size: 1.2em;
+  border-radius: 5px;
+  transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Messaggio di successo */
+.payment-status.success {
+  background-color: #28a745;
+  /* Verde */
+  color: white;
+  border: 1px solid #218838;
+}
+
+/* Messaggio di errore */
+.payment-status.error {
+  background-color: #dc3545;
+  /* Rosso */
+  color: white;
+  border: 1px solid #c82333;
+}
+
+/* Animazione di apparizione */
+.payment-status.success,
+.payment-status.error {
+  animation: fadeIn 1s ease-out, slideUp 0.5s ease-out;
+}
+
+/* Animazione per far sparire il messaggio dopo un certo tempo */
+.payment-status.success.fade-out,
+.payment-status.error.fade-out {
+  opacity: 0;
+  transform: translateY(-20px);
+}
+
+/* Definire l'animazione */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
