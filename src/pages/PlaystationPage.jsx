@@ -13,7 +13,7 @@ export default function PlaystationPage() {
         <>
             <div className="playstation-products-container">
                 <section className="container-nav-home">
-                    <div className='container-navigator-icons'>
+                    <div className='container-navigator-icons playstation'>
                         <div>
                             {/* Pulsante Console */}
                             <Link to='/playstation/consoles'>
