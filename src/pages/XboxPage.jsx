@@ -11,7 +11,7 @@ export default function XboxPage() {
         <>
             <div className="xbox-products-container">
                 <section className="container-nav-home">
-                    <div className='container-navigator-icons'>
+                    <div className='container-navigator-icons xbox'>
                         <div>
                             {/* Pulsante Console */}
                             <Link to='/xbox/console'>

@@ -23,14 +23,14 @@ export default function HomepageNav() {
     }
     return (
         <section className="container-nav-home">
-            <div className='container-navigator-icons'>
+            <div className='container-navigator-icons homepage'>
                 <div>
                     {/* Pulsante Console */}
                     <button onClick={toggleDropdown}>
                         <Joystick size={30} /> Console
                     </button>
                     {isOpen && (
-                        <ul className="dropdown-menu">
+                        <ul className={`dropdown-menu ${isOpen ? 'show' : ''}`}>
                             <li className="dropdown-item1"><Link to='/xbox/console'>Xbox console</Link></li>
                             <li className="dropdown-item1"><Link to='/playstation/consoles'>PlayStation console</Link></li>
                             <li className="dropdown-item1"><Link to='/nintendo/consoles'>Nintendo Console</Link></li>
@@ -43,7 +43,7 @@ export default function HomepageNav() {
                         <Gamepad2 size={30} /> Accessori
                     </button>
                     {isOpen2 && (
-                        <ul className="dropdown-menu">
+                        <ul className={`dropdown-menu ${isOpen2 ? 'show' : ''}`}>
                             <li className="dropdown-item1"><Link to='/xbox/accessories'>Accessori Xbox</Link></li>
                             <li className="dropdown-item1"><Link to='/playstation/accessories'>Accessori PlayStation</Link></li>
                             <li className="dropdown-item1"><Link to='/nintendo/accessories'>Accessori Nintendo</Link></li>
@@ -56,7 +56,7 @@ export default function HomepageNav() {
                         <Disc size={30} /> Giochi
                     </button>
                     {isOpen3 && (
-                        <ul className="dropdown-menu">
+                        <ul className={`dropdown-menu ${isOpen3 ? 'show' : ''}`}>
                             <li className="dropdown-item1"><Link to='/xbox/games'>Giochi Xbox</Link></li>
                             <li className="dropdown-item1"><Link to='/playstation/games'>Giochi PlayStation</Link></li>
                             <li className="dropdown-item1"><Link to='/nintendo/games'>Giochi Nintendo</Link></li>
