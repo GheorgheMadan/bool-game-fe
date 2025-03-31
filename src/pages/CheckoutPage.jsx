@@ -4,17 +4,19 @@ import axios from 'axios';
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements, PaymentElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import { useNavigate } from 'react-router-dom';
+import '../style/Checkout.css'
 
-// Carica la chiave pubblica di Stripe (deve essere la tua chiave pubblica)
+// Inizializza Stripe con la tua chiave pubblica di test
 const stripePromise = loadStripe("pk_test_51R4oHoBsHKjTjOb27pKcmH1YbaCbCgSSrIWcwXGnYGMnBiGhcO1zJFfurj9MEEjKGmTYO6EK8AHnrEd4j7yhFfYw00KFdjDfmf");
 
 const CheckoutForm = () => {
-    // Carica il carrello dal contesto globale e prepara lo stato per il pagamento
-    const { cart, clearCart } = useCart();
-    const [loading, setLoading] = useState(false); // Stato per monitorare se il pagamento è in corso
-    const [total, setTotal] = useState(0); // Totale da pagare
-    const [clientSecret, setClientSecret] = useState(null); // Secret client per Stripe
-    const [userDetails, setUserDetails] = useState({  // Dettagli dell'utente da inviare al backend
+    const { cart, clearCart } = useCart(); // Accesso al carrello dal contesto
+    const [loading, setLoading] = useState(false);
+    const [total, setTotal] = useState(0);
+    const [clientSecret, setClientSecret] = useState(null);
+
+    // Stato per i dettagli dell'utente
+    const [userDetails, setUserDetails] = useState({
         firstName: '',
         lastName: '',
         email: '',
@@ -23,23 +25,29 @@ const CheckoutForm = () => {
         state: '',
         fiscalCode: ''
     });
-    const stripe = useStripe();  // Hook per accedere a Stripe
-    const elements = useElements();  // Hook per accedere agli elementi di Stripe
-    const navigate = useNavigate();  // Hook per navigare tra le pagine
 
-    // Calcola il totale ogni volta che cambia il carrello
+    // Stato per la gestione dei messaggi di pagamento
+    const [paymentStatus, setPaymentStatus] = useState(''); // Stato per il messaggio di pagamento
+    const [paymentMessage, setPaymentMessage] = useState(''); // Messaggio di stato del pagamento
+    const [fadeOut, setFadeOut] = useState(false); // Gestione della sparizione del messaggio
+    // Hook di Stripe
+    const stripe = useStripe();
+    const elements = useElements();
+    const navigate = useNavigate();
+
+    // Calcola il totale del carrello
     useEffect(() => {
         setTotal(cart.reduce((total, product) => total + product.price * product.quantity, 0).toFixed(2));
     }, [cart]);
 
-    // Crea la sessione di pagamento con Stripe quando il carrello o i dettagli dell'utente cambiano
+    // Ottiene il clientSecret per Stripe al caricamento del carrello
     useEffect(() => {
         if (cart.length > 0) {
             axios.post('http://localhost:3000/api/payment/create-checkout-session', { cartItems: cart, userDetails })
                 .then(response => {
                     console.log(response.data);
                     if (response.data.clientSecret) {
-                        setClientSecret(response.data.clientSecret);  // Memorizza il client secret ricevuto
+                        setClientSecret(response.data.clientSecret);
                     } else {
                         console.error('Client Secret mancante');
                     }
@@ -48,9 +56,9 @@ const CheckoutForm = () => {
                     console.error('Errore nella creazione della sessione:', error);
                 });
         }
-    }, [cart, userDetails]);  // Riprova ogni volta che cart o userDetails cambiano
+    }, [cart, userDetails]);
 
-    // Gestisce l'input dell'utente per aggiornare i dettagli del form
+    // Gestisce il cambiamento degli input dell'utente
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setUserDetails(prevState => ({
@@ -59,48 +67,60 @@ const CheckoutForm = () => {
         }));
     };
 
-    // Funzione che viene chiamata quando si invia il modulo di pagamento
+    // Gestisce il pagamento con Stripe
     const handlePayment = async (e) => {
-        e.preventDefault(); // Impedisce il comportamento predefinito del form
-        setLoading(true); // Imposta lo stato di caricamento
+        e.preventDefault();
+        setLoading(true);
 
-        // Verifica che Stripe sia stato caricato correttamente
         if (!stripe || !elements) {
             console.error('Stripe non è caricato');
             setLoading(false);
             return;
         }
 
-        // Conferma il pagamento con Stripe
         const { error, paymentIntent } = await stripe.confirmPayment({
             elements,
             confirmParams: {
-                // Redirect alla home dopo il pagamento
                 return_url: window.location.origin,
             },
-            // Redirige solo se necessario
             redirect: "if_required",
         });
 
-        // Verifica che il pagamento sia stato effettuato con successo
-        if (!error && paymentIntent?.status === "succeeded") {
-            clearCart();
-            navigate('/');
 
-            // Invia le informazioni al backend per inviare le email
+
+        if (!error && paymentIntent?.status === "succeeded") {
             try {
-                const response = await axios.post('http://localhost:3000/api/payment/send-order-emails', {
-                    userDetails,       // Dati dell'utente
-                    cartItems: cart,   // Dettagli degli articoli nel carrello
-                    total: total,      // Totale dell'ordine
+                // Invia la richiesta per inviare email dopo il pagamento
+                await axios.post('http://localhost:3000/api/payment/send-order-emails', {
+                    userDetails,
+                    cartItems: cart,
+                    total: cart.reduce((sum, item) => sum + item.price * item.quantity, 0)
                 });
-                console.log('Email inviate con successo', response.data);
-            } catch (error) {
-                console.error('Errore nell\'invio delle email:', error.response || error);
+
+                console.log('✅ Email inviate con successo');
+
+                // Mostra il messaggio di successo
+                setPaymentStatus('success');
+                setPaymentMessage('Il pagamento è andato a buon fine!');
+                setFadeOut(false);
+
+                // Svuota il carrello
+                clearCart();
+
+                // Attendi 2 secondi e poi reindirizza alla Homepage
+                setTimeout(() => {
+                    setFadeOut(true);
+                    setTimeout(() => {
+                        navigate('/');
+                    }, 1000);
+                }, 2000);
+            } catch (emailError) {
+                console.error('❌ Errore nell’invio delle email:', emailError);
+                setPaymentMessage('Pagamento riuscito, ma errore nell’invio delle email.');
             }
         } else {
-            // Gestisce eventuali errori nel pagamento
-            console.error('Errore durante il pagamento:', error);
+            setPaymentStatus('error');
+            setPaymentMessage('Si è verificato un errore nel pagamento. Riprova!');
             setLoading(false);
         }
     };
@@ -110,6 +130,7 @@ const CheckoutForm = () => {
             <h1>Checkout</h1>
             <h3>Totale: €{total}</h3>
             <form>
+                {/* Campi per i dettagli dell'utente */}
                 <input type="text" name="firstName" value={userDetails.firstName} onChange={handleInputChange} placeholder="Nome" required />
                 <input type="text" name="lastName" value={userDetails.lastName} onChange={handleInputChange} placeholder="Cognome" required />
                 <input type="email" name="email" value={userDetails.email} onChange={handleInputChange} placeholder="Email" required />
@@ -126,6 +147,12 @@ const CheckoutForm = () => {
                     </button>
                 </form>
             )}
+            {/* Mostra il messaggio di stato del pagamento */}
+            {paymentMessage && (
+                <div className={`payment-status ${paymentStatus} ${fadeOut ? 'fade-out' : ''}`}>
+                    {paymentMessage}
+                </div>
+            )}
         </div>
     );
 };
@@ -134,6 +161,7 @@ const CheckoutPage = () => {
     const [clientSecret, setClientSecret] = useState(null);
     const { cart } = useCart();
 
+    // Ottiene il clientSecret al caricamento della pagina
     useEffect(() => {
         if (cart.length > 0) {
             axios.post('http://localhost:3000/api/payment/create-checkout-session', { cartItems: cart })
@@ -152,11 +180,16 @@ const CheckoutPage = () => {
     }, [cart]);
 
     return (
-        <>{clientSecret && <Elements stripe={stripePromise} options={{ clientSecret }}><CheckoutForm /></Elements>}</>
+        <>
+            {/* Renderizza il form solo se il clientSecret è stato ricevuto */}
+            {clientSecret && <Elements stripe={stripePromise} options={{ clientSecret }}><CheckoutForm /></Elements>}
+        </>
     );
 };
 
 export default CheckoutPage;
+
+
 
 
 
