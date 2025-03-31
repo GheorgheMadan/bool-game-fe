@@ -46,13 +46,14 @@ export const CartProvider = ({ children }) => {
         try {
             // Recupera lo stock disponibile dal database
             const response = await axios.get(`http://localhost:3000/api/products/${product.id}`);
-            const productStock = response.data.stock;
-
+            const availableStock = response.data.stock;
             const existingProduct = cart.find(item => item.id === product.id);
 
             if (existingProduct) {
                 // Se il prodotto esiste già, controlla se è possibile aumentare la quantità
-                if (existingProduct.quantity < productStock) {
+                const totalAvailableStock = availableStock + existingProduct.quantity;
+
+                if (existingProduct.quantity < totalAvailableStock) {
                     setCart((prevCart) =>
                         prevCart.map(item =>
                             item.id === product.id
@@ -67,7 +68,7 @@ export const CartProvider = ({ children }) => {
                 }
             } else {
                 // Se il prodotto non esiste nel carrello, aggiungilo solo se c'è disponibilità di stock
-                if (productStock > 0) {
+                if (availableStock > 0) {
                     setCart((prevCart) => [...prevCart, { ...product, quantity: 1 }]);
                     // Aggiorna lo stock nel database (decrementa)
                     await updateStockInDB(product.id, -1);
@@ -85,13 +86,17 @@ export const CartProvider = ({ children }) => {
         try {
             // Recupera lo stock disponibile dal database
             const response = await axios.get(`http://localhost:3000/api/products/${productId}`);
-            const productStock = response.data.stock;
+            // const productStock = response.data.stock;
+            const availableStock = response.data.stock;
 
             // Trova il prodotto nel carrello
             const productInCart = cart.find(item => item.id === productId);
 
             // Verifica se è possibile aumentare la quantità
-            if (productInCart.quantity < productStock) {
+            // Considera sia lo stock disponibile che la quantità già nel carrello
+            const totalAvailableStock = availableStock + productInCart.quantity;
+
+            if (productInCart.quantity < totalAvailableStock) {
                 // Aumenta la quantità nel carrello
                 setCart((prevCart) =>
                     prevCart.map(item =>
@@ -100,6 +105,17 @@ export const CartProvider = ({ children }) => {
                             : item
                     )
                 );
+
+                // // Verifica se è possibile aumentare la quantità
+                // if (productInCart.quantity < productStock) {
+                //     // Aumenta la quantità nel carrello
+                //     setCart((prevCart) =>
+                //         prevCart.map(item =>
+                //             item.id === productId
+                //                 ? { ...item, quantity: item.quantity + 1 }
+                //                 : item
+                //         )
+                //     );
                 // Aggiorna lo stock nel database (decrementa)
                 await updateStockInDB(productId, -1);
             } else {
