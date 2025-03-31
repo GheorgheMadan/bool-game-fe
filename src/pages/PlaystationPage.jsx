@@ -8,8 +8,8 @@ import '../style/PrincipalPageStyle/PlaystationPageStyle.css';
 export default function PlaystationPage() {
     return (
         <>
-            <div className='container-ps-section-bg'>
-                <div className='playstation-products-container-2'>
+            <div className="playstation-products-container">
+                <div className='playstation-products-container-2 '>
                     <h2 className='playstation-h2'>Benvenuto nel mondo Playstation</h2>
                     <PlaystationConsoles />
                     <PlaystationAccessories />
