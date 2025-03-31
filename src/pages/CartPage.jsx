@@ -27,17 +27,22 @@ const CartPage = () => {
     };
 
     // Funzione per calcolare il totale del carrello
-    const calculateTotal = () => {
+    const calculateSubTotal = () => {
         return cart.reduce((total, product) => total + product.price * product.quantity, 0).toFixed(2);
     };
 
-    // Calcola il costo di spedizione basato sul totale
+    // Calcola il costo di spedizione basato sul subtotale
     const calculateShippingCost = () => {
-        const total = parseFloat(calculateTotal());
-        return total > 39.99 ? 0 : 9.99;
+        const total = parseFloat(calculateSubTotal());
+        return total > 199.99 ? 0 : 9.99;
     };
 
     const shippingCost = calculateShippingCost();
+
+    // Funzione per calcolare il totale complessivo (subtotale + spedizione)
+    const calculateTotal = () => {
+        return (parseFloat(calculateSubTotal()) + shippingCost).toFixed(2);
+    };
 
     // Funzione per andare alla home
     const goToHome = () => {
@@ -96,11 +101,14 @@ const CartPage = () => {
                         <div className="cart-summary">
                             <div className="cart-total">
                                 {/* Mostriamo il totale del carrello */}
-                                <h3>Totale: €{calculateTotal()}</h3>
-                                <div className="centered-price">Spedizione gratuita per ordini superiori a 40€</div>
-                                <div className="centered-price">Costo spedizione: {shippingCost.toFixed(2)} €
+                                <div className="centered-price">Spedizione gratuita per ordini superiori a €200</div>
+
+                                <h3>Sub totale: €{calculateSubTotal()}</h3>
+
+                                <div className="centered-price">Costo spedizione: €{shippingCost.toFixed(2)}
                                     {shippingCost === 0 && " (gratis)"}
                                 </div>
+                                <h3 className='total-price'>Totale: €{calculateTotal()}</h3>
                             </div>
 
                             <div className="cart-actions">

@@ -9,6 +9,11 @@ header {
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
 }
 
+a {
+    text-decoration: none;
+    color: black;
+}
+
 header .container-nav {
     display: flex;
     align-items: center;
@@ -16,6 +21,15 @@ header .container-nav {
     justify-content: space-between;
     width: 75%;
     margin: 0 auto;
+
+}
+
+.burger-icon {
+    display: none;
+}
+
+.container-b-menu {
+    display: none;
 }
 
 /* SEZIONE LOGO */
@@ -115,7 +129,7 @@ a.active {
 
 
 /* NAVBAR SEZIONE INPUT E BUTTON */
-.container-search {
+.container-search-header {
     position: relative;
     /* Permette a ::after di essere posizionato in modo assoluto rispetto a questo elemento */
     display: flex;
@@ -131,7 +145,7 @@ a.active {
 }
 
 /* BORDER BOTTOM INIZIALMENTE INVISIBILE */
-.container-search::after {
+.container-search-header::after {
     content: "";
     /* Crea un elemento vuoto per il bordo inferiore */
     position: absolute;
@@ -149,7 +163,7 @@ a.active {
 }
 
 /* INPUT INIZIALMENTE NASCOSTO */
-.container-search input {
+.container-search-header .input-search-header {
     border: none;
     /* Rimuove il bordo predefinito */
     max-width: 0;
@@ -189,10 +203,11 @@ a.active {
 }
 
 
-.icon {
+.container-icons .icon {
     font-size: 20px;
     margin-left: 15px;
     cursor: pointer;
+    margin-top: 8px;
 }
 
 .icon:hover {
@@ -213,17 +228,16 @@ a.active {
 }
 
 /* ATTIVAZIONE ANIMAZIONI */
-.container-search.open input {
+.container-search-header.open .input-search-header {
     max-width: 300px;
     /* Si espande senza influenzare il layout */
     opacity: 1;
-    padding: 5px 10px;
     background-color: rgba(255, 255, 255, 0);
 
 
 }
 
-.container-search.open::after {
+.container-search-header.open::after {
     animation: expandBorder 0.1s ease-in-out forwards;
 }
 
@@ -267,5 +281,177 @@ a.active {
     100% {
         transform: scale(1);
         box-shadow: 0 0 8px rgba(255, 0, 0, 0.8);
+    }
+}
+
+/* ------------------------------------------------------------------------- */
+/* Ultra mobile (max 480px) */
+@media (max-width: 480px) {
+
+    header .container-nav {
+        width: 90%;
+    }
+
+    .burger-icon {
+        font-size: 30px;
+        margin-right: 10px;
+        display: inline;
+        cursor: pointer;
+    }
+
+    .container-icons .icon {
+        margin-top: 10px;
+    }
+
+
+    /* CONTAINER BURGER MENU */
+    .container-b-menu {
+        width: 50%;
+        background-color: white;
+        z-index: 1000000;
+        border: 1px solid rgb(185, 185, 185);
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        left: -100%;
+        height: 100vh;
+        box-shadow: 5px 0 10px rgba(0, 0, 0, 0.1);
+        transform: translateX(-100%);
+        /* Partiamo fuori schermo */
+        transition: transform 0.5s ease-in-out;
+        /* Animazione della trasformazione */
+    }
+
+    /* Menu aperto */
+    .container-b-menu.open {
+        transform: translateX(0);
+        /* Rientra nel suo posto */
+    }
+
+    /* Menu chiuso */
+    .container-b-menu.close {
+        transform: translateX(-100%);
+        /* Esce di nuovo fuori dallo schermo */
+    }
+
+    .container-b-menu a {
+        border-bottom: 1px solid rgb(255, 255, 255);
+        border-radius: 2px;
+        text-decoration: none;
+        color: black;
+        font-size: 20px;
+    }
+
+    .container-b-menu span {
+        margin-left: 10px;
+    }
+
+    /* SEZIONE LOGO */
+    .logo a {
+        font-size: 22px;
+        color: black;
+    }
+
+    /* display none della sezione del header in modalità mobile */
+    .container-link {
+        display: none;
+    }
+
+    a.active {
+        color: rgb(94, 10, 173);
+    }
+
+    /* ATTIVAZIONE ANIMAZIONI */
+    .container-search-header.open .input-search-header {
+        max-width: 120px;
+    }
+}
+
+/* ------------------------------------------------------------------------- */
+/* TABLET VERSION */
+@media (max-width: 768px) {
+
+    header .container-nav {
+        width: 90%;
+    }
+
+    .burger-icon {
+        font-size: 30px;
+        margin-right: 10px;
+        display: inline;
+        cursor: pointer;
+    }
+
+    .container-icons .icon {
+        margin-top: 10px;
+    }
+
+
+    /* CONTAINER BURGER MENU */
+    .container-b-menu {
+        width: 50%;
+        background-color: white;
+        z-index: 1000000;
+        border: 1px solid rgb(185, 185, 185);
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        height: 100vh;
+        box-shadow: 5px 0 10px rgba(0, 0, 0, 0.1);
+        padding-left: 30px;
+        transform: translateX(-100%);
+        /* Partiamo fuori schermo */
+        transition: transform 0.5s ease-in-out;
+        /* Animazione della trasformazione */
+    }
+
+    /* Menu aperto */
+    .container-b-menu.open {
+        transform: translateX(0);
+        /* Rientra nel suo posto */
+    }
+
+    /* Menu chiuso */
+    .container-b-menu.close {
+        transform: translateX(-100%);
+        /* Esce di nuovo fuori dallo schermo */
+    }
+
+    .container-b-menu a {
+        border-bottom: 1px solid rgb(255, 255, 255);
+        border-radius: 2px;
+        text-decoration: none;
+        color: black;
+        font-size: 22px;
+    }
+
+    .container-b-menu span {
+        margin-left: 10px;
+    }
+
+    /* display none della sezione del header in modalità mobile */
+    .container-link {
+        display: none;
+    }
+
+    a.active {
+        color: rgb(94, 10, 173);
+    }
+
+    /* ATTIVAZIONE ANIMAZIONI */
+    .container-search-header>form {
+        width: 130px;
+    }
+}
+
+/* ------------------------------------------------------------------------- */
+
+@media (max-width: 950px) {
+
+    /* SEZIONE LOGO */
+    .logo a {
+        font-size: 18px;
     }
 }

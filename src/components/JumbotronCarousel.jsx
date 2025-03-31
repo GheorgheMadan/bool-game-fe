@@ -1,20 +1,35 @@
 
-import React from "react";
 import { useLocation } from "react-router-dom";
 import { Carousel, Button } from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from "react-router-dom";
 import '../style/JumbotronStyle.css'
+import React, { useState, useEffect } from "react";
 
 const JumbotronCarousel = () => {
     const location = useLocation(); // Ottiene l'URL attuale
 
-    // Definiamo le immagini per ogni pagina
+    // CREO UNO STATO CHE INDIVIDUERA' LA DIMENSIONE DELLO SCHERMO
+    const [isMobile, setIsMobile] = useState(window.innerWidth < 550);
 
+    // Rileva il cambio di dimensione dello schermo
+    useEffect(() => {
+        const handleResize = () => {
+            setIsMobile(window.innerWidth < 480);
+        };
+
+        window.addEventListener("resize", handleResize);
+        return () => {
+            window.removeEventListener("resize", handleResize);
+        };
+    }, []);
+    // Definiamo le immagini per ogni pagina
+    // Definizione delle immagini per Desktop e Mobile
     const imagesByPage = {
         "/": [
             {
-                src: "./jumbotronoImage/xbox_jumbotron/xbox_series_x_s.jpg",
+                srcDesktop: "./jumbotronoImage/xbox_jumbotron/xbox_series_x_s.jpg",
+                srcMobile: "./jumbotronoImage/xbox_jumbotron/xbox_mobile.jpg",
                 alt: "Xbox Image",
                 link: "/xbox",
                 title: "Scopri Xbox Series X/S",
@@ -22,10 +37,13 @@ const JumbotronCarousel = () => {
                 buttonText: "Acquista ora",
                 buttonLink: "/xbox",
                 xboxLogo: "xbox-logo",
-                greenBtn: "greenBtn animationButton"
+                greenBtn: "greenBtn animationButton",
+                containerBottom: "containerBottom",
+                bgLogo: "bgLogo"
             },
             {
-                src: "./jumbotronoImage/playstation_jumbotron/play_4_5.jpg",
+                srcDesktop: "./jumbotronoImage/playstation_jumbotron/play_4_5.jpg",
+                srcMobile: "./jumbotronoImage/playstation_jumbotron/play_4_5_mobile.jpg",
                 alt: "PlayStation Image",
                 link: "/playstation",
                 title: "Benvenuto nella PlayStation 5",
@@ -34,31 +52,36 @@ const JumbotronCarousel = () => {
                 buttonLink: "/playstation",
                 animationButton: "animationButton",
                 blackText: "blackText",
-                logoPLay: "logoPlay"
+                logoPLay: "logoPlay",
+                containerTop: "containerTop"
             },
             {
-                src: "./jumbotronoImage/ac_shadows_jumbo.jpg",
+                srcDesktop: "./jumbotronoImage/ac_shadows_jumbo.jpg",
+                srcMobile: "./jumbotronoImage/ac_shadows_jumbo_mobile.jpg",
                 alt: "AC Shadows Image",
-                link: "/products/11",  // aggiunto link
+                link: "/products/11",
                 title: "Assassin's Creed Shadows",
                 text: "Un'avventura epica ti aspetta in Assassin's Creed Shadows, dove ogni decisione conta e la storia prende vita. Preparati a diventare un leggendario assassino.",
-                buttonText: "Gioca ora",
+                buttonText: "Acquista ora!",
                 buttonLink: "/products/11",
-                redButton: "redButton animationButton"
+                redButton: "redButton animationButton",
+                containerBottom: "containerBottom"
             },
             {
-                src: "./jumbotronoImage/bleach_jumbo.jpg",
+                srcDesktop: "./jumbotronoImage/bleach_jumbo.jpg",
+                srcMobile: "./jumbotronoImage/bleach_jumbo_mobile.jpg",
                 alt: "Bleach Image",
-                link: "/products/13",  // aggiunto link
+                link: "/products/13",
                 title: "Bleach: L'avventura continua",
                 text: "Entra nel mondo di Bleach con nuovi episodi e avventure, dove gli spiriti e i combattimenti sono sempre più intensi. Un viaggio che non finisce mai!",
                 buttonText: "Scopri ora",
                 buttonLink: "/products/13",
                 redButton: "redButton",
-                leftContainer: "leftContainer"
+                leftContainer: "leftContainer",
             },
             {
-                src: "./jumbotronoImage/nintendo_jumbotron/nintendo_switch.jpg",
+                srcDesktop: "./jumbotronoImage/nintendo_jumbotron/nintendo_switch.jpg",
+                srcMobile: "./jumbotronoImage/nintendo_jumbotron/nintendo_switch_mobile.jpg",
                 alt: "Nintendo Image",
                 link: "/products/129",
                 title: "Scopri il Nintendo Switch",
@@ -66,22 +89,26 @@ const JumbotronCarousel = () => {
                 buttonText: "Acquista ora",
                 buttonLink: "/products/129",
                 yellowBtn: "yellowBtn",
-                nintendoLogo: "nintendoLogo"
+                nintendoLogo: "nintendoLogo",
+                containerBottom: "containerBottom"
             },
             {
-                src: "./jumbotronoImage/wwe_2k25_jumbo.jpg",
+                srcDesktop: "./jumbotronoImage/wwe_2k25_jumbo.jpg",
+                srcMobile: "./jumbotronoImage/wwe_2k25_jumbo_mobile.jpg",
                 alt: "WWE 2K25 Image",
-                link: "/products/14",  // aggiunto link
+                link: "/products/14",
                 title: "WWE 2K25: Scopri la nuova edizione",
                 text: "Il ring è pronto, combatti ora! Scopri tutte le novità di WWE 2K25, il gioco che porta l'azione e i combattimenti a un nuovo livello.",
-                buttonText: "Gioca ora",
+                buttonText: "Acquista ora!",
                 buttonLink: "/products/14",
-                redButton: "redButton animationButton"
+                redButton: "redButton animationButton",
+                containerTop: "containerTop"
             }
         ],
         "/playstation": [
             {
-                src: "./jumbotronoImage/playstation_jumbotron/death_stranding_2.jpg",
+                srcDesktop: "./jumbotronoImage/playstation_jumbotron/death_stranding_2.jpg",
+                srcMobile: "./jumbotronoImage/playstation_jumbotron/death_stranding_2_mobile.jpg",
                 alt: "Death Stranding 2",
                 link: "/products/12",  // aggiunto link
                 title: "Death Stranding 2",
@@ -90,22 +117,12 @@ const JumbotronCarousel = () => {
                 buttonLink: "/products/12",
                 animationButton: "animationButton",
                 blackText: "blackText",
-                logoPLay: "logoPlay"
+                logoPLay: "logoPlay",
+                containerTop: "containerTop"
             },
             {
-                src: "./jumbotronoImage/playstation_jumbotron/play_controller.jpg",
-                alt: "PS Controller",
-                link: "/products/107",  // aggiunto link
-                title: "Scopri il nuovo controller PS5",
-                text: "Un'esperienza di gioco ancora più immersiva con il nuovo controller PS5. La tecnologia avanzata ti farà sentire ogni colpo, ogni movimento.",
-                buttonText: "Acquista ora",
-                buttonLink: "/products/107",
-                animationButton: "animationButton",
-                blackText: "blackText",
-                logoPLay: "logoPlay"
-            },
-            {
-                src: "./jumbotronoImage/playstation_jumbotron/play_4_5.jpg",
+                srcDesktop: "./jumbotronoImage/playstation_jumbotron/play_4_5.jpg",
+                srcMobile: "./jumbotronoImage/playstation_jumbotron/play_4_5_mobile.jpg",
                 alt: "PS4/5",
                 link: "/playstation/consoles",  // aggiunto link
                 title: "PlayStation 4 e 5",
@@ -114,10 +131,12 @@ const JumbotronCarousel = () => {
                 buttonLink: "/playstation",
                 animationButton: "animationButton",
                 blackText: "blackText",
-                logoPLay: "logoPlay"
+                logoPLay: "logoPlay",
+                containerTop: "containerTop"
             },
             {
-                src: "./jumbotronoImage/playstation_jumbotron/play_vr.jpg",
+                srcDesktop: "./jumbotronoImage/playstation_jumbotron/play_vr.jpg",
+                srcMobile: "./jumbotronoImage/playstation_jumbotron/play_vr_mobile.jpg",
                 alt: "PS VR",
                 link: "/products/111",  // aggiunto link
                 title: "Vivi la realtà virtuale con PS VR",
@@ -125,13 +144,15 @@ const JumbotronCarousel = () => {
                 buttonText: "Acquista ora",
                 buttonLink: "/products/111",
                 animationButton: "animationButton",
-                logoPLay: "logoPlay"
+                logoPLay: "logoPlay",
+                containerTop: "containerTop"
             }
         ],
 
         "/xbox": [
             {
-                src: "./jumbotronoImage/xbox_jumbotron/xbox_console.jpg",
+                srcDesktop: "./jumbotronoImage/xbox_jumbotron/xbox_console.jpg",
+                srcMobile: "./jumbotronoImage/xbox_jumbotron/xbox_console_mobile.jpg",
                 alt: "Xbox Console",
                 link: "/products/137",  // aggiunto link
                 title: "Scopri la nuova Xbox Series X/S",
@@ -140,10 +161,12 @@ const JumbotronCarousel = () => {
                 buttonLink: "/products/137",
                 xboxLogo: "xbox-logo",
                 blackText: "blackText",
-                greenBtn: "greenBtn animationButton"
+                greenBtn: "greenBtn animationButton",
+                containerTop: "containerTop"
             },
             {
-                src: "./jumbotronoImage/xbox_jumbotron/accessori_xbox.jpg",
+                srcDesktop: "./jumbotronoImage/xbox_jumbotron/accessori_xbox.jpg",
+                srcMobile: "./jumbotronoImage/xbox_jumbotron/accessori_xbox_mobile.jpg",
                 alt: "Xbox Accessories",
                 link: "/xbox/accessories",  // aggiunto link
                 title: "Accessori Xbox",
@@ -152,10 +175,12 @@ const JumbotronCarousel = () => {
                 buttonLink: "/xbox/accessories",
                 xboxLogo: "xbox-logo",
                 blackText: "blackText",
-                greenBtn: "greenBtn animationButton"
+                greenBtn: "greenBtn animationButton",
+                containerBottom: "containerBottom "
             },
             {
-                src: "./jumbotronoImage/xbox_jumbotron/xbox_series_x_s.jpg",
+                srcDesktop: "./jumbotronoImage/xbox_jumbotron/xbox_series_x_s.jpg",
+                srcMobile: "./jumbotronoImage/xbox_jumbotron/xbox_series_x_s_mobile.jpg",
                 alt: "Xbox Series X/S",
                 link: "/xbox/consoles",  // aggiunto link
                 title: "Xbox Series X/S",
@@ -163,10 +188,13 @@ const JumbotronCarousel = () => {
                 buttonText: "Scopri di più",
                 buttonLink: "/xbox/consoles",
                 xboxLogo: "xbox-logo",
-                greenBtn: "greenBtn animationButton"
+                greenBtn: "greenBtn animationButton",
+                containerTop: "containerTop",
+                bgLogo: "bgLogo"
             },
             {
-                src: "./jumbotronoImage/xbox_jumbotron/xbox.jpg",
+                srcDesktop: "./jumbotronoImage/xbox_jumbotron/xbox.jpg",
+                srcMobile: "./jumbotronoImage/xbox_jumbotron/xbox_mobile.jpg",
                 alt: "Xbox",
                 link: "/xbox",  // aggiunto link
                 title: "Gioca con Xbox",
@@ -175,12 +203,14 @@ const JumbotronCarousel = () => {
                 buttonLink: "/xbox",
                 xboxLogo: "xbox-logo",
                 bgLogo: "bgLogo",
-                greenBtn: "greenBtn animationButton"
+                greenBtn: "greenBtn animationButton",
+                containerBottom: "containerBottom"
             }
         ],
         "/nintendo": [
             {
-                src: "./jumbotronoImage/nintendo_jumbotron/nintendo_switch.jpg",
+                srcDesktop: "./jumbotronoImage/nintendo_jumbotron/nintendo_switch.jpg",
+                srcMobile: "./jumbotronoImage/nintendo_jumbotron/nintendo_switch_mobile.jpg",
                 alt: "Nintendo Switch",
                 link: "/products/129",  // aggiunto link
                 title: "Nintendo Switch",
@@ -188,10 +218,12 @@ const JumbotronCarousel = () => {
                 buttonText: "Acquista ora",
                 buttonLink: "/products/129",
                 yellowBtn: "yellowBtn",
-                nintendoLogo: "nintendoLogo"
+                nintendoLogo: "nintendoLogo",
+                containerBottom: "containerBottom"
             },
             {
-                src: "./jumbotronoImage/nintendo_jumbotron/nintendo_donkey_kong_Country_Returns.jpg",
+                srcDesktop: "./jumbotronoImage/nintendo_jumbotron/nintendo_donkey_kong_Country_Returns.jpg",
+                srcMobile: "./jumbotronoImage/nintendo_jumbotron/nintendo_donkey_kong_Country_Returns_mobile.jpg",
                 alt: "Donkey Kong",
                 link: "/donkey-kong",  // aggiunto link
                 title: "Donkey Kong Country Returns",
@@ -199,10 +231,12 @@ const JumbotronCarousel = () => {
                 buttonText: "Gioca ora",
                 buttonLink: "/donkey-kong",
                 yellowBtn: "yellowBtn",
-                nintendoLogo: "nintendoLogo"
+                nintendoLogo: "nintendoLogo",
+                containerBottom: "containerBottom"
             },
             {
-                src: "./jumbotronoImage/nintendo_jumbotron/nintendo_games.jpg",
+                srcDesktop: "./jumbotronoImage/nintendo_jumbotron/nintendo_games.jpg",
+                srcMobile: "./jumbotronoImage/nintendo_jumbotron/nintendo_games_mobile.jpg",
                 alt: "Nintendo Games",
                 link: "/nintendo-games",  // aggiunto link
                 title: "I migliori giochi per Nintendo",
@@ -210,10 +244,12 @@ const JumbotronCarousel = () => {
                 buttonText: "Esplora ora",
                 buttonLink: "/nintendo-games",
                 yellowBtn: "yellowBtn",
-                nintendoLogo: "nintendoLogo"
+                nintendoLogo: "nintendoLogo",
+                containerBottom: "containerBottom blackText"
             },
             {
-                src: "./jumbotronoImage/nintendo_jumbotron/xenoblade_chronicles_game.jpg",
+                srcDesktop: "./jumbotronoImage/nintendo_jumbotron/xenoblade_chronicles_game.jpg",
+                srcMobile: "./jumbotronoImage/nintendo_jumbotron/xenoblade_chronicles_game_mobile.jpg",
                 alt: "Xenoblade",
                 link: "/xenoblade",  // aggiunto link
                 title: "Xenoblade Chronicles",
@@ -221,44 +257,47 @@ const JumbotronCarousel = () => {
                 buttonText: "Gioca ora",
                 buttonLink: "/xenoblade",
                 yellowBtn: "yellowBtn",
-                nintendoLogo: "nintendoLogo"
+                nintendoLogo: "nintendoLogo",
+                containerTop: "containerTop"
             }
         ]
     };
 
     // Se la pagina attuale ha immagini definite, le usa, altrimenti fallback a un set predefinito
-    const images = imagesByPage[location.pathname] || imagesByPage["/"];
+    const images = imagesByPage[location.pathname] || [];
+
 
     return (
-
         <Carousel key={location.pathname}>
-            {images.map((image, index) => (
-                <Carousel.Item key={index}>
-                    {image.link ? (
-                        <Link to={image.link}>
-                            <img className="d-block w-100 img-jumbotron" src={image.src} alt={image.alt} />
-                        </Link>
-                    ) : (
-                        <img className="d-block w-100" src={image.src} alt={image.alt} />
-                    )}
-                    <Carousel.Caption className={`carousel-caption ${image.leftContainer || ""}`} >
-                        <div className="container-details-jumbo" >
-                            <div className={`${image.xboxLogo || ""} ${image.bgLogo || ""}  ${image.logoPLay || ""} ${image.nintendoLogo || ""}`}></div>
-                            <h4 className={image.blackText}>{image.title}</h4>
-                            <p className={image.blackText}>{image.text}</p>
-                            {image.link && (
-                                <>
+            {images.map((image, index) => {
+                const imageSrc = isMobile ? image.srcMobile : image.srcDesktop;
+                return (
+                    <Carousel.Item key={index}>
+                        {image.link ? (
+                            <Link to={image.link}>
+                                <img className="d-block w-100 img-jumbotron" src={imageSrc} alt={image.alt} />
+                            </Link>
+                        ) : (
+                            <img className="d-block w-100" src={imageSrc} alt={image.alt} />
+                        )}
+                        <Carousel.Caption className={`carousel-caption ${image.leftContainer || ""}${image.containerBottom || ""}  ${image.containerTop || ""}`}>
+                            <div className={`container-details-jumbo`}>
+                                <div className={`${image.xboxLogo || ""} ${image.bgLogo || ""} ${image.logoPLay || ""} ${image.nintendoLogo || ""}`}></div>
+                                <h4 className={image.blackText}>{image.title}</h4>
+                                <p className={image.blackText}>{image.text}</p>
+                                {image.link && (
                                     <Link to={image.link}>
-                                        <Button className={`${image.redButton || ""} ${image.animationButton || ""} ${image.greenBtn || ""} ${image.yellowBtn || ""}`}>{image.buttonText}</Button>
+                                        <Button className={`${image.redButton || ""} ${image.animationButton || ""} ${image.greenBtn || ""} ${image.yellowBtn || ""}`}>
+                                            {image.buttonText}
+                                        </Button>
                                     </Link>
-                                </>
-                            )}
-                        </div>
-                    </Carousel.Caption>
-                </Carousel.Item>
-            ))
-            }
-        </Carousel >
+                                )}
+                            </div>
+                        </Carousel.Caption>
+                    </Carousel.Item>
+                );
+            })}
+        </Carousel>
     );
 };
 
