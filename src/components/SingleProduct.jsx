@@ -34,13 +34,6 @@ export default function SingleProduct() {
         return <div>Caricamento prodotto...</div>;
     }
 
-    // Converti il prezzo in numero UNA VOLTA all'inizio
-    const priceNumber = data.price ? Number(data.price) : 0;
-    // Calcola il costo di spedizione (gratis se prezzo > 39.99)
-    const shippingCost = priceNumber > 39.99 ? 0 : 9.99;
-    // Calcola il prezzo totale (prezzo + tasse + spedizione)
-    const totalPrice = (priceNumber + 1.50 + shippingCost).toFixed(2);
-
     const getProductCategory = (product) => {
         return {
             // Determina se il prodotto è un gioco
@@ -118,7 +111,6 @@ export default function SingleProduct() {
                             <p className="card-text">
                                 <strong>Prezzo: {data.price} €</strong>
                             </p>
-                            <div className="total-price centered-price">Prezzo totale: {totalPrice} €</div>
                             {/* Mostra "Compatibile con" solo se non è console o accessorio */}
                             {!isConsole && !isAccessory && (
                                 <p>Compatibile con: {
@@ -140,11 +132,6 @@ export default function SingleProduct() {
                             )}
 
                             <p>Data di uscita: {new Date(data.release_date).toLocaleDateString('it-IT')}</p>
-                            <div className="centered-price">Costo spedizione: {shippingCost.toFixed(2)} €
-                                {shippingCost === 0 && " (gratis)"}
-                            </div>
-                            <div className="centered-price">Spedizione gratuita per ordini superiori a 40€</div>
-                            <div className="tax centered-price">Tasse % 1,50</div>
                             <div className={`centered-price ${data.stock < 1 ? "hidden" : "available"}`}>
                                 {data.stock < 1 ? "Non disponibile" : "Disponibile"}
                             </div>
