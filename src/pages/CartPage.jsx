@@ -31,6 +31,14 @@ const CartPage = () => {
         return cart.reduce((total, product) => total + product.price * product.quantity, 0).toFixed(2);
     };
 
+    // Calcola il costo di spedizione basato sul totale
+    const calculateShippingCost = () => {
+        const total = parseFloat(calculateTotal());
+        return total > 39.99 ? 0 : 9.99;
+    };
+
+    const shippingCost = calculateShippingCost();
+
     // Funzione per andare alla home
     const goToHome = () => {
         navigate('/');
@@ -89,6 +97,10 @@ const CartPage = () => {
                             <div className="cart-total">
                                 {/* Mostriamo il totale del carrello */}
                                 <h3>Totale: €{calculateTotal()}</h3>
+                                <div className="centered-price">Spedizione gratuita per ordini superiori a 40€</div>
+                                <div className="centered-price">Costo spedizione: {shippingCost.toFixed(2)} €
+                                    {shippingCost === 0 && " (gratis)"}
+                                </div>
                             </div>
 
                             <div className="cart-actions">
