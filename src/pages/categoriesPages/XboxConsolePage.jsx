@@ -3,7 +3,11 @@ import XboxConsoles from "../../components/PrincipalPageComponents/categoriesXbo
 export default function XboxConsolesPage() {
     return (
         <>
-            <XboxConsoles />
+            <div className="xbox-products-container">
+                <div className='xbox-products-container-2'>
+                    <XboxConsoles />
+                </div>
+            </div>
         </>
     )
 }

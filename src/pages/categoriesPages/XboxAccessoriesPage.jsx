@@ -3,7 +3,11 @@ import XboxAccessories from "../../components/PrincipalPageComponents/categories
 export default function XboxAccessoriesPage() {
     return (
         <>
-            <XboxAccessories />
+            <div className="xbox-products-container">
+                <div className='xbox-products-container-2'>
+                    <XboxAccessories />
+                </div>
+            </div>
         </>
     )
 }
