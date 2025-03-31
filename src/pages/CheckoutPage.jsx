@@ -71,24 +71,39 @@ const CheckoutForm = () => {
     const handlePayment = async (e) => {
         e.preventDefault();
         setLoading(true);
+        setPaymentStatus(null);
+        setPaymentMessage('');
 
+        // Verifica che tutti i campi del form siano compilati
+        for (const key in userDetails) {
+            if (!userDetails[key].trim()) {
+                setPaymentStatus('error');
+                setPaymentMessage('Tutti i campi del form devono essere compilati.');
+                setLoading(false);
+                return;
+            }
+        }
+
+
+        // Controlla se Stripe ed Elements sono stati inizializzati correttamente
         if (!stripe || !elements) {
             console.error('Stripe non è caricato');
             setLoading(false);
             return;
         }
 
+        // Conferma il pagamento con Stripe
         const { error, paymentIntent } = await stripe.confirmPayment({
-            elements,
+            elements,  // Elementi del modulo di pagamento di Stripe
             confirmParams: {
-                return_url: window.location.origin,
+                return_url: window.location.origin,  // URL a cui reindirizzare l'utente dopo il pagamento
             },
-            redirect: "if_required",
+            redirect: "if_required",  // Evita il reindirizzamento se non necessario
         });
 
-
-
         if (!error && paymentIntent?.status === "succeeded") {
+            console.log('✅ Pagamento riuscito');
+
             try {
                 // Invia la richiesta per inviare email dopo il pagamento
                 await axios.post('http://localhost:3000/api/payment/send-order-emails', {
@@ -121,8 +136,8 @@ const CheckoutForm = () => {
         } else {
             setPaymentStatus('error');
             setPaymentMessage('Si è verificato un errore nel pagamento. Riprova!');
-            setLoading(false);
         }
+        setLoading(false);
     };
 
     return (
