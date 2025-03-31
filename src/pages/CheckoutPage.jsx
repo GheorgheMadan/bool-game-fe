@@ -86,28 +86,41 @@ const CheckoutForm = () => {
             redirect: "if_required",
         });
 
+
+
         if (!error && paymentIntent?.status === "succeeded") {
+            try {
+                // Invia la richiesta per inviare email dopo il pagamento
+                await axios.post('http://localhost:3000/api/payment/send-order-emails', {
+                    userDetails,
+                    cartItems: cart,
+                    total: cart.reduce((sum, item) => sum + item.price * item.quantity, 0)
+                });
 
-            // Mostra il messaggio di successo
-            setPaymentStatus('success');
-            setPaymentMessage('Il pagamento è andato a buon fine!'); // Messaggio di successo
-            setFadeOut(false); // Azzera lo stato di sparizione
+                console.log('✅ Email inviate con successo');
 
-            // Svuota il carrello subito dopo il pagamento riuscito
-            clearCart();
+                // Mostra il messaggio di successo
+                setPaymentStatus('success');
+                setPaymentMessage('Il pagamento è andato a buon fine!');
+                setFadeOut(false);
 
-            // Attendi 2 secondi e poi reindirizza alla Homepage
-            setTimeout(() => {
-                setFadeOut(true);
+                // Svuota il carrello
+                clearCart();
+
+                // Attendi 2 secondi e poi reindirizza alla Homepage
                 setTimeout(() => {
-                    // Svuota il carrello subito dopo il pagamento riuscito
-                    clearCart();
-                    navigate('/');
-                }, 1000);
-            }, 2000);
+                    setFadeOut(true);
+                    setTimeout(() => {
+                        navigate('/');
+                    }, 1000);
+                }, 2000);
+            } catch (emailError) {
+                console.error('❌ Errore nell’invio delle email:', emailError);
+                setPaymentMessage('Pagamento riuscito, ma errore nell’invio delle email.');
+            }
         } else {
             setPaymentStatus('error');
-            setPaymentMessage('Si è verificato un errore nel pagamento. Riprova!'); // Messaggio di errore
+            setPaymentMessage('Si è verificato un errore nel pagamento. Riprova!');
             setLoading(false);
         }
     };
