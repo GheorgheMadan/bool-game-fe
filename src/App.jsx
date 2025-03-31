@@ -26,17 +26,17 @@ import SingleProduct from './components/SingleProduct';
 import SearchResultPage from './pages/SearchResultPage';
 
 // import categorie Playstation
-import PlaystationConsoles from './components/PrincipalPageComponents/categoriesPlaystation/PlaystationConsoles'
-import PlaystationGames from './components/PrincipalPageComponents/categoriesPlaystation/PlaystationGames'
-import PlaystationAccessories from './components/PrincipalPageComponents/categoriesPlaystation/PlaystationAccessories'
+import PlaystationAccessoriesPage from './pages/categoriesPages/PlaystationAccessoriesPage';
+import PlaystationConsolesPage from './pages/categoriesPages/PlaystationConsolesPage';
+import PlaystationGamesPage from './pages/categoriesPages/PlaystationGamesPage';
 // import categorie xbox 
-import XboxConsoles from './components/PrincipalPageComponents/categoriesXbox/XboxConsoles';
-import XboxAccessories from './components/PrincipalPageComponents/categoriesXbox/XboxAccessories';
-import XboxGames from './components/PrincipalPageComponents/categoriesXbox/XboxAccessories';
+import XboxAccessoriesPage from './pages/categoriesPages/XboxAccessoriesPage';
+import XboxConsolesPage from './pages/categoriesPages/XboxConsolePage';
+import XboxGamesPage from './pages/categoriesPages/XboxGamesPage';
 // import categorie nintendo
-import NintendoConsoles from './components/PrincipalPageComponents/categoriesNintendo/NintendoConsoles';
-import NintendoAccessories from './components/PrincipalPageComponents/categoriesNintendo/NintendoAccessories';
-import NintendoGames from './components/PrincipalPageComponents/categoriesNintendo/NintendoGames';
+import NintendoAccessoriesPage from './pages/categoriesPages/NintendoAccessoriesPage';
+import NintendoConsolesPage from './pages/categoriesPages/NintendoConsolesPage';
+import NintendoGamesPage from './pages/categoriesPages/NintendoGamesPage';
 
 // carica Stripe con la chiave pubblica
 const stripePromise = loadStripe('pk_test_51R4oHvPXYjIqouRcxeNvWgRuFnQ1vo8PlqPEzVS6mDT2ix4nlzdDPaqwSVD5oHDfiTx0xdfcL0IzUQTsy4IU1bvA0079IF49Us');
@@ -63,15 +63,18 @@ function App() {
                     <Route path='/search' element={<SearchResultPage />} />
                     <Route path='/cart' element={<CartPage />} />
                     <Route path='/products/:productId' element={<SingleProduct />} />
-                    <Route path='/playstation/consoles' element={<PlaystationConsoles />} />
-                    <Route path='/playstation/games' element={<PlaystationGames />} />
-                    <Route path='/playstation/accessories' element={<PlaystationAccessories />} />
-                    <Route path='/xbox/console' element={<XboxConsoles />} />
-                    <Route path='/xbox/games' element={<XboxGames />} />
-                    <Route path='/xbox/accessories' element={<XboxAccessories />} />
-                    <Route path='/nintendo/consoles' element={<NintendoConsoles />} />
-                    <Route path='/nintendo/games' element={<NintendoGames />} />
-                    <Route path='/nintendo/accessories' element={<NintendoAccessories />} />
+                    {/* ROTTE DELLE CATEGORIE PLAYSTATION  */}
+                    <Route path='/playstation/consoles' element={<PlaystationConsolesPage />} />
+                    <Route path='/playstation/games' element={<PlaystationGamesPage />} />
+                    <Route path='/playstation/accessories' element={<PlaystationAccessoriesPage />} />
+                    {/* ROTTE DELLE CATEGORIE XBOX */}
+                    <Route path='/xbox/console' element={<XboxConsolesPage />} />
+                    <Route path='/xbox/games' element={<XboxGamesPage />} />
+                    <Route path='/xbox/accessories' element={<XboxAccessoriesPage />} />
+                    {/* ROTTE DELLE CATEGORIRE NINTENDO */}
+                    <Route path='/nintendo/consoles' element={<NintendoConsolesPage />} />
+                    <Route path='/nintendo/games' element={<NintendoGamesPage />} />
+                    <Route path='/nintendo/accessories' element={<NintendoAccessoriesPage />} />
                   </Route>
                 </Routes>
               </Elements>

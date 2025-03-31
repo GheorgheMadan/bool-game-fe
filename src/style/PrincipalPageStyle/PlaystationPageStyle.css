@@ -1,3 +1,4 @@
+/* CONTAINER GENERALE PER LE CATEGORIE E LA PAGINA PRINICPALE PLAYSTATION */
 /* container per i prodotti */
 .playstation-products-container {
     padding: 2rem;
@@ -5,28 +6,21 @@
     background-size: 400% 400%;
     animation: backgroundAnimation 6s infinite alternate ease-in-out;
     background-image: url('../ps-bg.webp');
-    z-index: -3;
-}
-
-.container-ps-section-bg {
-    background-image: url('../ps-bg.webp');
-    background-size: 400% 400%;
-    animation: backgroundAnimation 6s infinite alternate ease-in-out;
 }
 
 .playstation-products-container-2 {
-    width: 80%;
+    width: 75%;
     margin: auto;
 
 }
+
+/* ---------------------------------------------------------------------- */
 
 .playstation-product-section {
     margin: 2rem 0;
     padding: 1rem;
     border-radius: 10px;
-    /* Angoli arrotondati per un look più morbido */
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-    /* Ombra morbida per dare profondità */
     backdrop-filter: blur(10px);
     background-size: cover;
     background-position: center;
