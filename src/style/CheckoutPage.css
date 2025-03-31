@@ -1,0 +1,83 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    
+    margin-top: 50px;
+    margin-bottom: 80px;
+  
+    position: relative;
+    width: 1000px;
+    height: auto;
+  
+    border-radius: 16px;
+    background-color: white;
+    
+    border: 2px solid #1B1B1B;
+    box-sizing: border-box;
+    box-shadow: 6px 6px 0px #1B1B1B;
+    border-radius: 8px;
+  }
+
+
+.enter_details i{
+    color: orange;
+    margin-bottom: 5px;
+  }
+
+
+  .personal_data {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Spazio tra gli elementi */
+    width: 100%;
+  }
+  
+
+  .personal_data label {
+    width: calc(50% - 10px); /* Due input per riga */
+    display: flex;
+    flex-direction: column;
+    font-weight: 600;
+  }
+  
+
+  textarea:focus, input:focus{
+    outline: none;
+    background: orange;
+    border: 3px solid #1B1B1B;
+    border-radius: 16px;
+  }
+
+
+  .pagamento {
+  background-color: orange;
+  border: 2px solid #1B1B1B;
+  box-sizing: border-box;
+  border-radius: 16px;
+  padding: 16px 32px 16px 16px;
+  text-align: center;
+  font-weight: 800;
+  margin-top: 10px;
+  margin-left: 630px;
+  width: 213px;
+  height: 50px;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  align-self: flex-end;
+  cursor: pointer;
+}
+
+
+.pagamento:hover {
+  background: #FFBB38;
+  box-shadow: 0px 0px 0px 4px #C1BFFA;
+}
+
+  
