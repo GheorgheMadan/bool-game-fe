@@ -10,7 +10,7 @@ const JumbotronCarousel = () => {
     const location = useLocation(); // Ottiene l'URL attuale
 
     // CREO UNO STATO CHE INDIVIDUERA' LA DIMENSIONE DELLO SCHERMO
-    const [isMobile, setIsMobile] = useState(window.innerWidth < 600);
+    const [isMobile, setIsMobile] = useState(window.innerWidth < 550);
 
     // Rileva il cambio di dimensione dello schermo
     useEffect(() => {
@@ -37,7 +37,9 @@ const JumbotronCarousel = () => {
                 buttonText: "Acquista ora",
                 buttonLink: "/xbox",
                 xboxLogo: "xbox-logo",
-                greenBtn: "greenBtn animationButton"
+                greenBtn: "greenBtn animationButton",
+                containerBottom: "containerBottom",
+                bgLogo: "bgLogo"
             },
             {
                 srcDesktop: "./jumbotronoImage/playstation_jumbotron/play_4_5.jpg",
@@ -50,7 +52,8 @@ const JumbotronCarousel = () => {
                 buttonLink: "/playstation",
                 animationButton: "animationButton",
                 blackText: "blackText",
-                logoPLay: "logoPlay"
+                logoPLay: "logoPlay",
+                containerTop: "containerTop"
             },
             {
                 srcDesktop: "./jumbotronoImage/ac_shadows_jumbo.jpg",
@@ -59,9 +62,10 @@ const JumbotronCarousel = () => {
                 link: "/products/11",
                 title: "Assassin's Creed Shadows",
                 text: "Un'avventura epica ti aspetta in Assassin's Creed Shadows, dove ogni decisione conta e la storia prende vita. Preparati a diventare un leggendario assassino.",
-                buttonText: "Gioca ora",
+                buttonText: "Acquista ora!",
                 buttonLink: "/products/11",
-                redButton: "redButton animationButton"
+                redButton: "redButton animationButton",
+                containerBottom: "containerBottom"
             },
             {
                 srcDesktop: "./jumbotronoImage/bleach_jumbo.jpg",
@@ -73,7 +77,7 @@ const JumbotronCarousel = () => {
                 buttonText: "Scopri ora",
                 buttonLink: "/products/13",
                 redButton: "redButton",
-                leftContainer: "leftContainer"
+                leftContainer: "leftContainer",
             },
             {
                 srcDesktop: "./jumbotronoImage/nintendo_jumbotron/nintendo_switch.jpg",
@@ -85,7 +89,8 @@ const JumbotronCarousel = () => {
                 buttonText: "Acquista ora",
                 buttonLink: "/products/129",
                 yellowBtn: "yellowBtn",
-                nintendoLogo: "nintendoLogo"
+                nintendoLogo: "nintendoLogo",
+                containerBottom: "containerBottom"
             },
             {
                 srcDesktop: "./jumbotronoImage/wwe_2k25_jumbo.jpg",
@@ -94,9 +99,10 @@ const JumbotronCarousel = () => {
                 link: "/products/14",
                 title: "WWE 2K25: Scopri la nuova edizione",
                 text: "Il ring è pronto, combatti ora! Scopri tutte le novità di WWE 2K25, il gioco che porta l'azione e i combattimenti a un nuovo livello.",
-                buttonText: "Gioca ora",
+                buttonText: "Acquista ora!",
                 buttonLink: "/products/14",
-                redButton: "redButton animationButton"
+                redButton: "redButton animationButton",
+                containerTop: "containerTop"
             }
         ],
         "/playstation": [

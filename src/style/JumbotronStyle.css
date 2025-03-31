@@ -108,7 +108,7 @@
 }
 
 /* VERSIONE MOBILE */
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 550px) {
     .container-details-jumbo p {
         display: inline;
     }
@@ -133,11 +133,6 @@
         height: 100%;
         padding-top: 14rem;
     }
-}
-
-/* VERSIONE TABLET */
-@media (max-width: 768px) {
-    /* Aggiungi eventuali regole per il tablet qui */
 }
 
 /* VERSIONE LAPTOP PICCOLO */
