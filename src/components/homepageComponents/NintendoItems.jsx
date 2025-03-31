@@ -36,7 +36,7 @@ export default function NintendoItems() {
     return (
         <section>
             <Link>
-                <h2 className="black-title title-h2">Scegli la tua Nintendo Switch Lite: Scopri le colorazioni disponibili!</h2>
+                <h2 className="black-title title-h2 nintendo-title">Scegli la tua Nintendo Switch Lite: Scopri le colorazioni disponibili!</h2>
             </Link>
             <div className="container-nintendo-items">
                 <div className="box-nintendo">
@@ -70,6 +70,7 @@ export default function NintendoItems() {
                             <img src={item1.image_url} alt={item1.name} className="img-nintendo" />
                         </Link>
                     </div>
+
                 </div>
                 <div className="box-nintendo">
                     <div>
