@@ -189,8 +189,7 @@ const JumbotronCarousel = () => {
                 buttonLink: "/xbox/consoles",
                 xboxLogo: "xbox-logo",
                 greenBtn: "greenBtn animationButton",
-                containerBottom: "containerBottom",
-                blackText: "blackText ",
+                containerTop: "containerTop",
                 bgLogo: "bgLogo"
             },
             {
