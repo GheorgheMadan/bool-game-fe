@@ -84,7 +84,6 @@ const CheckoutForm = () => {
             }
         }
 
-
         // Controlla se Stripe ed Elements sono stati inizializzati correttamente
         if (!stripe || !elements) {
             console.error('Stripe non è caricato');
@@ -104,6 +103,9 @@ const CheckoutForm = () => {
         if (!error && paymentIntent?.status === "succeeded") {
             console.log('✅ Pagamento riuscito');
 
+            // !Svuota il carrello
+            clearCart();
+
             try {
                 // Invia la richiesta per inviare email dopo il pagamento
                 await axios.post('http://localhost:3000/api/payment/send-order-emails', {
@@ -119,7 +121,7 @@ const CheckoutForm = () => {
                 setPaymentMessage('Il pagamento è andato a buon fine!');
                 setFadeOut(false);
 
-                // Svuota il carrello
+                // !Svuota il carrello
                 clearCart();
 
                 // Attendi 2 secondi e poi reindirizza alla Homepage
@@ -128,6 +130,7 @@ const CheckoutForm = () => {
                     setTimeout(() => {
                         navigate('/');
                     }, 1000);
+
                 }, 2000);
             } catch (emailError) {
                 console.error('❌ Errore nell’invio delle email:', emailError);
