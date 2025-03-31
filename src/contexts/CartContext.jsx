@@ -43,26 +43,41 @@ export const CartProvider = ({ children }) => {
 
     // Aggiungi prodotto al carrello
     const addToCart = async (product) => {
+        try {
+            // Recupera lo stock disponibile dal database
+            const response = await axios.get(`http://localhost:3000/api/products/${product.id}`);
+            const productStock = response.data.stock;
 
-        const existingProduct = cart.find(item => item.id === product.id);
-        if (existingProduct) {
-            // Se il prodotto esiste già, aumenta la quantità
-            setCart((prevCart) =>
-                prevCart.map(item =>
-                    item.id === product.id
-                        ? { ...item, quantity: item.quantity + 1 }
-                        : item
-                )
-            );
-            // Aggiorna lo stock nel database
-            await updateStockInDB(product.id, -1); // decremento dello stock
-        } else {
-            // Altrimenti aggiungi il prodotto al carrello
-            setCart((prevCart) => [...prevCart, { ...product, quantity: 1 }]);
-            // Aggiorna lo stock nel database
-            await updateStockInDB(product.id, -1); // decremento dello stock
+            const existingProduct = cart.find(item => item.id === product.id);
+
+            if (existingProduct) {
+                // Se il prodotto esiste già, controlla se è possibile aumentare la quantità
+                if (existingProduct.quantity < productStock) {
+                    setCart((prevCart) =>
+                        prevCart.map(item =>
+                            item.id === product.id
+                                ? { ...item, quantity: item.quantity + 1 }
+                                : item
+                        )
+                    );
+                    // Aggiorna lo stock nel database (decrementa)
+                    await updateStockInDB(product.id, -1);
+                } else {
+                    console.log("❌ Impossibile aggiungere altro prodotto: quantità massima raggiunta.");
+                }
+            } else {
+                // Se il prodotto non esiste nel carrello, aggiungilo solo se c'è disponibilità di stock
+                if (productStock > 0) {
+                    setCart((prevCart) => [...prevCart, { ...product, quantity: 1 }]);
+                    // Aggiorna lo stock nel database (decrementa)
+                    await updateStockInDB(product.id, -1);
+                } else {
+                    console.log("❌ Impossibile aggiungere il prodotto: stock esaurito.");
+                }
+            }
+        } catch (error) {
+            console.error("Errore durante il recupero dello stock:", error);
         }
-        // saveCartToLocalStorage(cart);
     };
 
     // Aumenta la quantità di un prodotto nel carrello
@@ -130,7 +145,7 @@ export const CartProvider = ({ children }) => {
     };
 
     return (
-        <CartContext.Provider value={{ cart, addToCart, increaseQuantity, decreaseQuantity, clearCart }}>
+        <CartContext.Provider value={{ cart, setCart, addToCart, increaseQuantity, decreaseQuantity, clearCart }}>
             {children}
         </CartContext.Provider>
     );

@@ -5,6 +5,7 @@ import { useState } from 'react';
 // import del GlobalContext e CartContext
 import { GlobalProvider } from './contexts/GlobalContext';
 import { CartProvider } from './contexts/CartContext';
+import { CheckoutProvider } from './contexts/CheckoutContext';
 import GlobalContextResults from './contexts/GlobalContextResult';
 
 // import di Stripe
@@ -49,36 +50,38 @@ function App() {
         {/* Avvolgo l'intera app con il GlobalProvider e CartProvider */}
         <GlobalProvider>
           <CartProvider>
-            <BrowserRouter>
-              <Elements stripe={stripePromise}>
-                <Routes>
-                  <Route element={<DefaultLayout />}>
-                    <Route index element={<HomePage />} />
-                    <Route path='/playstation' element={<PlaystationPage />} />
-                    <Route path='/xbox' element={<XboxPage />} />
-                    <Route path='/nintendo' element={<NintendoPage />} />
-                    <Route path='/checkout' element={<CheckoutPage stripePromise={stripePromise} />} />
-                  </Route>
-                  <Route element={<LayoutSearchCart />}>
-                    <Route path='/search' element={<SearchResultPage />} />
-                    <Route path='/cart' element={<CartPage />} />
-                    <Route path='/products/:productId' element={<SingleProduct />} />
-                    {/* ROTTE DELLE CATEGORIE PLAYSTATION  */}
-                    <Route path='/playstation/consoles' element={<PlaystationConsolesPage />} />
-                    <Route path='/playstation/games' element={<PlaystationGamesPage />} />
-                    <Route path='/playstation/accessories' element={<PlaystationAccessoriesPage />} />
-                    {/* ROTTE DELLE CATEGORIE XBOX */}
-                    <Route path='/xbox/console' element={<XboxConsolesPage />} />
-                    <Route path='/xbox/games' element={<XboxGamesPage />} />
-                    <Route path='/xbox/accessories' element={<XboxAccessoriesPage />} />
-                    {/* ROTTE DELLE CATEGORIRE NINTENDO */}
-                    <Route path='/nintendo/consoles' element={<NintendoConsolesPage />} />
-                    <Route path='/nintendo/games' element={<NintendoGamesPage />} />
-                    <Route path='/nintendo/accessories' element={<NintendoAccessoriesPage />} />
-                  </Route>
-                </Routes>
-              </Elements>
-            </BrowserRouter>
+            <CheckoutProvider>
+              <BrowserRouter>
+                <Elements stripe={stripePromise}>
+                  <Routes>
+                    <Route element={<DefaultLayout />}>
+                      <Route index element={<HomePage />} />
+                      <Route path='/playstation' element={<PlaystationPage />} />
+                      <Route path='/xbox' element={<XboxPage />} />
+                      <Route path='/nintendo' element={<NintendoPage />} />
+                      <Route path='/checkout' element={<CheckoutPage stripePromise={stripePromise} />} />
+                    </Route>
+                    <Route element={<LayoutSearchCart />}>
+                      <Route path='/search' element={<SearchResultPage />} />
+                      <Route path='/cart' element={<CartPage />} />
+                      <Route path='/products/:productId' element={<SingleProduct />} />
+                      {/* ROTTE DELLE CATEGORIE PLAYSTATION  */}
+                      <Route path='/playstation/consoles' element={<PlaystationConsolesPage />} />
+                      <Route path='/playstation/games' element={<PlaystationGamesPage />} />
+                      <Route path='/playstation/accessories' element={<PlaystationAccessoriesPage />} />
+                      {/* ROTTE DELLE CATEGORIE XBOX */}
+                      <Route path='/xbox/console' element={<XboxConsolesPage />} />
+                      <Route path='/xbox/games' element={<XboxGamesPage />} />
+                      <Route path='/xbox/accessories' element={<XboxAccessoriesPage />} />
+                      {/* ROTTE DELLE CATEGORIRE NINTENDO */}
+                      <Route path='/nintendo/consoles' element={<NintendoConsolesPage />} />
+                      <Route path='/nintendo/games' element={<NintendoGamesPage />} />
+                      <Route path='/nintendo/accessories' element={<NintendoAccessoriesPage />} />
+                    </Route>
+                  </Routes>
+                </Elements>
+              </BrowserRouter>
+            </CheckoutProvider>
           </CartProvider>
         </GlobalProvider>
       </GlobalContextResults.Provider>
