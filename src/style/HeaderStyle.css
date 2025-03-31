@@ -226,3 +226,46 @@ a.active {
 .container-search.open::after {
     animation: expandBorder 0.1s ease-in-out forwards;
 }
+
+.container-cart {
+    position: relative;
+    /* Permette di posizionare il contatore in modo assoluto rispetto a questo elemento */
+}
+
+
+.cart-count {
+    background: linear-gradient(135deg, #ff4d4d, #ff0000);
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 50%;
+    padding: 10px 8px;
+    position: absolute;
+    top: -9px;
+    right: -20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 18px;
+    height: 18px;
+    line-height: 1;
+    box-shadow: 0 0 8px rgba(255, 0, 0, 0.8);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 8px rgba(255, 0, 0, 0.8);
+    }
+
+    50% {
+        transform: scale(1.2);
+        box-shadow: 0 0 12px rgba(255, 0, 0, 1);
+    }
+
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 8px rgba(255, 0, 0, 0.8);
+    }
+}

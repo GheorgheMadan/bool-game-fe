@@ -58,7 +58,7 @@ export default function XboxGamesList() {
     return (
         <>
             <section>
-                <h2 className="title-h2">GIOCHI XBOX</h2>
+                <h2 className="title-h2 xbox-title">GIOCHI XBOX</h2>
                 <div className="container-trend">
                     <button onClick={nextSlide} className="next-btn">
                         <FontAwesomeIcon icon={faChevronRight} />

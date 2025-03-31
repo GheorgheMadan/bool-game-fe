@@ -36,7 +36,6 @@ export default function PlaystationConsoles() {
 
     return (
         <>
-            {/* Sezione per console */}
             <div className="playstation-product-section">
                 <h3>Console</h3>
                 <div className="playstation-product-list">
@@ -46,7 +45,7 @@ export default function PlaystationConsoles() {
                                 <img src={product.image_url} alt={product.name} />
                                 <h3>{product.name}</h3>
                             </Link>
-                            <span>${product.price}</span>
+                            <span>€{product.price}</span>
                         </div>
                     ))}
                 </div>

@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import '../../../style/PrincipalPageStyle/PlaystationPageStyle.css';
 
-
 export default function PlaystationAccessories() {
 
     const [sortedRange2, setSortedRange2] = useState([]);
@@ -39,8 +38,8 @@ export default function PlaystationAccessories() {
 
     return (
         <>
-            {/* Sezione per accessori */}
             < div className="playstation-product-section" >
+                {/* Sezione per accessori */}
                 <h3>Accessori</h3>
                 <div className="playstation-product-list">
                     {sortedRange2.map(product => (
@@ -49,11 +48,11 @@ export default function PlaystationAccessories() {
                                 <img src={product.image_url} alt={product.name} />
                                 <h3>{product.name}</h3>
                             </Link>
-                            <span>${product.price}</span>
+                            <span>€{product.price}</span>
                         </div>
                     ))}
                 </div>
-            </div >
+            </div>
         </>
     )
 }
