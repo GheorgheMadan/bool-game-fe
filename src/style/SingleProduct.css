@@ -12,10 +12,10 @@ a {
 }
 
 .image-try {
-    width: 400px;
-    height: 450px;
     margin-left: auto;
     margin-right: auto;
+    margin-bottom: 30px;
+    margin-top: 20px;
 }
 
 .card {
@@ -24,7 +24,7 @@ a {
 }
 
 .card-text {
-    font-size: 1em;
+    font-size: 2em;
     background-color: rgba(255, 166, 0, 0.697);
     padding: 5px;
     text-align: center;
@@ -32,7 +32,7 @@ a {
     text-align: center;
     margin-left: auto;
     margin-right: auto;
-    width: 300px;
+    margin-top: 20px;
 }
 
 .card-body-left {
@@ -61,17 +61,6 @@ a {
     text-shadow: 1px 1px 1px black;
 }
 
-.total-price {
-    width: 300px;
-    border: 1px solid black;
-    border-radius: 50px;
-    text-align: center;
-    background-color: black;
-    color: white;
-    padding: 5px;
-    margin-bottom: 2em;
-}
-
 .centered-price {
     display: block;
     margin-left: auto;
@@ -81,7 +70,6 @@ a {
 }
 
 .available {
-    width: 170px;
     text-align: center;
     color: rgb(56, 255, 30);
     background-color: rgba(3, 194, 3, 0.678);
@@ -89,7 +77,6 @@ a {
 }
 
 .not-available {
-    width: 185px;
     border-radius: 15px;
     text-align: center;
     background-color: red;
@@ -117,6 +104,8 @@ a {
     text-align: center;
     font-size: 35px;
     color: rgb(255, 230, 0);
+    margin-bottom: 2em;
+    text-shadow: 1px 1px 1px black;
 }
 
 .hidden {
@@ -129,7 +118,7 @@ a {
 }
 
 .sfondo {
-    background-image: url("/wallpaper-white-abstract.jpg");
+    background-image: url("/gold-and-white-background-free-vector.jpg");
     background-repeat: repeat;
     background-size: cover;
     width: 100%;
@@ -137,4 +126,43 @@ a {
 
 .single-product-container {
     padding: 2em;
+}
+
+body {
+    background-color: blue;
+}
+
+/* MEDIA QUERIES */
+/*MOBILE*/
+
+@media screen and (min-width: 576px) {
+
+    .card-body-right {
+        font-size: 16px;
+        padding: 3px;
+        text-align: center;
+        padding-top: 10%;
+    }
+
+    .card-text {
+        font-size: 1.5em;
+    }
+
+    .card-body-left {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+    }
+
+    .inline {
+        font-size: 15px
+    }
+
+}
+
+@media screen and (min-width: 576px) and (max-width: 720px) {
+    .card-text {
+        font-size: 1em;
+    }
 }
