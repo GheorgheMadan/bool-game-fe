@@ -284,6 +284,93 @@ a.active {
     }
 }
 
+@media (max-width: 950px) {
+
+    /* SEZIONE LOGO */
+    .logo a {
+        font-size: 18px;
+    }
+}
+
+/* TABLET VERSION */
+@media (max-width: 768px) {
+
+    header .container-nav {
+        width: 90%;
+    }
+
+    .burger-icon {
+        font-size: 30px;
+        margin-right: 10px;
+        display: inline;
+        cursor: pointer;
+    }
+
+    .container-icons .icon {
+        margin-top: 10px;
+    }
+
+
+    /* CONTAINER BURGER MENU */
+    .container-b-menu {
+        width: 50%;
+        background-color: white;
+        z-index: 1000000;
+        border: 1px solid rgb(185, 185, 185);
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        height: 100vh;
+        box-shadow: 5px 0 10px rgba(0, 0, 0, 0.1);
+        padding-left: 30px;
+        transform: translateX(-100%);
+        /* Partiamo fuori schermo */
+        transition: transform 0.5s ease-in-out;
+        /* Animazione della trasformazione */
+    }
+
+    /* Menu aperto */
+    .container-b-menu.open {
+        transform: translateX(0);
+        /* Rientra nel suo posto */
+    }
+
+    /* Menu chiuso */
+    .container-b-menu.close {
+        transform: translateX(-100%);
+        /* Esce di nuovo fuori dallo schermo */
+    }
+
+    .container-b-menu a {
+        border-bottom: 1px solid rgb(255, 255, 255);
+        border-radius: 2px;
+        text-decoration: none;
+        color: black;
+        font-size: 22px;
+    }
+
+    .container-b-menu span {
+        margin-left: 10px;
+    }
+
+    /* display none della sezione del header in modalità mobile */
+    .container-link {
+        display: none;
+    }
+
+    a.active {
+        color: rgb(94, 10, 173);
+    }
+
+    /* ATTIVAZIONE ANIMAZIONI */
+    .container-search>form {
+        width: 130px;
+    }
+}
+
+/* ------------------------------------------------------------------------- */
+
 /* ------------------------------------------------------------------------- */
 /* Ultra mobile (max 480px) */
 @media (max-width: 480px) {
@@ -369,89 +456,3 @@ a.active {
 }
 
 /* ------------------------------------------------------------------------- */
-/* TABLET VERSION */
-@media (max-width: 768px) {
-
-    header .container-nav {
-        width: 90%;
-    }
-
-    .burger-icon {
-        font-size: 30px;
-        margin-right: 10px;
-        display: inline;
-        cursor: pointer;
-    }
-
-    .container-icons .icon {
-        margin-top: 10px;
-    }
-
-
-    /* CONTAINER BURGER MENU */
-    .container-b-menu {
-        width: 50%;
-        background-color: white;
-        z-index: 1000000;
-        border: 1px solid rgb(185, 185, 185);
-        padding: 10px;
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        height: 100vh;
-        box-shadow: 5px 0 10px rgba(0, 0, 0, 0.1);
-        padding-left: 30px;
-        transform: translateX(-100%);
-        /* Partiamo fuori schermo */
-        transition: transform 0.5s ease-in-out;
-        /* Animazione della trasformazione */
-    }
-
-    /* Menu aperto */
-    .container-b-menu.open {
-        transform: translateX(0);
-        /* Rientra nel suo posto */
-    }
-
-    /* Menu chiuso */
-    .container-b-menu.close {
-        transform: translateX(-100%);
-        /* Esce di nuovo fuori dallo schermo */
-    }
-
-    .container-b-menu a {
-        border-bottom: 1px solid rgb(255, 255, 255);
-        border-radius: 2px;
-        text-decoration: none;
-        color: black;
-        font-size: 22px;
-    }
-
-    .container-b-menu span {
-        margin-left: 10px;
-    }
-
-    /* display none della sezione del header in modalità mobile */
-    .container-link {
-        display: none;
-    }
-
-    a.active {
-        color: rgb(94, 10, 173);
-    }
-
-    /* ATTIVAZIONE ANIMAZIONI */
-    .container-search>form {
-        width: 130px;
-    }
-}
-
-/* ------------------------------------------------------------------------- */
-
-@media (max-width: 950px) {
-
-    /* SEZIONE LOGO */
-    .logo a {
-        font-size: 18px;
-    }
-}

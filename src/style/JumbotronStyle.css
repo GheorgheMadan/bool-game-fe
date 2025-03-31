@@ -20,16 +20,20 @@
     width: 300px;
 }
 
+.container-details-jumbo button {
+    margin-top: -35px;
+}
+
 .container-details-jumbo h4 {
     margin-bottom: 15px;
     font-weight: 900;
 }
 
+.bgText,
 .bgLogo {
     background-color: rgba(255, 255, 255, 0.288);
     border-radius: 10px;
 }
-
 
 /* REGOLE LOGO NEL JUMBOTRON */
 .nintendoLogo,
@@ -107,21 +111,77 @@
     font-weight: 900;
 }
 
+/* VERSIONE LAPTOP PICCOLO */
+@media screen and (max-width: 1000px) {
+    .container-details-jumbo p {
+        display: none;
+    }
+
+    .container-details-jumbo h4 {
+        font-size: 16px;
+    }
+
+    .container-details-jumbo button {
+        margin-top: -40px;
+        font-size: 12px;
+    }
+
+}
+
+@media screen and (max-width: 831px) {
+
+    .container-details-jumbo h4 {
+        font-size: 13px;
+    }
+
+    .container-details-jumbo .logoPlay,
+    .xbox-logo {
+        width: 100px;
+    }
+
+    .container-details-jumbo .bgLogo {
+        padding: 0px;
+    }
+
+    .container-details-jumbo button {
+        font-size: 12px;
+    }
+
+    .leftContainer {
+        margin-right: 0;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .container-details-jumbo p {
+        display: none;
+    }
+}
+
 /* VERSIONE MOBILE */
 @media screen and (max-width: 550px) {
     .container-details-jumbo p {
         display: inline;
+        font-size: 14px;
+        line-height: -30px;
+    }
+
+    .container-details-jumbo button {
+        margin-top: 8px;
+        font-size: 12px;
     }
 
     .containerTop {
         padding-bottom: 14rem;
         justify-content: center;
+        margin-right: 0;
     }
 
     .containerBottom {
         align-items: baseline;
         padding-top: 14rem;
         justify-content: center;
+        margin-right: 0;
     }
 
     .leftContainer {
@@ -132,12 +192,6 @@
         justify-content: center;
         height: 100%;
         padding-top: 14rem;
-    }
-}
-
-/* VERSIONE LAPTOP PICCOLO */
-@media screen and (max-width: 1000px) {
-    .container-details-jumbo p {
-        display: none;
+        margin-right: 0;
     }
 }

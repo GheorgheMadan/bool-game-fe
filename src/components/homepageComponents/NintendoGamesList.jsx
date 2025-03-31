@@ -81,6 +81,57 @@ export default function NintendoGamesList() {
                                 </>
                             ))}
                     </div>
+                    <div className="container-trend-cards-laptop">
+                        {/* Estrae una porzione dell'array games, che va dall'indice index a index + 5. Quindi, ci saranno solo 5 giochi alla volta. */}
+                        {filteredGames
+                            .slice(index, index + 4)
+                            .map((game) => (
+                                <>
+                                    <div key={game.id} className="container-img">
+                                        <Link to={`/products/${game.id}`}>
+                                            <img className="img-gioco "
+                                                src={game.image_url}
+                                                alt={game.name}
+                                            />
+                                        </Link>
+                                    </div>
+                                </>
+                            ))}
+                    </div>
+                    <div className="container-trend-cards-tablet">
+                        {/* Estrae una porzione dell'array games, che va dall'indice index a index + 5. Quindi, ci saranno solo 5 giochi alla volta. */}
+                        {filteredGames
+                            .slice(index, index + 2)
+                            .map((game) => (
+                                <>
+                                    <div key={game.id} className="container-img">
+                                        <Link to={`/products/${game.id}`}>
+                                            <img className="img-gioco "
+                                                src={game.image_url}
+                                                alt={game.name}
+                                            />
+                                        </Link>
+                                    </div>
+                                </>
+                            ))}
+                    </div>
+                    <div className="container-trend-cards-mobile">
+                        {/* Estrae una porzione dell'array games, che va dall'indice index a index + 5. Quindi, ci saranno solo 5 giochi alla volta. */}
+                        {filteredGames
+                            .slice(index, index + 1)
+                            .map((game) => (
+                                <>
+                                    <div key={game.id} className="container-img">
+                                        <Link to={`/products/${game.id}`}>
+                                            <img className="img-gioco "
+                                                src={game.image_url}
+                                                alt={game.name}
+                                            />
+                                        </Link>
+                                    </div>
+                                </>
+                            ))}
+                    </div>
                     <button onClick={prevSlide} className="prev-btn">
                         <FontAwesomeIcon icon={faChevronLeft} />
                     </button>

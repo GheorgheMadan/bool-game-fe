@@ -49,8 +49,7 @@ export default function PlaystationGames() {
             {/* Sezione per giochi */}
             < div className="playstation-product-section" >
                 <h3>Giochi</h3>
-                <label for="filter-game-genre">Filtra per:</label>
-                <select name="game_genre" id="game-genre" onChange={handleGenreChange}>
+                <select name="game_genre" id="game-genre" onChange={handleGenreChange} className='select-filter-genre'>
                     <option value="">Scegli un opzione</option>
                     <option value="First-Person Shooter">First-Person Shooter</option>
                     <option value="Action-Adventure">Action-Adventure</option>
