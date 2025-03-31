@@ -3,7 +3,11 @@ import NintendoAccessories from "../../components/PrincipalPageComponents/catego
 export default function NintendoAccessoriesPage() {
     return (
         <>
-            <NintendoAccessories />
+            <div className="nintendo-products-container">
+                <div className='nintendo-products-container-2'>
+                    <NintendoAccessories />
+                </div>
+            </div>
         </>
     )
 }

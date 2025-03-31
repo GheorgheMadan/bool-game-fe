@@ -3,7 +3,11 @@ import NintendoGames from "../../components/PrincipalPageComponents/categoriesNi
 export default function NintendoGamesPage() {
     return (
         <>
-            <NintendoGames />
+            <div className="nintendo-products-container">
+                <div className='nintendo-products-container-2'>
+                    <NintendoGames />
+                </div>
+            </div>
         </>
     )
 }
