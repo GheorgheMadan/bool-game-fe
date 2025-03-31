@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useCart } from '../contexts/CartContext';
+import { useCheckout } from '../contexts/CheckoutContext';
 import axios from 'axios';
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements, PaymentElement, useStripe, useElements } from '@stripe/react-stripe-js';
@@ -10,10 +11,12 @@ import '../style/Checkout.css'
 const stripePromise = loadStripe("pk_test_51R4oHoBsHKjTjOb27pKcmH1YbaCbCgSSrIWcwXGnYGMnBiGhcO1zJFfurj9MEEjKGmTYO6EK8AHnrEd4j7yhFfYw00KFdjDfmf");
 
 const CheckoutForm = () => {
-    const { cart, clearCart } = useCart(); // Accesso al carrello dal contesto
+    const { clearCartAfterPayment } = useCheckout();
+    const { cart } = useCart(); // Accesso al carrello dal contesto
     const [loading, setLoading] = useState(false);
     const [total, setTotal] = useState(0);
     const [clientSecret, setClientSecret] = useState(null);
+    const [shippingCost, setShippingCost] = useState(0);
 
     // Stato per i dettagli dell'utente
     const [userDetails, setUserDetails] = useState({
@@ -35,9 +38,13 @@ const CheckoutForm = () => {
     const elements = useElements();
     const navigate = useNavigate();
 
-    // Calcola il totale del carrello
+    // Funzione per calcolare il totale dell'ordine
     useEffect(() => {
-        setTotal(cart.reduce((total, product) => total + product.price * product.quantity, 0).toFixed(2));
+        const totalAmount = cart.reduce((total, product) => total + product.price * product.quantity, 0);
+        setTotal(totalAmount.toFixed(2));
+        // Calcola il costo della spedizione
+        const shipping = totalAmount > 40 ? 0 : 5.99; // Spedizione gratuita per ordini superiori a 40€
+        setShippingCost(shipping.toFixed(2));
     }, [cart]);
 
     // Ottiene il clientSecret per Stripe al caricamento del carrello
@@ -103,8 +110,7 @@ const CheckoutForm = () => {
         if (!error && paymentIntent?.status === "succeeded") {
             console.log('✅ Pagamento riuscito');
 
-            // !Svuota il carrello
-            clearCart();
+            console.log('✅ Stock aggiornato con successo');
 
             try {
                 // Invia la richiesta per inviare email dopo il pagamento
@@ -121,8 +127,9 @@ const CheckoutForm = () => {
                 setPaymentMessage('Il pagamento è andato a buon fine!');
                 setFadeOut(false);
 
-                // !Svuota il carrello
-                clearCart();
+                // Svuota il carrello e calcola la differenza dello stock del db e la aggiorna
+                clearCartAfterPayment();
+                console.log("Carrello svuotato");
 
                 // Attendi 2 secondi e poi reindirizza alla Homepage
                 setTimeout(() => {
@@ -147,6 +154,10 @@ const CheckoutForm = () => {
         <div>
             <h1>Checkout</h1>
             <h3>Totale: €{total}</h3>
+            <div className="centered-price">Spedizione gratuita per ordini superiori a 40€</div>
+            <div className="centered-price">
+                Costo spedizione: €{shippingCost} {shippingCost === "0.00" && "(gratis)"}
+            </div>
             <form>
                 {/* Campi per i dettagli dell'utente */}
                 <input type="text" name="firstName" value={userDetails.firstName} onChange={handleInputChange} placeholder="Nome" required />
