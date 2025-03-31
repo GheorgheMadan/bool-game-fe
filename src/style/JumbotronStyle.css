@@ -27,6 +27,7 @@
 
 .bgLogo {
     background-color: rgba(255, 255, 255, 0.288);
+    border-radius: 10px;
 }
 
 
@@ -103,16 +104,45 @@
 
 .blackText {
     color: black;
+    font-weight: 900;
 }
 
-
-@media screen and (max-width: 1000px) {
-
+/* VERSIONE MOBILE */
+@media screen and (max-width: 600px) {
     .container-details-jumbo p {
-        display: none;
+        display: inline;
     }
 
-    .container-details-jumbo h4 {
-        font-size: 20px;
+    .containerTop {
+        padding-bottom: 14rem;
+        justify-content: center;
+    }
+
+    .containerBottom {
+        align-items: baseline;
+        padding-top: 14rem;
+        justify-content: center;
+    }
+
+    .leftContainer {
+        height: 100%;
+        text-align: center;
+        display: flex;
+        margin-top: 50px;
+        justify-content: center;
+        height: 100%;
+        padding-top: 14rem;
+    }
+}
+
+/* VERSIONE TABLET */
+@media (max-width: 768px) {
+    /* Aggiungi eventuali regole per il tablet qui */
+}
+
+/* VERSIONE LAPTOP PICCOLO */
+@media screen and (max-width: 1000px) {
+    .container-details-jumbo p {
+        display: none;
     }
 }
