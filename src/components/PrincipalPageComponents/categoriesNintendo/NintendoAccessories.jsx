@@ -48,7 +48,7 @@ export default function NintendoAccessories() {
                                 <img src={product.image_url} alt={product.name} />
                                 <h3>{product.name}</h3>
                             </Link>
-                            <span>${product.price}</span>
+                            <span>€{product.price}</span>
                         </div>
                     ))}
                 </div>

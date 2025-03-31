@@ -81,13 +81,13 @@ export default function NintendoGames() {
                     <option value="Shooter">Shooter</option>
                 </select>
                 <div className="nintendo-product-list">
-                    {filteredGames.map(product => (
+                    {filteredGames.length === 0 ? <h3>Nessun gioco trovato</h3> : filteredGames.map(product => (
                         <div key={product.id} className="nintendo-product-card">
                             <Link to={`/products/${product.id}`} className='nintendo-product-link'>
                                 <img src={product.image_url} alt={product.name} />
                                 <h3>{product.name}</h3>
                             </Link>
-                            <span>${product.price}</span>
+                            <span>€{product.price}</span>
                         </div>
                     ))}
                 </div>
