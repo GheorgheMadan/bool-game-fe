@@ -52,7 +52,7 @@ export default function NintendoGames() {
             {/* Sezione per giochi */}
             <div className="nintendo-product-section">
                 <h3>Giochi</h3>
-                <label for="filter-game-genre">Filtra per:</label>
+                <label className="nintendo-product-genre" for="filter-game-genre">Filtra per:</label>
                 <select name="game_genre" id="game-genre" onChange={handleGenreChange}>
                     <option value="">Scegli un opzione</option>
                     <option value="First-Person Shooter">First-Person Shooter</option>

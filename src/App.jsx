@@ -25,6 +25,7 @@ import CartPage from './pages/CartPage'
 import CheckoutPage from './pages/CheckoutPage'
 import SingleProduct from './components/SingleProduct';
 import SearchResultPage from './pages/SearchResultPage';
+import NotFoundPage from "./pages/NotFoundPage";
 
 // import categorie Playstation
 import PlaystationAccessoriesPage from './pages/categoriesPages/PlaystationAccessoriesPage';
@@ -60,6 +61,7 @@ function App() {
                       <Route path='/xbox' element={<XboxPage />} />
                       <Route path='/nintendo' element={<NintendoPage />} />
                       <Route path='/checkout' element={<CheckoutPage stripePromise={stripePromise} />} />
+                      <Route path="*" element={<NotFoundPage />} />
                     </Route>
                     <Route element={<LayoutSearchCart />}>
                       <Route path='/search' element={<SearchResultPage />} />
