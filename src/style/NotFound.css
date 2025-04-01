@@ -1,0 +1,94 @@
+/* Importa un font in stile retrò ispirato ai videogiochi */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+/* Contenitore principale della pagina 404 */
+.not-found-container {
+    text-align: center;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Press Start 2P', cursive;
+    color: #fff;
+    background: linear-gradient(45deg, #ff6b6b, #ffcc5c, #ffeead, #4ecdc4, #556270);
+    background-size: 300% 300%;
+    animation: gradientBG 6s ease infinite;
+}
+
+/* Animazione dello sfondo */
+@keyframes gradientBG {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Effetto glitch migliorato */
+.glitch {
+    font-size: 5rem;
+    position: relative;
+    display: inline-block;
+    color: #ff004f;
+    text-shadow: 4px 4px 0px #00eaff, -4px -4px 0px #ff00ff;
+    animation: glitch 0.5s infinite alternate;
+}
+
+/* Animazione effetto glitch */
+@keyframes glitch {
+    0% {
+        text-shadow: 4px 4px 0px #00eaff, -4px -4px 0px #ff00ff;
+    }
+
+    100% {
+        text-shadow: -4px -4px 0px #00eaff, 4px 4px 0px #ff00ff;
+    }
+}
+
+/* Testo e messaggi */
+.error-message {
+    font-size: 1.5rem;
+    margin-top: 20px;
+    text-shadow: 2px 2px #ff004f;
+}
+
+/* Testo di suggerimento */
+.hint-text {
+    font-size: 1rem;
+    margin-top: 10px;
+}
+
+/* Pulsante arcade */
+.arcade-button {
+    margin-top: 30px;
+    display: inline-block;
+    padding: 15px 25px;
+    font-size: 1.2rem;
+    background-color: #ff004f;
+    color: white;
+    text-decoration: none;
+    border-radius: 10px;
+    box-shadow: 0px 5px 0px #90002f;
+    transition: all 0.2s;
+    text-shadow: 2px 2px #000;
+}
+
+/* Effetto quando il pulsante viene hoverato */
+.arcade-button:hover {
+    background-color: #d4003f;
+    box-shadow: 0px 3px 0px #90002f;
+    transform: translateY(2px);
+}
+
+/* Effetto quando il pulsante viene premuto */
+.arcade-button:active {
+    box-shadow: 0px 0px 0px #90002f;
+    transform: translateY(5px);
+}

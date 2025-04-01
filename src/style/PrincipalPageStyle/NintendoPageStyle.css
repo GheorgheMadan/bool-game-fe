@@ -70,7 +70,8 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 1rem;
+    gap: 1.5rem;
+    margin-top: 2vw;
 }
 
 .nintendo-product-card {
@@ -171,115 +172,75 @@
 
 }
 
-.select-filter-genre {
-    width: 100%;
-    max-width: 250px;
-    /* Regola la larghezza massima */
-    padding: 8px 12px;
-    font-size: 16px;
+.nintendo-product-genre {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #fff;
+    /* Colore del testo bianco */
+    margin-bottom: 0.5rem;
+    /* Distanza inferiore per separare dal select */
+    display: block;
+    /* Assicurati che il label occupi una linea intera */
+    text-transform: uppercase;
+    /* Trasforma il testo in maiuscolo */
+    letter-spacing: 1px;
+    /* Aumenta la distanza tra le lettere */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    /* Ombra del testo */
+}
+
+#game-genre {
+    background-color: rgba(255, 255, 255, 0.6);
+    /* Bianco semi-trasparente */
+    border: 2px solid #ddd;
+    /* Bordo iniziale */
+    border-radius: 5px;
+    /* Angoli arrotondati */
+    padding: 0.5rem;
+    /* Padding per un po' di spazio interno */
+    font-size: 1rem;
+    /* Impostazione dimensione del testo */
     color: #333;
-    background-color: #fff;
-    border-radius: 20px;
+    /* Colore del testo */
     outline: none;
-    transition: border-color 0.3s ease-in-out;
-    cursor: pointer;
-    margin-bottom: 25px;
-
+    /* Rimuovi il bordo del focus predefinito */
+    position: relative;
+    /* Necessario per il bordo animato */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    /* Transizione morbida */
 }
 
-@media screen and (max-width: 1000px) {
-
-    /* container per i prodotti */
-    .nintendo-products-container {
-        padding: 2rem;
-    }
-
-    .nintendo-products-container-2 {
-        width: 85%;
-    }
-
-    .nintendo-h2 {
-        font-size: 30px;
-        margin-bottom: 25px;
-        padding-bottom: 10px;
-    }
-
-    .nintendo-product-section {
-        margin: 0rem 1rem;
-        padding: 1rem;
-    }
-
-    .nintendo-product-list {
-        gap: 0.5rem;
-    }
+/* Effetto dinamico al passaggio del mouse */
+#game-genre:hover {
+    border-color: #e91e63;
+    /* Cambia il colore del bordo quando il mouse passa sopra */
 }
 
-@media screen and (max-width: 768px) {
-
-    /* container per i prodotti */
-    .nintendo-products-container {
-        padding: 1rem 0rem;
+/* Animazione dinamica per il bordo */
+@keyframes borderAnimation {
+    0% {
+        border-color: #ddd;
+        /* Bordo iniziale */
     }
 
-    .nintendo-products-container-2 {
-        width: 90%;
-        margin: auto;
+    50% {
+        border-color: #00bcd4;
+        /* Bordo blu chiaro a metà animazione */
     }
 
-    .nintendo-h2 {
-        font-size: 25px;
-        margin-bottom: 25px;
-        padding-bottom: 10px;
-    }
-
-    .nintendo-product-section {
-        margin: 0rem 0;
-        padding: 1rem;
-        /* Ombra morbida per dare profondità */
-        backdrop-filter: blur(10px);
-    }
-
-    .nintendo-product-list {
-        gap: 0.5rem;
+    100% {
+        border-color: #e91e63;
+        /* Bordo rosa alla fine dell'animazione */
     }
 }
 
-@media screen and (max-width: 768px) {
+/* Applicare l'animazione  */
+#game-genre {
+    animation: borderAnimation 1s ease-in-out infinite;
+}
 
-    /* container per i prodotti */
-    .nintendo-products-container {
-        padding: 1rem 0rem;
-    }
-
-    .nintendo-products-container-2 {
-        width: 95%;
-        margin: auto;
-    }
-
-    .nintendo-h2 {
-        font-size: 25px;
-        margin-bottom: 25px;
-        padding-bottom: 10px;
-    }
-
-    .nintendo-product-section {
-        margin: 0rem 0;
-        padding: 1rem;
-        /* Ombra morbida per dare profondità */
-        backdrop-filter: blur(10px);
-    }
-
-    .nintendo-product-list {
-        gap: 1rem;
-    }
-
-    .nintendo-product-card {
-        height: 450px;
-        /* Aumento l'altezza per maggiore spazio */
-        width: 350px;
-    }
-
-    .nintendo-product-link h3 {
-        font-size: 20px;
-    }
+/* Aggiungere un'ombra al focus per un effetto di profondità */
+#game-genre:focus {
+    box-shadow: 0 0 10px rgba(233, 30, 99, 0.5);
+    /* Ombra dinamica quando è in focus */
 }

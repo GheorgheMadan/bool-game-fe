@@ -75,6 +75,7 @@
     flex-wrap: wrap;
     justify-content: center;
     gap: 1.5rem;
+    margin-top: 2vw;
 }
 
 .playstation-product-card {
@@ -174,69 +175,19 @@
     height: 100%;
 }
 
-@media screen and (max-width: 1000px) {
-
-    /* container per i prodotti */
-    .playstation-products-container {
-        padding: 2rem;
-    }
-
-    .playstation-products-container-2 {
-        width: 85%;
-    }
-
-    .playstation-h2 {
-        font-size: 30px;
-        margin-bottom: 25px;
-        padding-bottom: 10px;
-    }
-
-    .playstation-product-section {
-        margin: 0rem 1rem;
-        padding: 1rem;
-    }
-
-    .playstation-product-list {
-        gap: 0.5rem;
-    }
-}
-
-@media screen and (max-width: 768px) {
-
-    /* container per i prodotti */
-    .playstation-products-container {
-        padding: 1rem 0rem;
-    }
-
-    .playstation-products-container-2 {
-        width: 95%;
-        margin: auto;
-    }
-
-    .playstation-h2 {
-        font-size: 25px;
-        margin-bottom: 25px;
-        padding-bottom: 10px;
-    }
-
-    .playstation-product-section {
-        margin: 0rem 0;
-        padding: 1rem;
-        /* Ombra morbida per dare profondità */
-        backdrop-filter: blur(10px);
-    }
-
-    .playstation-product-list {
-        gap: 1rem;
-    }
-
-    .playstation-product-card {
-        height: 450px;
-        /* Aumento l'altezza per maggiore spazio */
-        width: 350px;
-    }
-
-    .playstation-product-link h3 {
-        font-size: 20px;
-    }
+.playstation-product-genre {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #fff;
+    /* Colore del testo bianco */
+    margin-bottom: 0.5rem;
+    /* Distanza inferiore per separare dal select */
+    display: block;
+    /* Assicurati che il label occupi una linea intera */
+    text-transform: uppercase;
+    /* Trasforma il testo in maiuscolo */
+    letter-spacing: 1px;
+    /* Aumenta la distanza tra le lettere */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    /* Ombra del testo */
 }
