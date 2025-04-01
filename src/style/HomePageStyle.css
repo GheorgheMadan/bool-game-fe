@@ -77,10 +77,6 @@ a {
     box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.4);
 }
 
-.container-navigator-icons.homepage {
-    background: linear-gradient(135deg, #111, #223344);
-}
-
 .container-navigator-icons:hover {
     animation: expandBackground 0.5s forwards;
     box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.6);
