@@ -189,8 +189,6 @@ const CheckoutForm = () => {
 
       {/* Campi per i dettagli dell'utente */}
       <form>
-
-
         <div className="personal_data">
           <div className="input_group">
             <label for="name">Nome</label>
@@ -291,7 +289,7 @@ const CheckoutForm = () => {
       </form>
       {/* BUTTON PAGAMENTO */}
       {clientSecret && (
-        <form onSubmit={handlePayment}>
+        <form onSubmit={handlePayment} className="stripe-form">
           <PaymentElement />
           <button
             className="pagamento"
