@@ -306,7 +306,7 @@ const CheckoutForm = () => {
             type="submit"
             disabled={loading || !stripe || !elements}
           >
-            {loading ? "Caricamento..." : "Paga"}
+            {loading ? "Caricamento..." : "Acquista ora"}
           </button>
         </form>
       )}

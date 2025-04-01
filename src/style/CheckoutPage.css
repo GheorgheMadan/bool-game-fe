@@ -2,16 +2,16 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding-left: 50px;
-  padding-right: 50px;
-  padding-top: 30px;
-  padding-bottom: 30px;
+  padding-left: 3vw;
+  padding-right: 3vw;
+  padding-top: 3vw;
+  padding-bottom: 3vw;
 
   margin-top: 50px;
   margin-bottom: 80px;
 
   position: relative;
-  width: 1000px;
+  width: 80vw;
   height: auto;
 
   border-radius: 16px;
@@ -32,19 +32,19 @@
 }
 
 
-.checkout h1{
+.checkout h1 {
   font-weight: 800;
   border-bottom: 3px solid rgb(194, 105, 3);
-  
+
 }
 
 
-.total_price h3{
+.total_price h3 {
   font-weight: 1000;
 }
 
 
-.fa-coins{
+.fa-coins {
   font-size: 17px;
   color: rgb(194, 105, 3);
 }
@@ -79,7 +79,7 @@
   font-weight: 600;
 }
 
-.personal_data input{
+.personal_data input {
   padding-left: 5px;
 }
 
@@ -103,7 +103,7 @@ input:focus {
   font-weight: 800;
   margin-top: 10px;
   margin-left: 800px;
-  width: 100px;
+  width: 150px;
   height: 50px;
   display: flex;
   justify-content: end;
