@@ -44,6 +44,13 @@ export default function SingleProduct() {
     };
     const { isConsole, isGame, isAccessory } = getProductCategory(data);
 
+    const pegiImages = {
+        3: "/pegi/PEGI_3.png",
+        7: "/pegi/PEGI_7.png",
+        12: "/pegi/PEGI_12.png",
+        16: "/pegi/PEGI_16.png",
+        18: "/pegi/PEGI_18.png"
+    };
 
     return (
         <>
@@ -60,21 +67,12 @@ export default function SingleProduct() {
                         {/* Sezione per giochi */}
                         {isGame && (
                             <>
-                                <p className="inline"> PEGI:
-                                    {data.pegi_rating === 3 ? (
-                                        <img className="pegi-image" src="/pegi/PEGI_3.png" alt="PEGI 3" />
-                                    ) : data.pegi_rating === 7 ? (
-                                        <img className="pegi-image" src="/pegi/PEGI_7.png" alt="PEGI 7" />
-                                    ) : data.pegi_rating === 12 ? (
-                                        <img className="pegi-image" src="/pegi/PEGI_12.png" alt="PEGI 12" />
-                                    ) : data.pegi_rating === 16 ? (
-                                        <img className="pegi-image" src="/pegi/PEGI_16.png" alt="PEGI 16" />
-                                    ) : data.pegi_rating === 18 ? (
-                                        <img className="pegi-image" src="/pegi/PEGI_18.png" alt="PEGI 18" />
-                                    ) : (
-                                        data.pegi_rating
-                                    )}
+                                <p className="inline">
+                                    PEGI: {pegiImages[data.pegi_rating] ? (
+                                        <img className="pegi-image" src={pegiImages[data.pegi_rating]} alt={`PEGI ${data.pegi_rating}`} />
+                                    ) : data.pegi_rating}
                                 </p>
+
                                 <p className="inline">Online: {data.online_mode === 1 ? (
                                     <img className="pegi-image" src="/pegi/online.png" alt="online" />
                                 ) : data.online_mode === 0 ? (

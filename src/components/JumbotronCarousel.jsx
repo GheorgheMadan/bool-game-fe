@@ -15,7 +15,7 @@ const JumbotronCarousel = () => {
     // Rileva il cambio di dimensione dello schermo
     useEffect(() => {
         const handleResize = () => {
-            setIsMobile(window.innerWidth < 480);
+            setIsMobile(window.innerWidth < 550);
         };
 
         window.addEventListener("resize", handleResize);
@@ -190,7 +190,6 @@ const JumbotronCarousel = () => {
                 xboxLogo: "xbox-logo",
                 greenBtn: "greenBtn animationButton",
                 containerTop: "containerTop",
-                bgLogo: "bgLogo"
             },
             {
                 srcDesktop: "./jumbotronoImage/xbox_jumbotron/xbox.jpg",
@@ -245,7 +244,8 @@ const JumbotronCarousel = () => {
                 buttonLink: "/nintendo-games",
                 yellowBtn: "yellowBtn",
                 nintendoLogo: "nintendoLogo",
-                containerBottom: "containerBottom blackText"
+                containerBottom: "containerBottom blackText",
+                bgText: "bgText"
             },
             {
                 srcDesktop: "./jumbotronoImage/nintendo_jumbotron/xenoblade_chronicles_game.jpg",
@@ -284,7 +284,7 @@ const JumbotronCarousel = () => {
                             <div className={`container-details-jumbo`}>
                                 <div className={`${image.xboxLogo || ""} ${image.bgLogo || ""} ${image.logoPLay || ""} ${image.nintendoLogo || ""}`}></div>
                                 <h4 className={image.blackText}>{image.title}</h4>
-                                <p className={image.blackText}>{image.text}</p>
+                                <p className={`${image.blackText || ""} ${image.bgText || ""}`}>{image.text}</p><br />
                                 {image.link && (
                                     <Link to={image.link}>
                                         <Button className={`${image.redButton || ""} ${image.animationButton || ""} ${image.greenBtn || ""} ${image.yellowBtn || ""}`}>
