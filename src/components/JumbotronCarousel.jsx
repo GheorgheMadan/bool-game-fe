@@ -224,7 +224,7 @@ const JumbotronCarousel = () => {
                 srcDesktop: "./jumbotronoImage/nintendo_jumbotron/nintendo_donkey_kong_Country_Returns.jpg",
                 srcMobile: "./jumbotronoImage/nintendo_jumbotron/nintendo_donkey_kong_Country_Returns_mobile.jpg",
                 alt: "Donkey Kong",
-                link: "/donkey-kong",  // aggiunto link
+                link: "products/16",  // aggiunto link
                 title: "Donkey Kong Country Returns",
                 text: "Un ritorno all'avventura per tutti. Scopri le meraviglie di Donkey Kong Country in un viaggio che ti lascerà senza fiato.",
                 buttonText: "Gioca ora",
@@ -237,7 +237,7 @@ const JumbotronCarousel = () => {
                 srcDesktop: "./jumbotronoImage/nintendo_jumbotron/nintendo_games.jpg",
                 srcMobile: "./jumbotronoImage/nintendo_jumbotron/nintendo_games_mobile.jpg",
                 alt: "Nintendo Games",
-                link: "/nintendo-games",  // aggiunto link
+                link: "/nintendo/games",  // aggiunto link
                 title: "I migliori giochi per Nintendo",
                 text: "Scopri titoli incredibili per Nintendo Switch. Una vasta gamma di giochi per tutti i gusti, dalla fantasia all'azione.",
                 buttonText: "Esplora ora",
@@ -251,7 +251,7 @@ const JumbotronCarousel = () => {
                 srcDesktop: "./jumbotronoImage/nintendo_jumbotron/xenoblade_chronicles_game.jpg",
                 srcMobile: "./jumbotronoImage/nintendo_jumbotron/xenoblade_chronicles_game_mobile.jpg",
                 alt: "Xenoblade",
-                link: "/xenoblade",  // aggiunto link
+                link: "products/15",  // aggiunto link
                 title: "Xenoblade Chronicles",
                 text: "Un'epica avventura ti aspetta. Xenoblade Chronicles è un'avventura che ti porterà in un mondo di fantasy e azione senza precedenti.",
                 buttonText: "Gioca ora",

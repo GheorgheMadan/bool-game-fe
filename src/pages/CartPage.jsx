@@ -59,12 +59,13 @@ const CartPage = () => {
             ) : (
                 <>
                     <div className="cart-content">
+
                         <ul className="cart-items">
                             {cart.map((product) => (
                                 <li key={product.id} className="cart-item">
 
                                     <div className='cart-item-image'>
-                                        <img src={product.image} alt={product.name} width="100" />
+                                        <img src={product.image} alt={product.name} />
                                     </div>
 
 
