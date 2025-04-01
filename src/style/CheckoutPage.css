@@ -1,24 +1,14 @@
-.container {
+.checkout-container {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding-left: 50px;
-  padding-right: 50px;
-  padding-top: 30px;
-  padding-bottom: 30px;
-
-  margin-top: 50px;
-  margin-bottom: 80px;
-
+  padding: 30px 50px;
+  margin: 50px auto 80px;
   position: relative;
-  width: 1000px;
-  height: auto;
-
+  width: 80%;
   border-radius: 16px;
   background-color: white;
-
   border: 2px solid #1B1B1B;
-  box-sizing: border-box;
   box-shadow: 6px 6px 0px #1B1B1B;
   border-radius: 8px;
 }
@@ -32,19 +22,19 @@
 }
 
 
-.checkout h1{
+.checkout h1 {
   font-weight: 800;
   border-bottom: 3px solid rgb(194, 105, 3);
-  
+
 }
 
 
-.total_price h3{
+.total_price h3 {
   font-weight: 1000;
 }
 
 
-.fa-coins{
+.fa-coins {
   font-size: 17px;
   color: rgb(194, 105, 3);
 }
@@ -72,14 +62,14 @@
 
 
 .personal_data label {
-  width: calc(50% - 10px);
+  width: calc(100% / 3 - 10px);
   /* Due input per riga */
   display: flex;
   flex-direction: column;
   font-weight: 600;
 }
 
-.personal_data input{
+.personal_data input {
   padding-left: 5px;
 }
 
@@ -107,7 +97,6 @@ input:focus {
   height: 50px;
   display: flex;
   justify-content: end;
-  /* flex-direction: row; */
   align-items: center;
   align-self: flex-end;
   cursor: pointer;
@@ -117,6 +106,10 @@ input:focus {
 .pagamento:hover {
   background: #FFBB38;
   box-shadow: 0px 0px 0px 4px #C1BFFA;
+}
+
+.StripeElement {
+  width: 80%;
 }
 
 .payment-status {
@@ -181,5 +174,11 @@ input:focus {
   100% {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@media screen and (max-width:1000px) {
+  .checkout-container {
+    width: 90%;
   }
 }
