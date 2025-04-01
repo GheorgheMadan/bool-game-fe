@@ -192,14 +192,14 @@ const CheckoutForm = () => {
         </h2>
       </div>
 
-      <div className="centered-price">
+      {/* <div className="centered-price">
         Spedizione gratuita per ordini superiori a 40€
       </div>
 
       <div className="centered-price">
         Costo spedizione: €{shippingCost}{" "}
         {shippingCost === "0.00" && "(gratis)"}
-      </div>
+      </div> */}
 
       <form>
         {/* Campi per i dettagli dell'utente */}
