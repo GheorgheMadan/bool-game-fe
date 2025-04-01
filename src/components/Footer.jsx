@@ -88,7 +88,7 @@ const Footer = () => {
           <div className="sb_footer-below">
             <div className="sb_footer-copyright">
               <div> ©{new Date().getFullYear()} NextLevelShop. All right reserved.</div>
-              <ul>
+              <ul className="year-footer">
                 <li>
                   <a href="/terms">
                     <p>Terms & Conditions</p>

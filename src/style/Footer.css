@@ -170,10 +170,39 @@ ul {
     flex-wrap: nowrap;
 }
 
+
+@media screen and (min-width:743px) and (max-width: 984px) {
+    .overlay-footer {
+        height: 85%;
+    }
+
+    .year-footer {
+        display: block;
+        text-align: center;
+    }
+}
+
 @media screen and (max-width: 850px) {
     .sb_footer-heading h1 {
         font-size: 44px;
         line-height: 50px;
+    }
+}
+
+@media screen and (max-width: 742px) {
+    .sb_footer-copyright {
+        flex-wrap: wrap;
+    }
+
+    .year-footer {
+        margin-top: 30px;
+    }
+
+    .overlay-footer {
+        top: 5%;
+        height: 90%;
+        width: 75%;
+        bottom: 30px;
     }
 }
 
