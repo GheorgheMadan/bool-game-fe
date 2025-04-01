@@ -39,11 +39,6 @@ const CartPage = () => {
 
     const shippingCost = calculateShippingCost();
 
-    // Funzione per calcolare il totale complessivo (subtotale + spedizione)
-    const calculateTotal = () => {
-        return (parseFloat(calculateSubTotal()) + shippingCost).toFixed(2);
-    };
-
     // Funzione per andare alla home
     const goToHome = () => {
         navigate('/');
@@ -108,7 +103,7 @@ const CartPage = () => {
                                 <div className="centered-price">Costo spedizione: €{shippingCost.toFixed(2)}
                                     {shippingCost === 0 && " (gratis)"}
                                 </div>
-                                <h3 className='total-price'>Totale: €{calculateTotal()}</h3>
+                                <h3 className='total-price'>Totale: €{calculateTotal(cart)}</h3>
                             </div>
 
                             <div className="cart-actions">
@@ -124,6 +119,21 @@ const CartPage = () => {
             )}
         </div>
     );
+};
+
+// Funzione per calcolare il totale complessivo (subtotale + spedizione)
+export const calculateTotal = (cart) => {
+    const calculateSubTotal = () => {
+        return cart.reduce((total, product) => total + product.price * product.quantity, 0);
+    };
+
+    const calculateShippingCost = () => {
+        const total = parseFloat(calculateSubTotal());
+        return total > 199.99 ? 0 : 9.99;
+    };
+
+    const shippingCost = calculateShippingCost();
+    return (parseFloat(calculateSubTotal()) + shippingCost).toFixed(2);
 };
 
 export default CartPage;
