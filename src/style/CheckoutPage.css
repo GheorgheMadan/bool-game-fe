@@ -109,9 +109,7 @@ input:focus {
   text-align: center;
   font-weight: bold;
   margin-top: 10px;
-  <<<<<<< HEAD margin-left: 800px;
   width: 150px;
-  =======>>>>>>>e4d41e6e7357fdf0f038fd0d288834ff9a1d8854 height: 50px;
   display: flex;
   align-items: center;
   cursor: pointer;
