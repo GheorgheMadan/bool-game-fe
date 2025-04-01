@@ -106,16 +106,6 @@ export const CartProvider = ({ children }) => {
                     )
                 );
 
-                // // Verifica se è possibile aumentare la quantità
-                // if (productInCart.quantity < productStock) {
-                //     // Aumenta la quantità nel carrello
-                //     setCart((prevCart) =>
-                //         prevCart.map(item =>
-                //             item.id === productId
-                //                 ? { ...item, quantity: item.quantity + 1 }
-                //                 : item
-                //         )
-                //     );
                 // Aggiorna lo stock nel database (decrementa)
                 await updateStockInDB(productId, -1);
             } else {
