@@ -62,7 +62,7 @@ export default function CardHomePage() {
                     </Link>
                     <div className="d-flex justify-content-center gap-4 mt-3 ">
                         <span className="fs-3 fw-bold text-success">€ {query.price}</span>
-                        <Link to={`/products/${query.id}`}>
+                        <Link to={`/products/${query.id}`} state={{ image: query.images?.[0] }}>
                             <button>
                                 Acquista ora!
                             </button>
@@ -90,7 +90,7 @@ export default function CardHomePage() {
                     </Link>
                     <div className="d-flex justify-content-center gap-4 mt-3">
                         <span className="fs-3 fw-bold text-success container-details-nintendo">€ {query2.price}</span>
-                        <Link to={`/products/${query2.id}`}>
+                        <Link to={`/products/${query2.id}`} state={{ image: query2.images?.[1] }}>
                             <button>
                                 Acquista ora!
                             </button>
