@@ -132,3 +132,57 @@
     display: inline-block;
     margin-top: 5px;
 }
+
+/********************************
+   filtro per ordinare i risultati
+*********************************/
+
+.sort-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.sort-select {
+    padding: 12px 20px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 30px;
+    background: rgba(0, 0, 0, 0.8);
+    font-size: 12px;
+    font-weight: bold;
+    color: #fff;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.4s ease-in-out;
+    box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.1);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.sort-select:hover {
+    border-color: rgba(255, 75, 43, 0.8);
+    box-shadow: 0px 0px 12px rgba(255, 75, 43, 0.8);
+    transform: scale(1.1);
+}
+
+.sort-select:focus {
+    border-color: #ff4b2b;
+    box-shadow: 0px 0px 15px rgba(255, 75, 43, 0.8);
+}
+
+/* Animazione di apertura */
+@keyframes pop-in {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.sort-select {
+    animation: pop-in 0.5s ease-in-out;
+}

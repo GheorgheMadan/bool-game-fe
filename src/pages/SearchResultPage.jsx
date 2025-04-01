@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import GlobalContextResults from '../contexts/GlobalContextResult';
 import '../style/SearchResultsStyle.css';
@@ -10,6 +10,7 @@ export default function SearchResults() {
     const [searchParams, setSearchParams] = useSearchParams(); // Hook per gestire i parametri di query
     const selectedCategory = searchParams.get('category') || ''; // Leggi la categoria dall'URL
     const searchQuery = searchParams.get('name') || ''; // Leggi il nome cercato dall'URL
+    const [sortType, setSortType] = useState('default'); // Nuovo stato per l'ordinamento
 
     // Effettua la chiamata API quando il componente viene caricato o i parametri cambiano
     useEffect(() => {
@@ -49,6 +50,27 @@ export default function SearchResults() {
         setSearchParams(params); // Aggiorna i parametri di query senza ricaricare la pagina
     };
 
+    // Funzione per ordinare i risultati
+    const getSortedResults = (results) => {
+        const sortedResults = [...results];
+
+        switch (sortType) {
+            case 'price-asc':
+                return sortedResults.sort((a, b) => a.price - b.price);
+            case 'price-desc':
+                return sortedResults.sort((a, b) => b.price - a.price);
+            case 'name-asc':
+                return sortedResults.sort((a, b) => a.name.localeCompare(b.name));
+            case 'name-desc':
+                return sortedResults.sort((a, b) => b.name.localeCompare(a.name));
+            default:
+                return sortedResults;
+        }
+    };
+
+    // Applica prima il filtro e poi l'ordinamento
+    const filteredAndSortedResults = getSortedResults(filteredResults);
+
     return (
         <div className='container-search-page'>
             <h2 className='search-title'>Risultati della ricerca</h2>
@@ -61,8 +83,23 @@ export default function SearchResults() {
                 <button onClick={() => updateCategory('accessorio')}>Accessori</button>
             </div>
 
+            {/* Nuova sezione ordinamento */}
+            <div className="sort-container">
+                <select
+                    value={sortType}
+                    onChange={(e) => setSortType(e.target.value)}
+                    className="sort-select"
+                >
+                    <option value="default">Ordina per</option>
+                    <option value="price-asc">Prezzo: dal più basso</option>
+                    <option value="price-desc">Prezzo: dal più alto</option>
+                    <option value="name-asc">Nome: A-Z</option>
+                    <option value="name-desc">Nome: Z-A</option>
+                </select>
+            </div>
+
             <div className='container-results'>
-                {filteredResults.map(result => (
+                {filteredAndSortedResults.map(result => (
                     <div key={result.id} className='card-result'>
                         <div>
                             <Link to={`/products/${result.id}`}>
