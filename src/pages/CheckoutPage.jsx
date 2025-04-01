@@ -11,6 +11,7 @@ import {
 } from "@stripe/react-stripe-js";
 import { useNavigate } from "react-router-dom";
 import "../style/CheckoutPage.css";
+import { calculateTotal } from "./CartPage"; // Importa la funzione
 
 // Inizializza Stripe con la tua chiave pubblica di test
 const stripePromise = loadStripe(
@@ -47,14 +48,8 @@ const CheckoutForm = () => {
 
   // Funzione per calcolare il totale dell'ordine
   useEffect(() => {
-    const totalAmount = cart.reduce(
-      (total, product) => total + product.price * product.quantity,
-      0
-    );
-    setTotal(totalAmount.toFixed(2));
-    // Calcola il costo della spedizione
-    const shipping = totalAmount > 40 ? 0 : 5.99; // Spedizione gratuita per ordini superiori a 40€
-    setShippingCost(shipping.toFixed(2));
+    const totalAmount = calculateTotal(cart); // Passa il carrello come parametro
+    setTotal(totalAmount);
   }, [cart]);
 
   // Ottiene il clientSecret per Stripe al caricamento del carrello
@@ -318,9 +313,8 @@ const CheckoutForm = () => {
       {/* Mostra il messaggio di stato del pagamento */}
       {paymentMessage && (
         <div
-          className={`payment-status ${paymentStatus} ${
-            fadeOut ? "fade-out" : ""
-          }`}
+          className={`payment-status ${paymentStatus} ${fadeOut ? "fade-out" : ""
+            }`}
         >
           {paymentMessage}
         </div>
