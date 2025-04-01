@@ -41,7 +41,7 @@ export default function CardHomePage() {
 
     return (
         <>
-            <h2 className="black-title title-h2">SCOPRI I NOSTRI BUNDLE</h2>
+            <h2 className="black-title title-h2 titolo-bundle">SCOPRI I NOSTRI BUNDLE</h2>
 
             {/* Primo bundle */}
             <section className="container-cards">
@@ -63,9 +63,7 @@ export default function CardHomePage() {
                     <div className="d-flex justify-content-center gap-4 mt-3 ">
                         <span className="fs-3 fw-bold text-success">€ {query.price}</span>
                         <Link to={`/products/${query.id}`}>
-                            <button
-                                onClick={() => addToCart({ id: query.id, name: query.name, price: query.price })}
-                            >
+                            <button>
                                 Acquista ora!
                             </button>
                         </Link>
@@ -93,10 +91,7 @@ export default function CardHomePage() {
                     <div className="d-flex justify-content-center gap-4 mt-3">
                         <span className="fs-3 fw-bold text-success container-details-nintendo">€ {query2.price}</span>
                         <Link to={`/products/${query2.id}`}>
-                            <button
-                                className=""
-                                onClick={() => addToCart({ id: query2.id, name: query2.name, price: query2.price })}
-                            >
+                            <button>
                                 Acquista ora!
                             </button>
                         </Link>
