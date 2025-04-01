@@ -1,11 +1,32 @@
 import { Joystick, Gamepad2, Disc } from "lucide-react";
 import { Link } from 'react-router-dom';
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 export default function HomepageNav() {
 
     const [isOpen, setIsOpen] = useState(false);
     const [isOpen2, setIsOpen2] = useState(false);
     const [isOpen3, setIsOpen3] = useState(false);
+    const dropdownRef = useRef(null); // Riferimento al container dei dropdown
+
+    // Aggiungi useEffect per gestire i click esterni
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+                setIsOpen(false);
+                setIsOpen2(false);
+                setIsOpen3(false);
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+
+        // Cleanup dell'event listener
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, []); // Array vuoto perché vogliamo che l'effect si esegua solo al mount
+
+
     function toggleDropdown() {
         setIsOpen(!isOpen)
         setIsOpen2(false);
@@ -23,7 +44,7 @@ export default function HomepageNav() {
     }
     return (
         <section className="container-nav-home">
-            <div className='container-navigator-icons homepage'>
+            <div className='container-navigator-icons homepage' ref={dropdownRef}>
                 <div>
                     {/* Pulsante Console */}
                     <button onClick={toggleDropdown}>
