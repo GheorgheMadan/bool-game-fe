@@ -78,7 +78,7 @@
 
 /* Lista prodotti */
 .cart-items {
-    width: 45%;
+    width: 60%;
     list-style: none;
     padding: 0;
     display: flex;
@@ -180,8 +180,9 @@
     font-size: 18px;
     font-weight: bold;
     color: white;
-    min-width: 30px;
+    min-width: 15px;
     text-align: center;
+    margin: auto;
 }
 
 /* Bottone rimuovi */
@@ -204,7 +205,6 @@
 .cart-summary {
     width: 45%;
     background: rgba(41, 41, 61, 0.85);
-    /* Glassmorphism */
     backdrop-filter: blur(10px);
     padding: 20px;
     border-radius: 12px;
@@ -279,4 +279,90 @@
     background: linear-gradient(135deg, #218838, #1e7e34);
     transform: scale(1.05);
     box-shadow: 0px 6px 12px rgba(23, 180, 8, 0.856);
+}
+
+@media screen and (max-width:1000px) {
+    .cart-content {
+        display: block;
+    }
+
+    .cart-items {
+        width: 100%;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    .cart-item {
+        flex-direction: column;
+        justify-content: space-between;
+        width: calc(100% / 3 - 15px);
+    }
+
+    .cart-item-info h3 {
+        margin: 10px 0;
+        font-size: 22px;
+    }
+
+    .cart-item-info p {
+        margin: 5px 0;
+        font-size: 16px;
+    }
+
+    .cart-buttons {
+        margin-top: 10px;
+    }
+
+    /* Stile per il numero della quantità */
+    .cart-buttons p {
+        margin: auto 4px;
+    }
+
+    .cart-summary {
+        width: 60%;
+        margin: 0 auto;
+    }
+}
+
+@media screen and (max-width:768px) {
+    .cart-item {
+        width: calc(100% / 2 - 15px);
+    }
+
+    .cart-summary {
+        width: 90%;
+        margin: 0 auto;
+    }
+}
+
+@media screen and (max-width:576px) {
+    .cart-item {
+        width: calc(100% / 1 - 15px);
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    /* Immagine del prodotto */
+    .cart-item-image {
+        width: 100%;
+        height: 200px;
+        flex-shrink: 0;
+        /* Impedisce il restringimento */
+        display: flex;
+        /* Assicura che l'immagine si comporti come previsto */
+        align-items: center;
+        justify-content: center;
+    }
+
+    .cart-item-image>img {
+        width: 200px;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 10px;
+        border: 2px solid #ff4d4d;
+    }
+
+    .cart-buttons {
+        justify-content: center;
+    }
 }
