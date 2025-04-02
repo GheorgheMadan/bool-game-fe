@@ -10,35 +10,36 @@ export default function XboxPage() {
     return (
         <>
             <div className="nintendo-products-container">
-                <section className="container-nav-home">
-                    <div className='container-navigator-icons nintendo'>
-                        <div>
-                            {/* Pulsante Console */}
-                            <Link to='/nintendo/consoles'>
-                                <button>
-                                    <Joystick size={30} /> Console
-                                </button>
-                            </Link>
+                <div className='general-container'>
+                    <section className="container-nav-home">
+                        <div className='container-navigator-icons nintendo'>
+                            <div>
+                                {/* Pulsante Console */}
+                                <Link to='/nintendo/consoles'>
+                                    <button>
+                                        <Joystick size={30} /> Console
+                                    </button>
+                                </Link>
+                            </div>
+                            <div>
+                                {/* Pulsante Accessori */}
+                                <Link to='/nintendo/accessories'>
+                                    <button>
+                                        <Gamepad2 size={30} /> Accessori
+                                    </button>
+                                </Link>
+                            </div>
+                            <div>
+                                {/* Pulsante Giochi */}
+                                <Link to='/nintendo/games'>
+                                    <button>
+                                        <Disc size={30} /> Giochi
+                                    </button>
+                                </Link>
+                            </div>
                         </div>
-                        <div>
-                            {/* Pulsante Accessori */}
-                            <Link to='/nintendo/accessories'>
-                                <button>
-                                    <Gamepad2 size={30} /> Accessori
-                                </button>
-                            </Link>
-                        </div>
-                        <div>
-                            {/* Pulsante Giochi */}
-                            <Link to='/nintendo/games'>
-                                <button>
-                                    <Disc size={30} /> Giochi
-                                </button>
-                            </Link>
-                        </div>
-                    </div>
-
-                </section>
+                    </section>
+                </div>
                 <div className='nintendo-products-container-2'>
                     <h2 className='nintendo-h2'>Benvenuto nel mondo Nintendo</h2>
                     <NintendoConsoles />

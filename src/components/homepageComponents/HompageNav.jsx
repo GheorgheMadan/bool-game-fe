@@ -43,6 +43,7 @@ export default function HomepageNav() {
         setIsOpen(false);
     }
     return (
+
         <section className="container-nav-home">
             <div className='container-navigator-icons homepage' ref={dropdownRef}>
                 <div>

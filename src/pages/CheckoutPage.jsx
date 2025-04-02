@@ -167,7 +167,7 @@ const CheckoutForm = () => {
   };
 
   return (
-    <div className="container">
+    <div className="checkout-container">
       {/* CHECKOUT */}
       <div className="checkout">
         <h1>Checkout</h1>
@@ -187,18 +187,8 @@ const CheckoutForm = () => {
         </h2>
       </div>
 
-      {/* <div className="centered-price">
-        Spedizione gratuita per ordini superiori a 40€
-      </div>
-
-      <div className="centered-price">
-        Costo spedizione: €{shippingCost}{" "}
-        {shippingCost === "0.00" && "(gratis)"}
-      </div> */}
-
+      {/* Campi per i dettagli dell'utente */}
       <form>
-        {/* Campi per i dettagli dell'utente */}
-
         <div className="personal_data">
           <div className="input_group">
             <label for="name">Nome</label>
@@ -299,14 +289,14 @@ const CheckoutForm = () => {
       </form>
       {/* BUTTON PAGAMENTO */}
       {clientSecret && (
-        <form onSubmit={handlePayment}>
+        <form onSubmit={handlePayment} className="stripe-form">
           <PaymentElement />
           <button
             className="pagamento"
             type="submit"
             disabled={loading || !stripe || !elements}
           >
-            {loading ? "Caricamento..." : "Paga"}
+            {loading ? "Caricamento..." : "Acquista ora"}
           </button>
         </form>
       )}

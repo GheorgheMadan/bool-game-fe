@@ -1,66 +1,47 @@
-.container {
+.checkout-container {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding-left: 50px;
-  padding-right: 50px;
-  padding-top: 30px;
-  padding-bottom: 30px;
-
-  margin-top: 50px;
-  margin-bottom: 80px;
-
+  padding: 30px 50px;
+  margin: 50px auto 80px;
   position: relative;
-  width: 1000px;
-  height: auto;
-
-  border-radius: 16px;
+  width: 80%;
   background-color: white;
-
   border: 2px solid #1B1B1B;
-  box-sizing: border-box;
   box-shadow: 6px 6px 0px #1B1B1B;
   border-radius: 8px;
+  max-width: 1000px;
 }
 
-
 .checkout {
-  /* border: 1px solid black; */
   width: 100%;
   display: flex;
   justify-content: end;
 }
 
-
-.checkout h1{
+.checkout h1 {
   font-weight: 800;
   border-bottom: 3px solid rgb(194, 105, 3);
-  
 }
 
-
-.total_price h3{
+.total_price h3 {
   font-weight: 1000;
 }
 
-
-.fa-coins{
+.fa-coins {
   font-size: 17px;
   color: rgb(194, 105, 3);
 }
 
-
 .enter_details {
   margin-top: 20px;
 }
-
 
 .enter_details i {
   color: rgb(194, 105, 3);
   margin-bottom: 5px;
   font-size: 20px;
 }
-
 
 .personal_data {
   display: flex;
@@ -70,19 +51,15 @@
   width: 100%;
 }
 
-
 .personal_data label {
-  width: calc(50% - 10px);
-  /* Due input per riga */
   display: flex;
   flex-direction: column;
   font-weight: 600;
 }
 
-.personal_data input{
+.personal_data input {
   padding-left: 5px;
 }
-
 
 textarea:focus,
 input:focus {
@@ -92,25 +69,26 @@ input:focus {
   border-radius: 16px;
 }
 
+/********************************
+   stripe rules
+*********************************/
+
+.stripe-form {
+  width: 100%;
+}
 
 .pagamento {
   background-color: orange;
   border: 2px solid #1B1B1B;
-  box-sizing: border-box;
   border-radius: 16px;
-  padding: 16px 32px 16px 16px;
+  padding: 12px 20px;
   text-align: center;
-  font-weight: 800;
+  font-weight: bold;
   margin-top: 10px;
-  margin-left: 800px;
-  width: 100px;
-  height: 50px;
   display: flex;
-  justify-content: end;
-  /* flex-direction: row; */
   align-items: center;
-  align-self: flex-end;
   cursor: pointer;
+  margin-left: auto;
 }
 
 
@@ -118,6 +96,7 @@ input:focus {
   background: #FFBB38;
   box-shadow: 0px 0px 0px 4px #C1BFFA;
 }
+
 
 .payment-status {
   margin-top: 20px;
@@ -181,5 +160,57 @@ input:focus {
   100% {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@media screen and (max-width:1000px) {
+  .checkout-container {
+    width: 90%;
+    padding: 30px 30px;
+  }
+
+  .personal_data {
+    gap: 30px;
+  }
+
+  .personal_data input {
+    width: 180px;
+    height: 35px;
+  }
+}
+
+@media screen and (max-width:768px) {
+  .personal_data input {
+    width: 210px;
+    height: 35px;
+  }
+
+  .personal_data {
+    gap: 15px;
+  }
+}
+
+@media screen and (max-width:576px) {
+  .checkout-container {
+    width: 95%;
+    padding: 10px 10px;
+  }
+
+  .personal_data input {
+    width: 210px;
+    height: 35px;
+  }
+
+}
+
+@media screen and (max-width:483px) {
+
+  .personal_data input {
+    width: 280px;
+    height: 35px;
+  }
+
+  .input_group {
+    margin: 0 auto;
   }
 }

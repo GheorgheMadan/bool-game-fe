@@ -71,18 +71,20 @@ const CartPage = () => {
 
                                     <div className="cart-item-info">
                                         <h3>{product.name}</h3>
-                                        <p>{product.description}</p>
                                         <p>Prezzo: €{product.price}</p>
                                     </div>
 
                                     <div className="cart-buttons">
-                                        {/* Bottone per aumentare la quantità */}
-                                        <button onClick={() => handleIncrease(product.id)}> <i className="fas fa-plus"></i>
-                                        </button>
-                                        <p className="cart-quantity">{product.quantity}</p>
 
                                         {/* Bottone per diminuire la quantità */}
                                         <button onClick={() => handleDecrease(product.id)}> <i className="fas fa-minus"></i>
+                                        </button>
+
+                                        {/* numero quantità */}
+                                        <p className="cart-quantity">{product.quantity}</p>
+
+                                        {/* Bottone per aumentare la quantità */}
+                                        <button onClick={() => handleIncrease(product.id)}> <i className="fas fa-plus"></i>
                                         </button>
 
                                         {/* Bottone per rimuovere il prodotto dal carrello */}
@@ -90,10 +92,10 @@ const CartPage = () => {
                                             <i className="fas fa-trash"></i>
                                         </button>
                                     </div>
-
                                 </li>
                             ))}
                         </ul>
+
                         <div className="cart-summary">
                             <div className="cart-total">
                                 {/* Mostriamo il totale del carrello */}

@@ -22,13 +22,105 @@ export default function SingleProduct() {
     const [data, setData] = useState(null);
     const [error, setError] = useState(null);
 
+    // useEffect(() => {
+    //     if (productId) {
+    //         axios.get(`http://localhost:3000/api/products/${productId}`)
+    //             .then(res => setData(res.data))
+    //             .catch(err => setError("Errore nel recupero del prodotto o della categoria."));
+    //     }
+    // }, [productId]);
+
     useEffect(() => {
         if (productId) {
+
+            // Chiamata API per ottenere i dettagli del prodotto
             axios.get(`http://localhost:3000/api/products/${productId}`)
-                .then(res => setData(res.data))
+                .then(res => {
+                    console.log("Product data received:", res.data);
+                    setData(res.data); // Imposta i dati del prodotto
+
+                    // Fai partire l'interazione con Tidio dopo un breve ritardo per garantire che il bot sia caricato
+                    setTimeout(() => {
+                        if (window.tidioChatApi) {
+                            // Verifica che l'API di Tidio sia pronta
+                            window.tidioChatApi.on("ready", function () {
+                                console.log("Tidio Chat API is ready, sending data to Tidio");
+
+                                // Invia le informazioni al bot di Tidio
+                                window.tidioChatApi.setVisitorData({
+                                    product_name: res.data.name,
+                                    product_price: res.data.price,
+                                    product_description: res.data.description
+                                });
+
+                                // Aggiungi un ritardo di 5 secondi per il messaggio
+                                setTimeout(() => {
+                                    if (window.tidioChatApi && window.tidioChatApi.displayMessage) {
+                                        window.tidioChatApi.displayMessage(`Stai guardando: ${res.data.name}. Prezzo: ${res.data.price}€. Descrizione: ${res.data.description}`);
+                                    } else {
+                                        console.log("Il metodo displayMessage non è disponibile ancora.");
+                                        // Potresti aggiungere un'altra logica qui, come un tentativo ripetuto
+                                    }
+                                }, 3000); // Ritardo di 3 secondi per il messaggio
+                            });
+                        } else {
+                            console.error("Tidio Chat API non è ancora pronta.");
+                        }
+                    }, 5000); // Ritardo di 1 secondo per dare il tempo a Tidio di caricare
+                })
                 .catch(err => setError("Errore nel recupero del prodotto o della categoria."));
         }
     }, [productId]);
+
+    // useEffect(() => {
+    //     if (productId) {
+    //         console.log(`Fetching product with ID: ${productId}`);
+
+    //         // Chiamata API per ottenere i dettagli del prodotto
+    //         axios.get(`http://localhost:3000/api/products/${productId}`)
+    //             .then(res => {
+    //                 console.log("Product data received:", res.data);
+    //                 setData(res.data); // Imposta i dati del prodotto
+
+    //                 // Fai partire l'interazione con Tidio dopo un breve ritardo per garantire che il bot sia caricato
+    //                 setTimeout(() => {
+    //                     if (window.tidioChatApi) {
+    //                         // Verifica che l'API di Tidio sia pronta
+    //                         window.tidioChatApi.on("ready", function () {
+    //                             console.log("Tidio Chat API is ready, sending data to Tidio");
+
+    //                             // Ottieni i dettagli del prodotto
+    //                             const productName = res.data.name;
+    //                             const productPrice = res.data.price;
+    //                             const productDescription = res.data.description;
+
+    //                             // Invia i dettagli del prodotto al bot di Tidio
+    //                             window.tidioChatApi.setVisitorData({
+    //                                 product_name: productName,
+    //                                 product_price: productPrice,
+    //                                 product_description: productDescription
+    //                             });
+
+    //                             // Crea il messaggio dinamico da inviare
+    //                             const messageText = `✨ Stai guardando: ${productName} ✨\n💰 Prezzo: ${productPrice}€\n📝 Descrizione: ${productDescription}`;
+
+
+    //                             // Invia il messaggio al bot di Tidio
+    //                             window.tidioChatApi.displayMessage({
+    //                                 text: messageText
+    //                             });
+    //                         });
+    //                     } else {
+    //                         console.error("Tidio Chat API non è ancora pronta.");
+    //                     }
+    //                 }, 1000); // Ritardo di 1 secondo per dare il tempo a Tidio di caricare
+    //             })
+    //             .catch(err => setError("Errore nel recupero del prodotto o della categoria."));
+    //     }
+    // }, [productId]);
+
+
+    console.log("Rendering product:", data);
 
     if (error) {
         return <div>{error}</div>;
@@ -46,6 +138,7 @@ export default function SingleProduct() {
             isAccessory: product.category_name === 'accessorio'
         }
     };
+
     const { isConsole, isGame, isAccessory } = getProductCategory(data);
 
     const pegiImages = {
