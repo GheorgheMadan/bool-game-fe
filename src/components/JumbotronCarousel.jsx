@@ -182,11 +182,10 @@ const JumbotronCarousel = () => {
                 srcDesktop: "./jumbotronoImage/xbox_jumbotron/xbox_series_x_s.jpg",
                 srcMobile: "./jumbotronoImage/xbox_jumbotron/xbox_series_x_s_mobile.jpg",
                 alt: "Xbox Series X/S",
-                link: "/xbox/consoles",  // aggiunto link
+                link: "/xbox/console",  // aggiunto link
                 title: "Xbox Series X/S",
                 text: "La console perfetta per ogni gamer. Con prestazioni straordinarie e giochi esclusivi, Xbox Series X/S è il futuro del gaming.",
                 buttonText: "Scopri di più",
-                buttonLink: "/xbox/consoles",
                 xboxLogo: "xbox-logo",
                 greenBtn: "greenBtn animationButton",
                 containerTop: "containerTop",
@@ -195,7 +194,7 @@ const JumbotronCarousel = () => {
                 srcDesktop: "./jumbotronoImage/xbox_jumbotron/xbox.jpg",
                 srcMobile: "./jumbotronoImage/xbox_jumbotron/xbox_mobile.jpg",
                 alt: "Xbox",
-                link: "/xbox",  // aggiunto link
+                link: "/xbox/games",  // aggiunto link
                 title: "Gioca con Xbox",
                 text: "Un catalogo di giochi vasto e avvincente. Con Xbox, l'esperienza di gioco è sempre emozionante e ricca di novità.",
                 buttonText: "Esplora ora",
