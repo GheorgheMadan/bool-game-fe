@@ -162,32 +162,6 @@ export default function SingleProduct() {
                             <img src={data.image_url} alt={data.name} />
                         </div>}
                         {/* Sezione per giochi */}
-                        {isGame && (
-                            <div className="container-pegi">
-                                <p className="inline">
-                                    PEGI: {pegiImages[data.pegi_rating] ? (
-                                        <img className="pegi-image" src={pegiImages[data.pegi_rating]} alt={`PEGI ${data.pegi_rating}`} />
-                                    ) : data.pegi_rating}
-                                </p>
-
-                                <p className="inline">Online: {data.online_mode === 1 ? (
-                                    <img className="pegi-image" src="/pegi/online.png" alt="online" />
-                                ) : data.online_mode === 0 ? (
-                                    <img className="pegi-image" src="/pegi/offline.png" alt="offline" />
-                                ) : (
-                                    data.online_mode
-                                )}
-                                </p>
-                                <p className="inline">Modalità di gioco: {data.multiplayer === 1 ? (
-                                    <img className="pegi-image" src="/pegi/multiplayer.png" alt="multiplayer" />
-                                ) : data.multiplayer === 0 ? (
-                                    <img className="pegi-image" src="/pegi/singleplayer.png" alt="singleplayer" />
-                                ) : (
-                                    data.multiplayer
-                                )}
-                                </p>
-                            </div>
-                        )}
                         {(isConsole || isAccessory) &&
                             <ConsoleCrousel product={data} />
                         }
@@ -223,27 +197,57 @@ export default function SingleProduct() {
                                 Data di uscita: {new Date(data.release_date).toLocaleDateString('it-IT')}
                             </p>
                         </div>
-                        {/* <div className={`centered-price ${data.stock > 0 ? "hidden" : "not-available"}`}>
-                                Non Disponibile
-                            </div> */}
-                        <p className="price">
-                            <strong>{data.price} €</strong>
-                        </p>
-                        <div className="container-buttons">
-                            <div className={` ${data.stock === 0 ? "not-available" : "available"}`}>
-                                <div>{data.stock < 1 ? "Non disponibile" : "Disponibile"}</div>
+
+                        <div className="container-details-flex">
+                            <div className="container-price-pegi">
+                                {isGame && (
+                                    <div className="container-pegi">
+                                        <p className="inline">
+                                            PEGI: {pegiImages[data.pegi_rating] ? (
+                                                <img className="pegi-image" src={pegiImages[data.pegi_rating]} alt={`PEGI ${data.pegi_rating}`} />
+                                            ) : data.pegi_rating}
+                                        </p>
+
+                                        <p className="inline">Online: {data.online_mode === 1 ? (
+                                            <img className="pegi-image" src="/pegi/online.png" alt="online" />
+                                        ) : data.online_mode === 0 ? (
+                                            <img className="pegi-image" src="/pegi/offline.png" alt="offline" />
+                                        ) : (
+                                            data.online_mode
+                                        )}
+                                        </p>
+                                        <p className="inline">Modalità di gioco: {data.multiplayer === 1 ? (
+                                            <img className="pegi-image" src="/pegi/multiplayer.png" alt="multiplayer" />
+                                        ) : data.multiplayer === 0 ? (
+                                            <img className="pegi-image" src="/pegi/singleplayer.png" alt="singleplayer" />
+                                        ) : (
+                                            data.multiplayer
+                                        )}
+                                        </p>
+                                    </div>
+                                )}
+                                <p className="price">
+                                    <strong>{data.price} €</strong>
+                                </p>
                             </div>
-                            <button
-                                onClick={() => addToCart({
-                                    id: data.id,
-                                    name: data.name,
-                                    price: data.price,
-                                    image: data.image_url
-                                })}
-                                className={`${data.stock === 0 ? 'hidden' : ''} `}
-                            >
-                                <FaCartShopping />  Aggiungi al carrello
-                            </button>
+
+
+                            <div className="container-buttons">
+                                <div className={` ${data.stock === 0 ? "not-available" : "available"}`}>
+                                    <div>{data.stock < 1 ? "Non disponibile" : "Disponibile"}</div>
+                                </div>
+                                <button
+                                    onClick={() => addToCart({
+                                        id: data.id,
+                                        name: data.name,
+                                        price: data.price,
+                                        image: data.image_url
+                                    })}
+                                    className={`${data.stock === 0 ? 'hidden' : ''} `}
+                                >
+                                    <FaCartShopping />  Aggiungi al carrello
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -264,7 +268,17 @@ export default function SingleProduct() {
                         <GenreFiltred product={data} />
                     </div>
                 }
-                {(isConsole || isAccessory) &&
+                {isConsole &&
+                    <>
+                        < div className="corelated-container">
+                            <CorelatedConsole product={data} />
+                        </div>
+                        < div className="corelated-container">
+                            <CorelatedAccessories product={data} />
+                        </div>
+                    </>
+                }
+                {isAccessory &&
                     <>
                         < div className="corelated-container">
                             <CorelatedConsole product={data} />
