@@ -28,7 +28,7 @@ footer {
     opacity: 0.5;
     position: absolute;
     bottom: 50px;
-    width: 100%;
+    width: 92%;
     height: 75%;
     z-index: 2;
 }
@@ -174,11 +174,31 @@ ul {
 @media screen and (min-width:743px) and (max-width: 984px) {
     .overlay-footer {
         height: 85%;
+        width: 62%;
     }
 
     .year-footer {
+        margin-top: 50px;
+        position: relative;
+        left: -30px;
+    }
+
+    .sb_footer-copyright {
         display: block;
-        text-align: center;
+    }
+
+    .sb_footer-below {
+        display: block;
+    }
+
+    .sb_footer-links {
+        justify-content: flex-start
+    }
+}
+
+@media screen and (max-width: 968px) {
+    .overlay-footer {
+        min-width: 450px;
     }
 }
 
@@ -196,13 +216,21 @@ ul {
 
     .year-footer {
         margin-top: 30px;
+        position: relative;
+        left: -30px;
     }
 
     .overlay-footer {
         top: 5%;
         height: 90%;
-        width: 75%;
+        width: 100%;
         bottom: 30px;
+        left: 0px;
+    }
+
+    .sb_footer-links {
+        justify-content: center;
+
     }
 }
 
@@ -210,6 +238,11 @@ ul {
     .sb_footer-heading h1 {
         font-size: 34px;
         line-height: 42px;
+    }
+
+
+    .year-footer {
+        flex-wrap: wrap;
     }
 
     .sb_footer-links div {
@@ -234,11 +267,27 @@ ul {
         margin-left: 0rem;
         margin-top: 1rem;
     }
+
+    .sb_footer-links {
+        justify-content: center;
+
+    }
+
+    .overlay-footer {
+        top: 5%;
+        height: 90%;
+        min-width: 50%;
+        bottom: 30px;
+    }
 }
 
 @media screen and (max-width: 400px) {
     .sb_footer-heading h1 {
         font-size: 27px;
         line-height: 38px;
+    }
+
+    .sb_footer-links {
+        justify-content: center;
     }
 }
