@@ -22,7 +22,7 @@ export default function NavBarHeader() {
             <div className='container-nav'>
                 <div className='logo'>
                     <FaBars className='burger-icon' onClick={toggleMenu} />
-                    <Link to='/'><img className='img-logo-header' src="/next_level_shop.gif" /></Link>
+                    <Link to='/'>Next Level Shop</Link>
                 </div>
                 <div className='container-link'>
                     <NavLink to='/' className='icon home' >
