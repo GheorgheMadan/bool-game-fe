@@ -71,7 +71,7 @@
 /* CONTENITORE PER I GIOCHI  CON LO SFONDO TRASPARENTE*/
 .container-box-game {
     display: flex;
-    background-color: rgba(0, 0, 0, 0.343);
+    background-color: rgba(0, 0, 0, 0.4);
     backdrop-filter: blur(30px);
     border-radius: 15px;
 }
@@ -82,18 +82,18 @@ a {
 
 /* REGOLE COPERTINA PRODOTTO */
 .container-images {
-    width: 40%;
-    padding: 2em;
+    width: 50%;
     display: flex;
-    gap: 10px;
+    gap: 15px;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
 
 .card-image {
-    width: 80%;
-    height: 90%;
+    width: 400px;
+    height: 400px;
+    padding: 20px;
 }
 
 .card-image img {
@@ -102,23 +102,11 @@ a {
     object-fit: contain;
 }
 
-/* Container pegi */
-.container-pegi {
-    display: flex;
-}
-
-.pegi-image {
-    width: 20px;
-    margin-left: 5px;
-    margin-right: 15px;
-}
-
-
 /* REGOLE DETTAGLI E PAGAMENTO */
 .card-payment-details {
     color: white;
     text-shadow: 1px 1px 1px black;
-    width: 45%;
+    width: 50%;
     border-radius: 15px;
     padding: 20px;
     display: flex;
@@ -140,8 +128,7 @@ a {
 /* h5 titolo del console e accessori colore nero*/
 .card-payment-details-console .title-console {
     color: black;
-    margin: 20px 0px;
-    width: 100%;
+    margin-bottom: 10px;
     text-align: center;
     font-size: 35px;
 }
@@ -153,10 +140,29 @@ a {
     font-size: 35px;
     color: white;
     text-shadow: 1px 1px 1px black;
-    margin: 20px 0px;
+    margin-bottom: 10px;
 }
 
-.card-payment-details .price {
+
+.container-details-flex {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.container-price-pegi {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Container pegi */
+.pegi-image {
+    width: 40px;
+    margin-left: 5px;
+    margin-right: 15px;
+}
+
+.container-price-pegi .price {
     font-size: 40px;
     align-self: flex-end;
 }
@@ -164,6 +170,7 @@ a {
 .container-buttons {
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 /* SE IL PRODOTTO è DISPONIBILE */
@@ -171,8 +178,8 @@ a {
     color: white;
     background-color: rgba(60, 173, 60, 0.637);
     border-radius: 15px;
-    width: fit-content;
     padding: 7px 10px;
+    text-align: center;
 }
 
 /* SE IL PRODOTTO NON è DISPONIBILE */
@@ -192,15 +199,17 @@ a {
 
 .card-payment-details button {
     text-align: center;
-    font-size: 18px;
+    font-size: 15px;
     background-color: rgb(233, 129, 69);
     color: white;
-    padding: 10px 80px;
+    padding: 10px 40px;
     border: none;
     border-radius: 15px;
     width: fit-content;
 }
 
+
+/* DESCRIPTION SECTION */
 /* REGOLE DESCRIZIONE PRODOTTO */
 .container-description-product {
     margin: 40px 0;
@@ -297,5 +306,375 @@ a {
 }
 
 .img-console:hover {
-    transform: scale(1.1);
+    transform: scale(1.05);
+}
+
+.container-img-console {
+    width: 300px;
+    height: 200px;
+    margin: 0 auto;
+}
+
+.img-console {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    object-fit: contain;
+    transition: transform 0.3s ease-in-out;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+/* VERSIONE LAPTOP 1000px */
+@media screen and (max-width: 1000px) {
+
+    .general-container-single-product {
+        width: 85%;
+        margin: 0 auto;
+        padding-top: 20px;
+    }
+
+    .card-image {
+        width: 350px;
+        height: 360px;
+        padding: 20px;
+    }
+
+    .card-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+
+    /* h5 titolo del console e accessori colore nero*/
+    .card-payment-details-console .title-console {
+        color: black;
+        margin: 20px 0px;
+        text-align: center;
+        font-size: 30px;
+    }
+
+
+    .card-payment-details h5 {
+        width: 100%;
+        text-align: center;
+        font-size: 30px;
+        color: white;
+        text-shadow: 1px 1px 1px black;
+        margin-bottom: 10px;
+    }
+
+    .card-payment-details {
+        font-size: 14px;
+        line-height: 15px;
+    }
+
+    .container-price-pegi .price {
+        font-size: 30px;
+        align-self: flex-end;
+    }
+
+    .container-pegi p {
+        font-size: 14px;
+        line-height: 8px;
+    }
+
+    .card-payment-details button {
+        text-align: center;
+        font-size: 13px;
+        background-color: rgb(233, 129, 69);
+        color: white;
+        padding: 10px 30px;
+        border: none;
+        border-radius: 15px;
+        width: fit-content;
+    }
+
+    .available {
+        padding: 4px 10px;
+    }
+
+    .not-available {
+        padding: 4px 10px;
+    }
+
+    /* CONSOLE CAROUSEL */
+    .main-image {
+        margin-bottom: 10px;
+        width: 350px;
+        height: 250px;
+        position: relative;
+        margin-bottom: 5px;
+    }
+
+    .main-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+
+    .container-thumbnails-image img {
+        width: 60px;
+    }
+
+    .container-trend-cards-tablet .container-img-console {
+        width: 350px;
+        height: 300px;
+        margin: 0 auto;
+    }
+
+}
+
+/* MEDIA QUERY TABLET*/
+@media screen and (max-width: 768px) {
+    .container-trend-cards-tablet .container-img-console {
+        width: 300px;
+        height: 220px;
+    }
+
+    .container-box {
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* CONTENITORE PER I GIOCHI  CON LO SFONDO TRASPARENTE*/
+    .container-box-game {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .general-container-single-product {
+        width: 85%;
+    }
+
+    /* REGOLE COPERTINA PRODOTTO */
+    .container-images {
+        width: 100%;
+    }
+
+    .container-details-flex {
+        display: flex;
+        flex-direction: row;
+    }
+
+    /* CONTAINER IMMAGINE GIOCO */
+    .card-image {
+        width: 400px;
+        height: 300px;
+        padding: 20px;
+    }
+
+    /* DIMENSIONI IMMAGINE GIOCO */
+    .card-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+
+    /* REGOLE DETTAGLI E PAGAMENTO */
+    .card-payment-details {
+        width: 100%;
+        margin-top: -40px;
+    }
+
+
+    /* h5 titolo del console e accessori colore nero*/
+    .card-payment-details-console .title-console {
+        margin-bottom: 10px;
+        font-size: 35px;
+    }
+
+    .card-payment-details-console strong {
+        color: black;
+    }
+
+    .card-payment-details h5 {
+        font-size: 30px;
+    }
+
+
+    .container-details-flex {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .container-price-pegi {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .container-price-pegi .price {
+        font-size: 35px;
+    }
+
+    /* SE IL PRODOTTO è DISPONIBILE */
+    .available {
+        padding: 10px 12px;
+    }
+
+    /* SE IL PRODOTTO NON è DISPONIBILE */
+    .not-available {
+        padding: 10px 12px;
+    }
+
+    .card-payment-details button {
+        font-size: 18px;
+        padding: 15px 50px;
+    }
+
+
+    /* DESCRIPTION SECTION */
+    /* REGOLE DESCRIZIONE PRODOTTO */
+    .container-description-product {
+        margin: 40px 0;
+        padding: 10px;
+    }
+
+    .container-description-product h5 {
+        font-size: 22px;
+    }
+
+    .container-description-product p {
+        font-size: 15px;
+    }
+
+    .corelated-container {
+        margin-bottom: 80px;
+    }
+
+    /* CONSOLE CAROUSEL */
+    .main-image {
+        margin-bottom: 10px;
+        width: 450px;
+        height: 350px;
+        position: relative;
+        margin-bottom: 5px;
+    }
+
+    /* GESTIONE IMMAGINI NEL CORELATED CONSOLE */
+    .container-img-console {
+        display: flex;
+        height: 250px;
+        width: 250px;
+        gap: 10px;
+        transition: transform 1s ease-in-out;
+        /* Transizione più fluida */
+        will-change: transform;
+    }
+
+    .img-console {
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+        transition: transform 0.3s ease-in-out;
+    }
+
+}
+
+@media screen and (max-width: 550px) {
+    .container-trend-cards-tablet .container-img-console {
+        width: 400px;
+        height: 300px;
+    }
+
+}
+
+@media screen and (max-width: 500px) {
+    .jumbo-container {
+        display: none;
+    }
+
+    .general-container-single-product {
+        width: 95%;
+    }
+
+    /* CONTAINER IMMAGINE GIOCO */
+    .card-image {
+        width: 400px;
+        height: 300px;
+        padding: 14px;
+    }
+
+    /* h5 titolo del console e accessori colore nero*/
+    .card-payment-details-console .title-console {
+        margin: 30px 0;
+        font-size: 25px;
+    }
+
+    .card-payment-details h5 {
+        font-size: 25px;
+        margin-top: 10px;
+    }
+
+    .container-price-pegi .price {
+        font-size: 30px;
+    }
+
+    /* SE IL PRODOTTO è DISPONIBILE */
+    .not-available,
+    .available {
+        padding: 5px 8px;
+        font-size: 13px;
+    }
+
+    .card-payment-details button {
+        font-size: 13px;
+        padding: 13px 25px;
+    }
+
+    /* DESCRIPTION SECTION */
+    /* REGOLE DESCRIZIONE PRODOTTO */
+    .container-description-product {
+        margin: 40px 0;
+        padding: 10px;
+    }
+
+    .container-description-product h5 {
+        font-size: 20px;
+    }
+
+    .container-description-product p {
+        font-size: 13px;
+    }
+
+    .corelated-container {
+        margin-bottom: 80px;
+    }
+
+    /* CONSOLE CAROUSEL */
+    .main-image {
+        width: 320px;
+        height: 280px;
+        position: relative;
+    }
+
+    .container-thumbnails {
+        display: none;
+    }
+
+    /* .container-thumbnails-image img {
+        width: 80px;
+        height: 50px;
+        object-fit: contain;
+        border-radius: 10px;
+        transition: all 0.3s ease;
+    } */
+
+    /* .main-image button {
+        position: absolute;
+        top: 40%;
+        border: none;
+        background-color: rgba(255, 255, 255, 0);
+        font-size: 30px;
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.3s ease-in-out;
+        padding: 20px 0;
+    } */
+}
+
+@media screen and (max-width: 550px) {
+    .container-img-console {
+        width: 300px;
+        height: 300px;
+    }
 }
