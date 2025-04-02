@@ -2,11 +2,15 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 // Importa useParams
 import { useParams } from 'react-router-dom';
-import "bootstrap/dist/css/bootstrap.min.css";
 import "../style/SingleProduct.css";
 // Per aggiungere i prodotti al carrello
 import { useCart } from "../contexts/CartContext";
 import { Link } from "react-router-dom";
+import { FaCartShopping } from "react-icons/fa6";
+import GenreFiltred from "./singleProductComponents/GenreFiltred";
+import ConsoleCrousel from "./singleProductComponents/ConsoleCarousel";
+import CorelatedConsole from "./singleProductComponents/CorelatedConsole";
+import CorelatedAccessories from "./singleProductComponents/CorelatedAccessories";
 
 export default function SingleProduct() {
 
@@ -55,18 +59,18 @@ export default function SingleProduct() {
     return (
         <>
             {/* Videogame card */}
-            <div className="single-product-container sfondo">
-                <div className="card d-flex flex-row justify-content-between">
+            <div className={`jumbo-container ${(isConsole || isAccessory) ? 'hidden' : ''}`} style={{ backgroundImage: `url(${data.image_url})` }}>
+            </div>
+            <div className="general-container-single-product">
+                <div className={`container-box ${isConsole || isAccessory ? '' : 'container-box-game'}`}>
                     {/* Parte sinistra con titolo e dettagli */}
-                    <div className="card-body-left">
-                        <h5 className="card-title mb-2">{data.name}</h5>
-                        <div className="image-try">
-                            <img className="image mr-4" src={data.image_url} alt={data.name} />
-                        </div>
-
+                    <div className="container-images">
+                        {isGame && <div className="card-image">
+                            <img src={data.image_url} alt={data.name} />
+                        </div>}
                         {/* Sezione per giochi */}
                         {isGame && (
-                            <>
+                            <div className="container-pegi">
                                 <p className="inline">
                                     PEGI: {pegiImages[data.pegi_rating] ? (
                                         <img className="pegi-image" src={pegiImages[data.pegi_rating]} alt={`PEGI ${data.pegi_rating}`} />
@@ -89,26 +93,16 @@ export default function SingleProduct() {
                                     data.multiplayer
                                 )}
                                 </p>
-                            </>
+                            </div>
                         )}
-
-                        {/* Sezione per console */}
-                        {isConsole && (
-                            <>
-                                <p>Specifiche hardware: {data.hardware_specs}</p>
-                                <p>Colore: {data.color}</p>
-                            </>
-                        )}
-
-                        <p>Descrizione: {data.description}</p>
+                        {(isConsole || isAccessory) &&
+                            <ConsoleCrousel product={data} />
+                        }
                     </div>
-
                     {/* Parte destra con prezzo e acquisto */}
-                    <div className="card-body-right justify-content-center d-flex-xl flex-wrap">
-                        <div className="card-right-img">
-                            <p className="card-text">
-                                <strong>Prezzo: {data.price} €</strong>
-                            </p>
+                    <div className={`card-payment-details ${isConsole || isAccessory ? 'card-payment-details-console' : 'card-payment-details'}`}>
+                        <h5 className={` " " ${isConsole || isAccessory ? 'title-console' : ''}`}>{data.name}</h5>
+                        <div >
                             {/* Mostra "Compatibile con" solo se non è console o accessorio */}
                             {!isConsole && !isAccessory && (
                                 <p>Compatibile con: {
@@ -126,15 +120,25 @@ export default function SingleProduct() {
                             )}
 
                             {isConsole && (
-                                <p>Specifiche tecniche: {data.hardware_specs}</p>
+                                <p>Brand: {data.brand_console}</p>
+                            )}
+                            {isAccessory && (
+                                <p>Brand: {data.brand}</p>
                             )}
 
-                            <p>Data di uscita: {new Date(data.release_date).toLocaleDateString('it-IT')}</p>
-                            <div className={`centered-price ${data.stock < 1 ? "hidden" : "available"}`}>
-                                {data.stock < 1 ? "Non disponibile" : "Disponibile"}
-                            </div>
-                            <div className={`centered-price ${data.stock > 0 ? "hidden" : "not-available"}`}>
+                            <p>
+                                Data di uscita: {new Date(data.release_date).toLocaleDateString('it-IT')}
+                            </p>
+                        </div>
+                        {/* <div className={`centered-price ${data.stock > 0 ? "hidden" : "not-available"}`}>
                                 Non Disponibile
+                            </div> */}
+                        <p className="price">
+                            <strong>{data.price} €</strong>
+                        </p>
+                        <div className="container-buttons">
+                            <div className={` ${data.stock === 0 ? "not-available" : "available"}`}>
+                                <div>{data.stock < 1 ? "Non disponibile" : "Disponibile"}</div>
                             </div>
                             <button
                                 onClick={() => addToCart({
@@ -143,13 +147,40 @@ export default function SingleProduct() {
                                     price: data.price,
                                     image: data.image_url
                                 })}
-                                className="add-cart centered-price"
+                                className={`${data.stock === 0 ? 'hidden' : ''} `}
                             >
-                                Aggiungi al carrello
+                                <FaCartShopping />  Aggiungi al carrello
                             </button>
                         </div>
                     </div>
                 </div>
+                <div className="container-description-product">
+                    <h5>Descrizione:</h5>
+                    {/* Sezione per console */}
+                    {isConsole && (
+                        <>
+                            <p>Specifiche hardware: {data.hardware_specs}</p>
+                            <p>Colore: {data.color}</p>
+                        </>
+                    )}
+
+                    <p>{data.description}</p>
+                </div>
+                {isGame &&
+                    < div className="corelated-container">
+                        <GenreFiltred product={data} />
+                    </div>
+                }
+                {(isConsole || isAccessory) &&
+                    <>
+                        < div className="corelated-container">
+                            <CorelatedConsole product={data} />
+                        </div>
+                        < div className="corelated-container">
+                            <CorelatedAccessories product={data} />
+                        </div>
+                    </>
+                }
             </div>
         </>
     )
