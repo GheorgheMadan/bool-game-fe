@@ -26,41 +26,61 @@ export default function CorelatedConsole({ product }) {
     useEffect(() => { fetchConsoles() }, [])
     useEffect(() => {
         // Applica il filtro quando i giochi sono cambiati
-        const filtered = consoles.filter((console) =>
-            console.brand_console === product.brand_console && console.name !== product.name
-        )
+        const filtered = consoles.filter((item) => {
+            if (product.brand_console) {
+                // Il prodotto è una console → Mostra altre console dello stesso brand
+                return item.brand_console === product.brand_console && item.name !== product.name;
+            } else {
+                // Il prodotto è un accessorio → Mostra le console dello stesso brand dell'accessorio
+                return item.brand_console === product.brand;
+            }
+        });
         setFilteredConsoles(filtered) // Imposta i giochi filtrati
     }, [consoles])
 
+    const getVisibleItems = () => {
+        if (window.innerWidth >= 1024) return 5;  // Desktop
+        if (window.innerWidth >= 768) return 4;   // Laptop
+        if (window.innerWidth >= 480) return 2;   // Tablet
+        return 1;  // Mobile
+    };
+
     // Funzione per lo scorrimento in avanti di una sola immagine 
     function nextSlide() {
-        if (index + 1 < filteredConsoles.length - 3) {
-            setIndex(index + 1) // aumenta l'indice di 1 
+        const visibleItems = getVisibleItems();
+        if (index + visibleItems < filteredConsoles.length) {
+            setIndex((prev) => prev + 1);
         } else {
-            // Ciclico: torna all'inizio quando arrivi alla fine
-            setIndex(0); // Torna alla prima immagine
+            setIndex(0); // Torna all'inizio se si raggiunge la fine
         }
     }
 
-    // Funzione per lo scorrimento indietro di una sola immagine 
     function prevSlide() {
         if (index === 0) {
-            // Ciclico: torna all'ultimo gioco quando sei alla prima immagine
-            setIndex(filteredConsoles.length - 4); // Torna all'ultimo gruppo di 4 immagini
+            setIndex(filteredConsoles.length - getVisibleItems()); // Vai all'ultima porzione di elementi visibili
         } else {
-            setIndex(index - 1); // Riduci l'indice di 1
+            setIndex((prev) => prev - 1);
         }
     }
+
+    useEffect(() => {
+        const handleResize = () => {
+            setIndex(0); // Reset index quando cambia la viewport
+        };
+        window.addEventListener("resize", handleResize);
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
 
     return (
         <>
             {filteredConsoles.length === 0 ? '' : <section>
                 <h2 className="title-h2  black-title">Potrebbero Piacerti Anche:</h2>
                 <div className="container-trend">
-                    <button onClick={nextSlide} className={`next-btn  ${filteredConsoles.length < 5 ? 'hidden' : ''}`}>
-                        <FontAwesomeIcon icon={faChevronRight} />
-                    </button>
+
                     <div className="container-trend-cards">
+                        <button onClick={nextSlide} className={`next-btn  ${filteredConsoles.length < 5 ? 'hidden' : ''}`}>
+                            <FontAwesomeIcon icon={faChevronRight} />
+                        </button>
                         {/* Estrae una porzione dell'array games, che va dall'indice index a index + 5. Quindi, ci saranno solo 5 giochi alla volta. */}
                         {filteredConsoles
                             .slice(index, index + 5)
@@ -76,82 +96,75 @@ export default function CorelatedConsole({ product }) {
                                     </div>
                                 </>
                             ))}
+                        <button onClick={prevSlide} className={`prev-btn  ${filteredConsoles.length < 5 ? 'hidden' : ''}`}>
+                            <FontAwesomeIcon icon={faChevronLeft} />
+                        </button>
                     </div>
-                    <button onClick={prevSlide} className={`prev-btn  ${filteredConsoles.length < 5 ? 'hidden' : ''}`}>
-                        <FontAwesomeIcon icon={faChevronLeft} />
-                    </button>
+                    <div className="container-trend-cards-laptop">
+                        <button onClick={nextSlide} className={`next-btn  ${filteredConsoles.length < 4 ? 'hidden' : ''}`}>
+                            <FontAwesomeIcon icon={faChevronRight} />
+                        </button>
+                        {filteredConsoles
+                            .slice(index, index + 4)
+                            .map((console) => (
+                                <>
+                                    <div key={console.id} className="container-img-console">                    <Link to={`/products/${console.id}`} onClick={() => window.scrollTo(0, 0)}>
+                                        <img className="img-console"
+                                            src={console.image_url}
+                                            alt={console.name}
+                                        />
+                                    </Link>
+                                    </div>
+                                </>
+                            ))}
+                        <button onClick={prevSlide} className={`prev-btn  ${filteredConsoles.length < 4 ? 'hidden' : ''}`}>
+                            <FontAwesomeIcon icon={faChevronLeft} />
+                        </button>
+                    </div>
+                    <div className="container-trend-cards-tablet">
+                        <button onClick={nextSlide} className={`next-btn  ${filteredConsoles.length < 2 ? 'hidden' : ''}`}>
+                            <FontAwesomeIcon icon={faChevronRight} />
+                        </button>
+                        {filteredConsoles
+                            .slice(index, index + 2)
+                            .map((console) => (
+                                <>
+                                    <div key={console.id} className="container-img-console">                    <Link to={`/products/${console.id}`} onClick={() => window.scrollTo(0, 0)}>
+                                        <img className="img-console"
+                                            src={console.image_url}
+                                            alt={console.name}
+                                        />
+                                    </Link>
+                                    </div>
+                                </>
+                            ))}
+                        <button onClick={prevSlide} className={`prev-btn  ${filteredConsoles.length < 2 ? 'hidden' : ''}`}>
+                            <FontAwesomeIcon icon={faChevronLeft} />
+                        </button>
+                    </div>
+                    <div className="container-trend-cards-mobile">
+                        <button onClick={nextSlide} className={`next-btn  ${filteredConsoles.length < 2 ? 'hidden' : ''}`}>
+                            <FontAwesomeIcon icon={faChevronRight} />
+                        </button>
+                        {filteredConsoles
+                            .slice(index, index + 1)
+                            .map((console) => (
+                                <>
+                                    <div key={console.id} className="container-img-console">                    <Link to={`/products/${console.id}`} onClick={() => window.scrollTo(0, 0)}>
+                                        <img className="img-console"
+                                            src={console.image_url}
+                                            alt={console.name}
+                                        />
+                                    </Link>
+                                    </div>
+                                </>
+                            ))}
+                        <button onClick={prevSlide} className={`prev-btn  ${filteredConsoles.length < 2 ? 'hidden' : ''}`}>
+                            <FontAwesomeIcon icon={faChevronLeft} />
+                        </button>
+                    </div>
                 </div>
-
             </section>}
         </>
     )
 }
-
-{/* <div className="container-trend-cards-laptop">
-
-    {filteredConsoles
-        .slice(index, index + 5)
-        .map((console) => (
-            <>
-                <div key={console.id} className="container-img-console">
-                    <Link to={`/products/${console.id}`} onClick={() => window.scrollTo(0, 0)}>
-                        <img className="img-console"
-                            src={console.image_url}
-                            alt={console.name}
-                        />
-                    </Link>
-                </div>
-            </>
-        ))}
-</div> */}
-{/* <div className="container-trend-cards-laptop">
-                
-{filteredGames
-    .slice(index, index + 4)
-    .map((game) => (
-        <>
-            <div key={game.id} className="container-img">
-                <Link to={`/products/${game.id}`} onClick={() => window.scrollTo(0, 0)}>
-                    <img className="img-gioco "
-                        src={game.image_url}
-                        alt={game.name}
-                    />
-                </Link>
-            </div>
-        </>
-    ))}
-</div>
-<div className="container-trend-cards-tablet">
-
-{filteredGames
-    .slice(index, index + 2)
-    .map((game) => (
-        <>
-            <div key={game.id} className="container-img">
-                <Link to={`/products/${game.id}`} onClick={() => window.scrollTo(0, 0)}>
-                    <img className="img-gioco "
-                        src={game.image_url}
-                        alt={game.name}
-                    />
-                </Link>
-            </div>
-        </>
-    ))}
-</div>
-<div className="container-trend-cards-mobile">
-
-{filteredGames
-    .slice(index, index + 1)
-    .map((game) => (
-        <>
-            <div key={game.id} className="container-img">
-                <Link to={`/products/${game.id}`} onClick={() => window.scrollTo(0, 0)}>
-                    <img className="img-gioco "
-                        src={game.image_url}
-                        alt={game.name}
-                    />
-                </Link>
-            </div>
-        </>
-    ))}
-</div> */}
