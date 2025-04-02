@@ -1,0 +1,41 @@
+.back-button {
+    position: absolute;
+    left: 20px;
+    background-color: #343a40;
+    margin-top: 10px;
+    /* Grigio scuro */
+    color: #ffffff;
+    /* Testo bianco */
+    border: none;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    /* z-index: 10000; */
+    /* Spazio tra l'icona e il testo */
+}
+
+.back-button:hover {
+    background-color: #495057;
+    /* Grigio più chiaro */
+    transform: scale(1.05);
+    /* Leggera crescita */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.back-button:active {
+    transform: scale(0.95);
+    /* Effetto click */
+}
+
+@media screen and (max-width:1000px) {
+
+    .back-button {
+        display: none;
+    }
+}
