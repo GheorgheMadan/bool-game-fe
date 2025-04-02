@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import "../style/SingleProduct.css";
 // Per aggiungere i prodotti al carrello
 import { useCart } from "../contexts/CartContext";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import { FaCartShopping } from "react-icons/fa6";
 import GenreFiltred from "./singleProductComponents/GenreFiltred";
 import ConsoleCrousel from "./singleProductComponents/ConsoleCarousel";
@@ -20,7 +20,6 @@ export default function SingleProduct() {
     const { productId } = useParams();
     const [data, setData] = useState(null);
     const [error, setError] = useState(null);
-    // const [productData, setProductData] = useState(null);
 
     // useEffect(() => {
     //     if (productId) {
@@ -31,52 +30,77 @@ export default function SingleProduct() {
     // }, [productId]);
 
     useEffect(() => {
+        // Verifica se il productId è disponibile
         if (productId) {
-            // console.log("Tidio Chat API:", window.tidioChatApi);
+            // Esegui la richiesta API per ottenere i dettagli del prodotto tramite il productId
             axios.get(`http://localhost:3000/api/products/${productId}`)
                 .then(res => {
-                    // console.log("Product data received:", res.data);
+                    // Salva i dati del prodotto nel state
                     setData(res.data);
 
-                    // Attendi che Tidio sia pronto
+                    // Funzione per verificare che l'API di Tidio sia pronta
                     const checkTidioReady = () => {
-                        // console.log("Checking Tidio readiness...");
+                        // Verifica se l'API di Tidio è disponibile
                         if (window.tidioChatApi && window.tidioChatApi.on) {
                             console.log("Tidio Chat API detected, attaching ready event...");
-                            window.tidioChatApi.on("ready", function () {
-                                // console.log("Tidio Chat API is ready, sending data to Tidio");
 
-                                window.tidioChatApi.setVisitorData({
-                                    name: res.data.name,
-                                    price: res.data.price,
-                                    description: res.data.description
+                            // Verifica se i dati del visitatore non sono già stati impostati
+                            if (!window.tidioChatApi.isVisitorDataSet) {
+                                console.log("Tidio Chat API is ready!");
+                                window.tidioChatApi.on("ready", function () {
+                                    console.log("Tidio Chat API is ready!");
+
+                                    // Imposta i dati del visitatore con le informazioni del prodotto
+                                    window.tidioChatApi.setVisitorData({
+                                        productName: res.data.name,
+                                        productPrice: res.data.price,
+                                        productDescription: res.data.description
+                                    });
+
+                                    // Segna i dati come già impostati, evitando di impostarli nuovamente
+                                    window.tidioChatApi.isVisitorDataSet = true;
+                                    console.log("Dati del visitatore impostati:", {
+                                        productName: res.data.name,
+                                        productPrice: res.data.price,
+                                        productDescription: res.data.description
+                                    });
+
+                                    // Ritardo prima di inviare il messaggio nel chat di Tidio
+                                    setTimeout(() => {
+                                        // Verifica se la funzione displayMessage è disponibile
+                                        if (window.tidioChatApi.displayMessage) {
+                                            // Invia un messaggio predefinito con i dettagli del prodotto
+                                            window.tidioChatApi.displayMessage(
+                                                `🔎 Stai guardando: ${res.data.name}\n
+                                                💰 Prezzo: ${res.data.price}€\n
+                                                📖 Descrizione: ${res.data.description}`
+                                            );
+                                            console.log("Messaggio inviato con successo");
+                                        } else {
+                                            console.log("Tidio displayMessage non disponibile.");
+                                        }
+                                    }, 2000); // Attendere un altro po' prima di inviare il messaggio
                                 });
-                                console.log(res.data.price);
-
-
-                                setTimeout(() => {
-                                    if (window.tidioChatApi.displayMessage) {
-                                        console.log("Sending message to Tidio...");
-                                        window.tidioChatApi.displayMessage(
-                                            `Stai guardando: ${res.data.name}. Prezzo: ${res.data.price}€. Descrizione: ${res.data.description}`
-                                        );
-                                    } else {
-                                        console.log("Tidio displayMessage non disponibile.");
-                                    }
-                                }, 2000);
-                            });
+                            } else {
+                                console.log("Dati visitatore già impostati.");
+                            }
                         } else {
-                            setTimeout(checkTidioReady, 500);
+                            // Se Tidio non è pronto, riprova dopo 1 secondo
+                            setTimeout(() => {
+                                checkTidioReady(); // Riprovare se Tidio non è pronto
+                            }, 1000);
                         }
                     };
-
+                    // Chiama la funzione per verificare se Tidio è pronto
                     checkTidioReady();
                 })
-                .catch(() => setError("Errore nel recupero del prodotto o della categoria."));
+                .catch(err => {
+                    // Gestione degli errori in caso di problemi con la richiesta API
+                    console.error("Errore nel recupero del prodotto:", err);
+                    setError("Errore nel recupero del prodotto o della categoria.");
+                });
         }
-    }, [productId]);
-
-    console.log("Rendering product:", data);
+    }, [productId]);   // Il codice verrà eseguito ogni volta che productId cambia
 
     if (error) {
         return <div>{error}</div>;
