@@ -11,36 +11,40 @@ import { Link } from "react-router-dom";
 export default function PlaystationPage() {
     return (
         <>
-            <div className="playstation-products-container">
-                <section className="container-nav-home">
-                    <div className='container-navigator-icons playstation'>
-                        <div>
-                            {/* Pulsante Console */}
-                            <Link to='/playstation/consoles'>
-                                <button>
-                                    <Joystick size={30} /> Console
-                                </button>
-                            </Link>
-                        </div>
-                        <div>
-                            {/* Pulsante Accessori */}
-                            <Link to='/playstation/accessories'>
-                                <button>
-                                    <Gamepad2 size={30} /> Accessori
-                                </button>
-                            </Link>
-                        </div>
-                        <div>
-                            {/* Pulsante Giochi */}
-                            <Link to='/playstation/games'>
-                                <button>
-                                    <Disc size={30} /> Giochi
-                                </button>
-                            </Link>
-                        </div>
-                    </div>
 
-                </section>
+
+            <div className="playstation-products-container">
+                <div className='general-container'>
+                    <section className="container-nav-home">
+                        <div className='container-navigator-icons playstation'>
+                            <div>
+                                {/* Pulsante Console */}
+                                <Link to='/playstation/consoles'>
+                                    <button>
+                                        <Joystick size={30} /> Console
+                                    </button>
+                                </Link>
+                            </div>
+                            <div>
+                                {/* Pulsante Accessori */}
+                                <Link to='/playstation/accessories'>
+                                    <button>
+                                        <Gamepad2 size={30} /> Accessori
+                                    </button>
+                                </Link>
+                            </div>
+                            <div>
+                                {/* Pulsante Giochi */}
+                                <Link to='/playstation/games'>
+                                    <button>
+                                        <Disc size={30} /> Giochi
+                                    </button>
+                                </Link>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
                 <div className='playstation-products-container-2 '>
                     <h2 className='playstation-h2'>Benvenuto nel mondo Playstation</h2>
                     <PlaystationConsoles />
