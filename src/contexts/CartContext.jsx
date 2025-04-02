@@ -7,9 +7,10 @@ const CartContext = createContext();
 // Componente che avvolge l'intera app per fornire il carrello
 export const CartProvider = ({ children }) => {
     const [cart, setCart] = useState([]);
-    const [isCartInitialized, setIsCartInitialized] = useState(false); // Stato per tracciare l'inizializzazione del carrello
+    const [isCartInitialized, setIsCartInitialized] = useState(false);
+    const [errorMessages, setErrorMessages] = useState({}); // Stato per errori specifici per ogni prodotto
 
-    // Funzione centrale per aggiornare lo stock nel database
+    // Funzione per aggiornare lo stock nel database
     const updateStockInDB = async (productId, quantityChange) => {
         try {
             await axios.post('http://localhost:3000/api/stock/adjust', {
@@ -17,25 +18,21 @@ export const CartProvider = ({ children }) => {
                 quantityChange,
             });
         } catch (error) {
-            console.error('Errore nell\'aggiornamento dello stock:', error);
+            console.error("Errore nell'aggiornamento dello stock:", error);
         }
     };
 
     useEffect(() => {
         const storedCart = JSON.parse(localStorage.getItem('cart')) || [];
-        console.log("Carrello caricato dal localStorage:", storedCart);
         setCart(storedCart);
-        setIsCartInitialized(true); // Imposta lo stato come inizializzato
+        setIsCartInitialized(true);
     }, []);
 
-    // Salva il carrello nel localStorage ogni volta che cambia, ma solo dopo l'inizializzazione
     useEffect(() => {
         if (isCartInitialized) {
             if (cart.length > 0) {
-                console.log("Salvo il carrello nel localStorage:", cart);
                 localStorage.setItem('cart', JSON.stringify(cart));
             } else {
-                console.log("Rimuovo il carrello dal localStorage perché è vuoto.");
                 localStorage.removeItem('cart');
             }
         }
@@ -44,15 +41,12 @@ export const CartProvider = ({ children }) => {
     // Aggiungi prodotto al carrello
     const addToCart = async (product) => {
         try {
-            // Recupera lo stock disponibile dal database
             const response = await axios.get(`http://localhost:3000/api/products/${product.id}`);
             const availableStock = response.data.stock;
             const existingProduct = cart.find(item => item.id === product.id);
 
             if (existingProduct) {
-                // Se il prodotto esiste già, controlla se è possibile aumentare la quantità
                 const totalAvailableStock = availableStock + existingProduct.quantity;
-
                 if (existingProduct.quantity < totalAvailableStock) {
                     setCart((prevCart) =>
                         prevCart.map(item =>
@@ -61,19 +55,18 @@ export const CartProvider = ({ children }) => {
                                 : item
                         )
                     );
-                    // Aggiorna lo stock nel database (decrementa)
                     await updateStockInDB(product.id, -1);
+                    setErrorMessages(prev => ({ ...prev, [product.id]: null })); // Resetta errore per il prodotto
                 } else {
-                    console.log("❌ Impossibile aggiungere altro prodotto: quantità massima raggiunta.");
+                    setErrorMessages(prev => ({ ...prev, [product.id]: "Quantità massima raggiunta." }));
                 }
             } else {
-                // Se il prodotto non esiste nel carrello, aggiungilo solo se c'è disponibilità di stock
                 if (availableStock > 0) {
                     setCart((prevCart) => [...prevCart, { ...product, quantity: 1 }]);
-                    // Aggiorna lo stock nel database (decrementa)
                     await updateStockInDB(product.id, -1);
+                    setErrorMessages(prev => ({ ...prev, [product.id]: null }));
                 } else {
-                    console.log("❌ Impossibile aggiungere il prodotto: stock esaurito.");
+                    setErrorMessages(prev => ({ ...prev, [product.id]: "❌ Stock esaurito." }));
                 }
             }
         } catch (error) {
@@ -84,20 +77,13 @@ export const CartProvider = ({ children }) => {
     // Aumenta la quantità di un prodotto nel carrello
     const increaseQuantity = async (productId) => {
         try {
-            // Recupera lo stock disponibile dal database
             const response = await axios.get(`http://localhost:3000/api/products/${productId}`);
-            // const productStock = response.data.stock;
             const availableStock = response.data.stock;
 
-            // Trova il prodotto nel carrello
             const productInCart = cart.find(item => item.id === productId);
-
-            // Verifica se è possibile aumentare la quantità
-            // Considera sia lo stock disponibile che la quantità già nel carrello
             const totalAvailableStock = availableStock + productInCart.quantity;
 
             if (productInCart.quantity < totalAvailableStock) {
-                // Aumenta la quantità nel carrello
                 setCart((prevCart) =>
                     prevCart.map(item =>
                         item.id === productId
@@ -105,16 +91,14 @@ export const CartProvider = ({ children }) => {
                             : item
                     )
                 );
-
-                // Aggiorna lo stock nel database (decrementa)
                 await updateStockInDB(productId, -1);
+                setErrorMessages(prev => ({ ...prev, [productId]: null })); // Rimuove l'errore per questo prodotto
             } else {
-                console.log("❌ Impossibile aggiungere altro prodotto: quantità massima raggiunta.");
+                setErrorMessages(prev => ({ ...prev, [productId]: "Quantità massima raggiunta." }));
             }
         } catch (error) {
             console.error("Errore durante il recupero dello stock:", error);
         }
-        // saveCartToLocalStorage(cart);
     };
 
     // Riduci la quantità di un prodotto nel carrello
@@ -126,32 +110,28 @@ export const CartProvider = ({ children }) => {
                     : item
             )
         );
-        // Solo se la quantità è maggiore di 1, aggiorna lo stock
+
         const product = cart.find(item => item.id === productId);
         if (product && product.quantity > 1) {
-            await updateStockInDB(productId, 1); // incremento dello stock
+            await updateStockInDB(productId, 1);
         }
-        // saveCartToLocalStorage(cart);
+
+        setErrorMessages(prev => ({ ...prev, [productId]: null })); // Rimuove l'errore per questo prodotto
     };
 
-    // Funzione per rimuovere un singolo prodotto dal carrello e ripristinare lo stock
+    // Funzione per rimuovere un singolo prodotto dal carrello
     const clearCart = async (productId) => {
-        // Trova il prodotto da rimuovere
         const productToRemove = cart.find(product => product.id === productId);
 
         if (productToRemove) {
-            // Ripristina lo stock per il prodotto rimosso
             await updateStockInDB(productId, productToRemove.quantity);
-
-            // Rimuovi il prodotto dal carrello
-            const updatedCart = cart.filter(product => product.id !== productId);
-            setCart(updatedCart); // Aggiorna lo stato del carrello
+            setCart(cart.filter(product => product.id !== productId));
+            setErrorMessages(prev => ({ ...prev, [productId]: null })); // Rimuove l'errore per il prodotto rimosso
         }
-
     };
 
     return (
-        <CartContext.Provider value={{ cart, setCart, addToCart, increaseQuantity, decreaseQuantity, clearCart }}>
+        <CartContext.Provider value={{ cart, setCart, addToCart, increaseQuantity, decreaseQuantity, clearCart, errorMessages }}>
             {children}
         </CartContext.Provider>
     );

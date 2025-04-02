@@ -4,6 +4,7 @@
     padding: 30px;
     color: white;
     box-shadow: 0px 0px 15px rgba(255, 77, 77, 0.2);
+    min-height: 430px;
 }
 
 /* Titolo del carrello */
@@ -91,14 +92,15 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: rgba(41, 41, 61, 0.85);
     gap: 20px;
     min-height: 140px;
     backdrop-filter: blur(10px);
     padding: 15px;
+    background: rgba(41, 41, 61, 0.85);
     border-radius: 12px;
     transition: all 0.3s ease-in-out;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+    position: relative;
 }
 
 .cart-item:hover {
@@ -199,6 +201,18 @@
     transform: scale(1.1);
 }
 
+.error-message-cart {
+    color: white;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    font-weight: bold;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+
 /********************************
     sezione recap totali del carrello
 *********************************/
@@ -280,6 +294,10 @@
     transform: scale(1.05);
     box-shadow: 0px 6px 12px rgba(23, 180, 8, 0.856);
 }
+
+/********************************
+   inizio media
+*********************************/
 
 @media screen and (max-width:1000px) {
     .cart-content {
