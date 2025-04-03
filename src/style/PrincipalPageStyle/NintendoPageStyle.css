@@ -244,3 +244,56 @@
     box-shadow: 0 0 10px rgba(233, 30, 99, 0.5);
     /* Ombra dinamica quando è in focus */
 }
+
+/* Tablet (≤ 1024px) */
+@media screen and (max-width: 1024px) {
+    .nintendo-products-container-2 {
+        width: 85%;
+        margin: auto;
+    }
+
+    .nintendo-product-list {
+        gap: 5px;
+    }
+
+    .nintendo-products-container {
+        padding: 0rem;
+    }
+}
+
+/* Mobile (≤ 768px) */
+@media screen and (max-width: 768px) {
+    .nintendo-products-container-2 {
+        width: 90%;
+        margin: auto;
+    }
+
+    .nintendo-product-list {
+        gap: 5px;
+    }
+
+    .nintendo-products-container {
+        padding: 0rem;
+    }
+}
+
+/* Mobile piccolo (≤ 480px) */
+@media screen and (max-width: 480px) {
+    .nintendo-products-container-2 {
+        width: 95%;
+        margin: auto;
+    }
+
+    .nintendo-product-list {
+        gap: 25px;
+    }
+
+    .nintendo-products-container {
+        padding: 0rem;
+    }
+
+    .nintendo-product-card {
+        height: 380px;
+        width: 280px;
+    }
+}
