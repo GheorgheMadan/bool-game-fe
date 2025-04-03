@@ -187,3 +187,56 @@
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     /* Ombra del testo */
 }
+
+/* Tablet (≤ 1024px) */
+@media screen and (max-width: 1024px) {
+    .xbox-products-container-2 {
+        width: 85%;
+        margin: auto;
+    }
+
+    .xbox-product-list {
+        gap: 5px;
+    }
+
+    .xbox-products-container {
+        padding: 0rem;
+    }
+}
+
+/* Mobile (≤ 768px) */
+@media screen and (max-width: 768px) {
+    .xbox-products-container-2 {
+        width: 90%;
+        margin: auto;
+    }
+
+    .xbox-product-list {
+        gap: 5px;
+    }
+
+    .xbox-products-container {
+        padding: 0rem;
+    }
+}
+
+/* Mobile piccolo (≤ 480px) */
+@media screen and (max-width: 480px) {
+    .xbox-products-container-2 {
+        width: 95%;
+        margin: auto;
+    }
+
+    .xbox-product-list {
+        gap: 25px;
+    }
+
+    .xbox-products-container {
+        padding: 0rem;
+    }
+
+    .xbox-product-card {
+        height: 380px;
+        width: 280px;
+    }
+}
