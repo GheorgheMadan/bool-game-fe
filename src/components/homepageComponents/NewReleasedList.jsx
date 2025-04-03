@@ -23,7 +23,7 @@ export default function NewReleasedList() {
             .catch(err => console.error(err)
             )
     }
-    useEffect(() => { fetchGames() }, [])
+    useEffect(() => { fetchGames() }, [])  // Effettua la chiamata per i giochi all'inizio (solo al primo render)
     useEffect(() => {
         // Applica il filtro quando i giochi sono cambiati
         const filtered = games.filter((game) => game.release_date >= '2024-01-01')
@@ -53,8 +53,10 @@ export default function NewReleasedList() {
     return (
         <>
             <section>
+                {/* Titolo della sezione */}
                 <h2 className="title-h2  black-title">🆕 Ultime uscite</h2>
                 <div className="container-trend">
+                    {/* Pulsante per andare avanti */}
                     <button onClick={nextSlide} className="next-btn">
                         <FontAwesomeIcon icon={faChevronRight} />
                     </button>
@@ -75,6 +77,7 @@ export default function NewReleasedList() {
                                 </>
                             ))}
                     </div>
+                    {/* Contenitore per la visualizzazione su laptop */}
                     <div className="container-trend-cards-laptop">
                         {/* Estrae una porzione dell'array games, che va dall'indice index a index + 5. Quindi, ci saranno solo 5 giochi alla volta. */}
                         {filteredGames
@@ -92,6 +95,7 @@ export default function NewReleasedList() {
                                 </>
                             ))}
                     </div>
+                    {/* Contenitore per la visualizzazione su tablet */}
                     <div className="container-trend-cards-tablet">
                         {/* Estrae una porzione dell'array games, che va dall'indice index a index + 5. Quindi, ci saranno solo 5 giochi alla volta. */}
                         {filteredGames
@@ -109,6 +113,7 @@ export default function NewReleasedList() {
                                 </>
                             ))}
                     </div>
+                    {/* Contenitore per la visualizzazione su mobile */}
                     <div className="container-trend-cards-mobile">
                         {/* Estrae una porzione dell'array games, che va dall'indice index a index + 5. Quindi, ci saranno solo 5 giochi alla volta. */}
                         {filteredGames
@@ -126,6 +131,7 @@ export default function NewReleasedList() {
                                 </>
                             ))}
                     </div>
+                    {/* Pulsante per tornare indietro */}
                     <button onClick={prevSlide} className="prev-btn">
                         <FontAwesomeIcon icon={faChevronLeft} />
                     </button>

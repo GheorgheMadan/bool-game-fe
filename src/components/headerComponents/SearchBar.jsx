@@ -10,10 +10,10 @@ import GlobalContextResults from '../../contexts/GlobalContextResult';
 import { useCart } from '../../contexts/CartContext'; // Importa il contesto del carrello
 
 export default function SearchBar() {
-    const { cart } = useCart(); // Ottieni il carrello dal contesto
+    const { cart } = useCart();  // Ottieni il carrello dal contesto globale
     const { setResults } = useContext(GlobalContextResults); // Aggiorna i risultati nel contesto globale
-    const [isOpen, setIsOpen] = useState(false);
-    const [searchParams, setSearchParams] = useSearchParams(); // Hook per gestire i parametri di query
+    const [isOpen, setIsOpen] = useState(false);   // Stato per gestire l'apertura e la chiusura della barra di ricerca
+    const [searchParams, setSearchParams] = useSearchParams();  // Hook per gestire i parametri di query nell'URL
     const [input, setInput] = useState(searchParams.get('name') || ''); // Stato per il testo della ricerca
     const navigate = useNavigate();
 
@@ -32,9 +32,10 @@ export default function SearchBar() {
     }
 
     // Funzione per gestire la ricerca
-    async function search(e) {
+    async function search(e) {  // Impedisce il comportamento predefinito del form (refresh della pagina)
         e.preventDefault();
         try {
+            // Effettua una richiesta GET al server per cercare i prodotti con il nome inserito nell'input
             const response = await axios.get(`http://localhost:3000/api/products/search?name=${input}`);
             setResults(response.data); // Aggiorna i risultati nel contesto globale
             navigate(`/search?name=${input}`); // Naviga alla pagina dei risultati di ricerca mantenendo i parametri di query
@@ -46,6 +47,7 @@ export default function SearchBar() {
 
     return (
         <div className='container-icons'>
+            {/* Contenitore della barra di ricerca */}
             <div className={`container-search-header ${isOpen ? 'open' : ''}`}>
                 <form onSubmit={search}>
                     <input
@@ -57,13 +59,16 @@ export default function SearchBar() {
                         placeholder="Cerca..."
                     />
                 </form>
+                {/* Icona per aprire/chiudere la ricerca */}
                 <button onClick={toggleSearch}>
                     <FontAwesomeIcon icon={faSearch} className='icon' />
                 </button>
             </div>
+            {/* Contenitore del carrello */}
             <div className='container-cart'>
                 <NavLink to='/cart'>
                     <FontAwesomeIcon icon={faShoppingCart} className='icon' />
+                    {/* Mostra il numero di articoli nel carrello se maggiore di zero */}
                     {totalItems > 0 && (
                         <span className='cart-count'>{totalItems}</span>
                     )}

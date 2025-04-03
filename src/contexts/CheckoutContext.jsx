@@ -12,23 +12,25 @@ export const CheckoutProvider = ({ children }) => {
     // Se setCart non è disponibile, significa che CartProvider non avvolge correttamente l'app
     if (!setCart) {
         console.error("❌ Errore: setCart non è disponibile nel contesto! Controlla che CartProvider avvolga l'app correttamente.");
-        // Previene il crash dell'app
+        // Previene il crash dell'app restituendo null (evita di renderizzare il provider)
         return null;
     }
 
 
     // Funzione per svuotare il carrello dopo un pagamento riuscito
     const clearCartAfterPayment = () => {
-        setCart([]); // Svuota il carrello
+        setCart([]); // Svuota il carrello impostandolo come array vuoto
         localStorage.removeItem('cart'); // Rimuovi il carrello dal localStorage
         console.log("✅ Carrello svuotato dopo il pagamento.");
     };
 
     return (
+        // Fornisce la funzione di svuotamento del carrello a tutti i componenti figli
         <CheckoutContext.Provider value={{ clearCartAfterPayment }}>
             {children}
         </CheckoutContext.Provider>
     );
 };
 
+// Hook personalizzato per utilizzare il contesto del checkout
 export const useCheckout = () => useContext(CheckoutContext);

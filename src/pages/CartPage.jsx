@@ -5,36 +5,46 @@ import '../style/Cart.css';
 import { Link } from 'react-router-dom';
 
 const CartPage = () => {
+    // Ottiene i dati del carrello e le funzioni di gestione dal contesto CartContext
     const { cart, increaseQuantity, decreaseQuantity, clearCart, errorMessages } = useCart();
     const navigate = useNavigate();
 
+    // Gestisce l'aumento della quantità di un prodotto nel carrello
     const handleIncrease = (productId) => {
         increaseQuantity(productId);
     };
 
+    // Gestisce la diminuzione della quantità di un prodotto nel carrello
     const handleDecrease = (productId) => {
         decreaseQuantity(productId);
     };
 
+    // Rimuove un prodotto dal carrello
     const handleRemove = (productId) => {
         clearCart(productId);
     };
 
+    // Calcola il subtotale del carrello (senza considerare la spedizione)
     const calculateSubTotal = () => {
         return cart.reduce((total, product) => total + product.price * product.quantity, 0).toFixed(2);
     };
 
+    // Calcola il costo della spedizione in base al totale del carrello
     const calculateShippingCost = () => {
         const total = parseFloat(calculateSubTotal());
+        // Spedizione gratuita se il totale è maggiore di 199,99€
         return total > 199.99 ? 0 : 9.99;
     };
 
+    // Ottieni il costo di spedizione
     const shippingCost = calculateShippingCost();
 
+    // Funzione per andare alla home page
     const goToHome = () => {
         navigate('/');
     };
 
+    // Funzione per andare alla pagina di checkout, passando il carrello come stato
     const goToCheckout = () => {
         navigate('/checkout', { state: { cart } });
     };

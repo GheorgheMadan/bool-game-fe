@@ -10,14 +10,19 @@ import { useState } from 'react';
 import { faChevronUp, faChevronDown } from '@fortawesome/free-solid-svg-icons';
 
 export default function NavBarHeader() {
+    // Stato per gestire l'apertura e chiusura del menu laterale
     const [isOpen, setIsOpen] = useState(false)
+    // Stati per gestire l'apertura dei menu a tendina
     const [openDropdown1, setOpenDropdown1] = useState(null);
     const [openDropdown2, setOpenDropdown2] = useState(null);
     const [openDropdown3, setOpenDropdown3] = useState(null);
 
+
+    // Funzione per toggle del menu laterale
     function toggleMenu() {
         setIsOpen(!isOpen)
     }
+    // Funzioni per gestire l'apertura e chiusura dei dropdown
     function dropdown1() {
         setOpenDropdown1(!openDropdown1)
         setOpenDropdown2(false)
@@ -33,9 +38,12 @@ export default function NavBarHeader() {
         setOpenDropdown1(false)
         setOpenDropdown2(false)
     }
+
     return (
         <>
+            {/* Contenitore per la navigazione */}
             <div className='container-nav' >
+                {/* Logo e icona hamburger (menu laterale) */}
                 <div className='logo'>
                     <FaBars className='burger-icon' onClick={toggleMenu} />
                     <Link to='/'>
@@ -44,6 +52,8 @@ export default function NavBarHeader() {
                         </div>
                     </Link>
                 </div>
+
+                {/* Icone di navigazione principali */}
                 <div className='container-link'>
                     <NavLink to='/' className='icon home' >
                         <FontAwesomeIcon icon={faHome} />
@@ -58,25 +68,33 @@ export default function NavBarHeader() {
                         <BsNintendoSwitch />
                     </NavLink>
                 </div>
+
+                {/* Barra di ricerca */}
                 <SearchBar />
             </div>
+
+            {/* Menu laterale che appare quando 'isOpen' è true */}
             {
                 isOpen &&
                 <div className={`container-b-menu ${isOpen ? 'open' : 'close'}`} onClick={() => setIsOpen(false)}>
+                    {/* Link per la Home */}
                     <div className='home-m'>
                         <NavLink to='/'>
                             <FontAwesomeIcon icon={faHome} />
                             <span>Home</span>
                         </NavLink>
                     </div>
+                    {/* Dropdown per PlayStation */}
                     <div onClick={(event) => event.stopPropagation()}>
                         <div onClick={dropdown1} className='container-items-b-menu'>
                             <div className='playstation-m'>
                                 <FontAwesomeIcon icon={faPlaystation} className='menu-icon' />
                                 <span>PlayStation</span>
                             </div>
+                            {/* Icona per espandere o ridurre il dropdown */}
                             <FontAwesomeIcon icon={openDropdown1 ? faChevronUp : faChevronDown} />
                         </div>
+                        {/* Contenuto del dropdown PlayStation */}
                         {openDropdown1 && (
                             <div className='dropdown-content'>
                                 <NavLink to='/playstation' onClick={() => setIsOpen(false)}>Playstation</NavLink>
@@ -86,14 +104,18 @@ export default function NavBarHeader() {
                             </div>
                         )}
                     </div>
+
+                    {/* Dropdown per Xbox */}
                     <div onClick={(event) => event.stopPropagation()}>
                         <div onClick={dropdown2} className='container-items-b-menu'>
                             <div className='xbox-m'>
                                 <FontAwesomeIcon icon={faXbox} className='menu-icon' />
                                 <span>Xbox</span>
                             </div>
+                            {/* Icona per espandere o ridurre il dropdown */}
                             <FontAwesomeIcon icon={openDropdown2 ? faChevronUp : faChevronDown} />
                         </div>
+                        {/* Contenuto del dropdown Xbox */}
                         {openDropdown2 && (
                             <div className='dropdown-content'>
                                 <NavLink to='/xbox' onClick={() => setIsOpen(false)}>Xbox</NavLink>
@@ -103,14 +125,17 @@ export default function NavBarHeader() {
                             </div>
                         )}
                     </div>
+                    {/* Dropdown per Nintendo */}
                     <div onClick={(event) => event.stopPropagation()} >
                         <div onClick={dropdown3} className='container-items-b-menu'>
                             <div className='nintendo-m'>
                                 <BsNintendoSwitch className='menu-icon' />
                                 <span>Nintendo</span>
                             </div>
+                            {/* Icona per espandere o ridurre il dropdown */}
                             <FontAwesomeIcon icon={openDropdown3 ? faChevronUp : faChevronDown} />
                         </div>
+                        {/* Contenuto del dropdown Nintendo */}
                         {openDropdown3 && (
                             <div className='dropdown-content'>
                                 <NavLink to='/nintendo' onClick={() => setIsOpen(false)}>Nintendo</NavLink>
@@ -122,7 +147,6 @@ export default function NavBarHeader() {
                     </div>
                 </div>
             }
-            {/*  */}
         </>
     )
 }

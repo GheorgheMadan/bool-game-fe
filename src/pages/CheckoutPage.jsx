@@ -19,14 +19,14 @@ const stripePromise = loadStripe(
 );
 
 const CheckoutForm = () => {
-  const { clearCartAfterPayment } = useCheckout();
+  const { clearCartAfterPayment } = useCheckout();   // Funzione per svuotare il carrello dopo il pagamento
   const { cart } = useCart(); // Accesso al carrello dal contesto
-  const [loading, setLoading] = useState(false);
-  const [total, setTotal] = useState(0);
-  const [clientSecret, setClientSecret] = useState(null);
-  const [shippingCost, setShippingCost] = useState(0);
+  const [loading, setLoading] = useState(false);  // Stato di caricamento per il pagamento
+  const [total, setTotal] = useState(0);  // Totale dell'ordine
+  const [clientSecret, setClientSecret] = useState(null);  // Chiave cliente per Stripe
+  const [shippingCost, setShippingCost] = useState(0);  // Costo della spedizione
 
-  // Stato per i dettagli dell'utente
+  // Stato per i dettagli dell'utente (form)
   const [userDetails, setUserDetails] = useState({
     firstName: "",
     lastName: "",
@@ -46,7 +46,7 @@ const CheckoutForm = () => {
   const elements = useElements();
   const navigate = useNavigate();
 
-  // Funzione per calcolare il totale dell'ordine
+  // Calcola il totale dell'ordine ogni volta che cambia il carrello
   useEffect(() => {
     const totalAmount = calculateTotal(cart); // Passa il carrello come parametro
     setTotal(totalAmount);
@@ -63,7 +63,7 @@ const CheckoutForm = () => {
         .then((response) => {
           console.log(response.data);
           if (response.data.clientSecret) {
-            setClientSecret(response.data.clientSecret);
+            setClientSecret(response.data.clientSecret);  // Imposta la clientSecret per Stripe
           } else {
             console.error("Client Secret mancante");
           }
@@ -72,7 +72,7 @@ const CheckoutForm = () => {
           console.error("Errore nella creazione della sessione:", error);
         });
     }
-  }, [cart, userDetails]);
+  }, [cart, userDetails]);  // Riprova ogni volta che il carrello o i dettagli utente cambiano
 
   // Gestisce il cambiamento degli input dell'utente
   const handleInputChange = (e) => {
@@ -160,6 +160,7 @@ const CheckoutForm = () => {
         );
       }
     } else {
+      // Se il pagamento fallisce, mostra un messaggio di errore
       setPaymentStatus("error");
       setPaymentMessage("Si è verificato un errore nel pagamento. Riprova!");
     }
@@ -314,8 +315,8 @@ const CheckoutForm = () => {
 };
 
 const CheckoutPage = () => {
-  const [clientSecret, setClientSecret] = useState(null);
-  const { cart } = useCart();
+  const [clientSecret, setClientSecret] = useState(null);  // Stato per la chiave clientSecret di Stripe
+  const { cart } = useCart();  // Ottieni il carrello dal contesto
 
   // Ottiene il clientSecret al caricamento della pagina
   useEffect(() => {
@@ -327,7 +328,7 @@ const CheckoutPage = () => {
         .then((response) => {
           console.log(response.data);
           if (response.data.clientSecret) {
-            setClientSecret(response.data.clientSecret);
+            setClientSecret(response.data.clientSecret);  // Imposta clientSecret se ricevuto
           } else {
             console.error("Client Secret mancante");
           }

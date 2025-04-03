@@ -4,12 +4,15 @@ import axios from 'axios';
 import '../../../style/PrincipalPageStyle/NintendoPageStyle.css';
 
 export default function NintendoGames() {
+    // Stato per memorizzare i giochi ordinati
     const [sortedRange3, setSortedRange3] = useState([]);
 
     // Stato per il genere selezionato dal menu a tendina
     const [selectedGenre, setSelectedGenre] = useState('');
 
+    // useEffect per caricare i dati dei prodotti all'inizio
     useEffect(() => {
+        // Chiamata API per ottenere tutti i prodotti
         axios.get('http://localhost:3000/api/products/')
             .then(response => {
                 // Filtra i prodotti prima, poi ordina in base agli ID
@@ -18,7 +21,7 @@ export default function NintendoGames() {
                 setSortedRange3(range3);
             })
             .catch(error => console.error(error));
-    }, []);
+    }, []);  // Esegui una sola volta al caricamento del componente
 
     // Funzione per filtrare i prodotti in base ai criteri specificati
     const filterProducts = (allProducts) => {
@@ -44,7 +47,7 @@ export default function NintendoGames() {
         setSelectedGenre(e.target.value);
     }
 
-    // filtro i giochi 
+    // Filtro i giochi in base al genere selezionato
     const filteredGames = selectedGenre ? sortedRange3.filter(game => game.game_genre && game.game_genre.includes(selectedGenre)) : sortedRange3
 
     return (
@@ -52,6 +55,8 @@ export default function NintendoGames() {
             {/* Sezione per giochi */}
             <div className="nintendo-product-section">
                 <h3>Giochi</h3>
+
+                {/* Menu a tendina per selezionare il genere del gioco */}
                 <label className="nintendo-product-genre" for="filter-game-genre">Filtra per:</label>
                 <select name="game_genre" id="game-genre" onChange={handleGenreChange}>
                     <option value="">Scegli un opzione</option>
@@ -80,9 +85,12 @@ export default function NintendoGames() {
                     <option value="Action-Adventure, Platform">Action-Adventure, Platform</option>
                     <option value="Shooter">Shooter</option>
                 </select>
+                {/* Lista dei giochi filtrati */}
                 <div className="nintendo-product-list">
+                    {/* Se non ci sono giochi filtrati, mostra un messaggio */}
                     {filteredGames.length === 0 ? <h3>Nessun gioco trovato</h3> : filteredGames.map(product => (
                         <div key={product.id} className="nintendo-product-card">
+                            {/* Link per il dettaglio del prodotto */}
                             <Link to={`/products/${product.id}`} className='nintendo-product-link'>
                                 <img src={product.image_url} alt={product.name} />
                                 <h3>{product.name}</h3>

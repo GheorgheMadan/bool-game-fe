@@ -4,16 +4,20 @@ import axios from 'axios';
 import '../../../style/PrincipalPageStyle/XboxPageStyle.css';
 
 export default function XboxGames() {
+    // Stato per memorizzare i giochi filtrati e ordinati
     const [sortedRange3, setSortedRange3] = useState([]);
-
     // Stato per il genere selezionato dal menu a tendina
     const [selectedGenre, setSelectedGenre] = useState('');
 
     useEffect(() => {
+        // Chiamata API per ottenere tutti i prodotti dal backend
         axios.get('http://localhost:3000/api/products/')
             .then(response => {
+                // Filtra i prodotti in base alla compatibilità con Xbox
                 const filteredProducts = filterProducts(response.data);
+                // Ordina i prodotti filtrati in base alla categoria "gioco"
                 const { range3 } = sortProductsById(filteredProducts);
+                // Imposta lo stato con i giochi filtrati e ordinati
                 setSortedRange3(range3);
             })
             .catch(error => console.error(error));
@@ -22,10 +26,13 @@ export default function XboxGames() {
     // Funzione per filtrare i prodotti in base ai criteri specificati
     const filterProducts = (allProducts) => {
         return allProducts.filter(product => {
+            // Parsiamo le console supportate come array
             const supportedConsoles = JSON.parse(product.supported_consoles || '[]');
             return (
+                // Verifica se il prodotto è compatibile con Xbox
                 (product.category_name === "console" && /Xbox/i.test(product.name)) ||
                 /Xbox/i.test(product.compatibility) ||
+                // Verifica se il prodotto supporta Xbox tra le console
                 (Array.isArray(supportedConsoles) && supportedConsoles.some(console => /Xbox/i.test(console)))
             );
         });
@@ -33,8 +40,10 @@ export default function XboxGames() {
 
     // Funzione per ordinare i prodotti in base agli ID (dal 119-139, 101-118, 1-100)
     const sortProductsById = (filteredProducts) => {
+        // Filtra i prodotti appartenenti alla categoria "gioco"
         const range3 = filteredProducts.filter(product => product.category_name === 'gioco');
 
+        // Restituisce i giochi filtrati
         return { range3 };
     };
 
@@ -52,6 +61,7 @@ export default function XboxGames() {
             {/* Sezione per giochi */}
             <div className="xbox-product-section">
                 <h3>Giochi</h3>
+                {/* Etichetta e menu a tendina per il filtro per genere */}
                 <label className="xbox-product-genre" for="filter-game-genre">Filtra per:</label>
                 <select name="game_genre" id="game-genre" onChange={handleGenreChange}>
                     <option value="">Scegli un opzione</option>

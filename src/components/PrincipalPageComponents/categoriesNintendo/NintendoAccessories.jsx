@@ -4,9 +4,12 @@ import axios from 'axios';
 import '../../../style/PrincipalPageStyle/NintendoPageStyle.css';
 
 export default function NintendoAccessories() {
+    // Stato per memorizzare gli accessori ordinati
     const [sortedRange2, setSortedRange2] = useState([]);
 
+    // useEffect per caricare i dati dei prodotti all'inizio
     useEffect(() => {
+        // Chiamata API per ottenere tutti i prodotti
         axios.get('http://localhost:3000/api/products/')
             .then(response => {
                 // Filtra i prodotti prima, poi ordina in base agli ID
@@ -38,12 +41,14 @@ export default function NintendoAccessories() {
     };
     return (
         <>
-            {/* Sezione per accessori */}
+            {/* Sezione per visualizzare gli accessori Nintendo */}
             <div className="nintendo-product-section">
                 <h3>Accessori</h3>
                 <div className="nintendo-product-list">
+                    {/* Sezione per visualizzare gli accessori Nintendo */}
                     {sortedRange2.map(product => (
                         <div key={product.id} className="nintendo-product-card">
+                            {/* Sezione per visualizzare gli accessori Nintendo */}
                             <Link to={`/products/${product.id}`} className='nintendo-product-link'>
                                 <img src={product.image_url} alt={product.name} />
                                 <h3>{product.name}</h3>

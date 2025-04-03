@@ -6,9 +6,12 @@ import '../../../style/PrincipalPageStyle/NintendoPageStyle.css';
 
 
 export default function NintendoConsoles() {
+    // Stato per memorizzare le console ordinate
     const [sortedRange1, setSortedRange1] = useState([]);
 
+    // useEffect per caricare i dati dei prodotti all'inizio
     useEffect(() => {
+        // Chiamata API per ottenere tutti i prodotti
         axios.get('http://localhost:3000/api/products/')
             .then(response => {
                 // Filtra i prodotti prima, poi ordina in base agli ID
@@ -44,6 +47,7 @@ export default function NintendoConsoles() {
             <div className="nintendo-product-section">
                 <h3>Console</h3>
                 <div className="nintendo-product-list">
+                    {/* Mappa i prodotti e mostra ogni console */}
                     {sortedRange1.map(product => (
                         <div key={product.id} className="nintendo-product-card">
                             <Link to={`/products/${product.id}`} className='nintendo-product-link'>

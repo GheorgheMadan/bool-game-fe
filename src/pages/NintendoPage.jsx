@@ -6,6 +6,7 @@ import NintendoAccessories from "../components/PrincipalPageComponents/categorie
 import { Joystick, Gamepad2, Disc } from "lucide-react";
 import { Link } from "react-router-dom";
 
+// Componente principale per la pagina Nintendo
 export default function XboxPage() {
     return (
         <>
