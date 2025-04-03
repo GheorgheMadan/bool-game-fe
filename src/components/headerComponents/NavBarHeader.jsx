@@ -35,7 +35,7 @@ export default function NavBarHeader() {
     }
     return (
         <>
-            <div className='container-nav'>
+            <div className='container-nav' >
                 <div className='logo'>
                     <FaBars className='burger-icon' onClick={toggleMenu} />
                     <Link to='/'>

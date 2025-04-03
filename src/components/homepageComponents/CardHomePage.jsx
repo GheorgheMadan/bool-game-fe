@@ -44,7 +44,7 @@ export default function CardHomePage() {
             <h2 className="black-title title-h2 titolo-bundle">SCOPRI I NOSTRI BUNDLE</h2>
 
             {/* Primo bundle */}
-            <section className="container-cards">
+            <section className="container-bundle">
                 {/* Sezione per il primo prodotto del bundle */}
                 <div className="div-1">
                     <Link to={`/products/${query.id}`}>
@@ -72,7 +72,7 @@ export default function CardHomePage() {
             </section>
 
             {/* Secondo bundle */}
-            <section className="container-cards">
+            <section className="container-bundle">
                 {/* Sezione per il secondo prodotto del bundle */}
                 <div className='div-2'>
                     <Link to={`/products/${query2.id}`}>
