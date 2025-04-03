@@ -77,10 +77,6 @@ a {
     box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.4);
 }
 
-.container-navigator-icons.homepage {
-    background: linear-gradient(135deg, #111, #223344);
-}
-
 .container-navigator-icons:hover {
     animation: expandBackground 0.5s forwards;
     box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.6);
@@ -204,8 +200,18 @@ a {
     margin: 50px 0;
     height: 430px;
     margin-bottom: 100px;
+}
+
+.container-bundle {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 20px;
+    margin: 50px 0;
+    height: 430px;
+    margin-bottom: 100px;
     position: relative;
 }
+
 
 .div-1 {
     width: 70%;
@@ -723,21 +729,40 @@ a {
 
     .container-img {
         margin: 0 auto;
-        width: 350px;
-        height: 450px;
+        width: 320px;
+        height: 420px;
     }
 
     /* GESTIONE BUNDLE CardHomePage.jsx */
-    .container-cards .div-2 {
+    .container-bundle .div-2 {
         display: none;
+    }
+
+    .container-bundle {
+        display: flex;
+        flex-wrap: nowrap;
+        gap: 20px;
+        margin: 0px 0;
+        /* height: 430px; */
+        position: relative;
+        justify-content: center;
+        margin-top: -80px;
     }
 
     .titolo-bundle {
         margin-bottom: 0;
     }
 
+    .container-details-nintendo h4 {
+        font-size: 18px;
+    }
+
+    .container-details-nintendo a button {
+        font-size: 14px;
+    }
+
     .general-container section {
-        margin-bottom: 20px;
+        margin-bottom: 0px;
     }
 
     .container-cards {
@@ -752,7 +777,6 @@ a {
         margin: 0px 0px;
         gap: 0;
         height: 430px;
-        margin-bottom: 0px;
         position: relative;
     }
 
