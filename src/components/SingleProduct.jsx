@@ -10,6 +10,7 @@ import GenreFiltred from "./singleProductComponents/GenreFiltred";
 import ConsoleCrousel from "./singleProductComponents/ConsoleCarousel";
 import CorelatedConsole from "./singleProductComponents/CorelatedConsole";
 import CorelatedAccessories from "./singleProductComponents/CorelatedAccessories";
+// import ChatBot from "./ChatBot";
 
 export default function SingleProduct() {
 
@@ -135,6 +136,12 @@ export default function SingleProduct() {
             <div className={`jumbo-container ${(isConsole || isAccessory) ? 'hidden' : ''}`} style={{ backgroundImage: `url(${data.image_url})` }}>
             </div>
             <div className="general-container-single-product">
+
+                {/* Chatbot
+                <div className="chatbot-container">
+                    <ChatBot productId={productId} />
+                </div> */}
+
                 <div className={`container-box ${isConsole || isAccessory ? '' : 'container-box-game'}`}>
                     {/* Parte sinistra con titolo e dettagli */}
                     <div className="container-images">
