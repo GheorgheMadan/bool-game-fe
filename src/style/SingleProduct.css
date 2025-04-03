@@ -327,7 +327,7 @@ a {
 @media screen and (max-width: 1329px) {
     .container-img {
         width: 350px;
-        height: 300px;
+        height: 200px;
     }
 }
 
@@ -342,7 +342,7 @@ a {
 
     .container-img {
         width: 350px;
-        height: 290px;
+        height: 200px;
     }
 
     /* .card-image {
@@ -461,6 +461,7 @@ a {
     /* REGOLE COPERTINA PRODOTTO */
     .container-images {
         width: 100%;
+
     }
 
     .container-details-flex {
@@ -598,6 +599,11 @@ a {
 
     .general-container-single-product {
         width: 95%;
+    }
+
+    .container-img {
+        width: 320px;
+        height: 280px;
     }
 
     /* CONTAINER IMMAGINE GIOCO */
