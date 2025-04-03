@@ -191,3 +191,56 @@
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     /* Ombra del testo */
 }
+
+/* Tablet (≤ 1024px) */
+@media screen and (max-width: 1024px) {
+    .playstation-products-container-2 {
+        width: 85%;
+        margin: auto;
+    }
+
+    .playstation-product-list {
+        gap: 5px;
+    }
+
+    .playstation-products-container {
+        padding: 0rem;
+    }
+}
+
+/* Mobile (≤ 768px) */
+@media screen and (max-width: 768px) {
+    .playstation-products-container-2 {
+        width: 90%;
+        margin: auto;
+    }
+
+    .playstation-product-list {
+        gap: 5px;
+    }
+
+    .playstation-products-container {
+        padding: 0rem;
+    }
+}
+
+/* Mobile piccolo (≤ 480px) */
+@media screen and (max-width: 480px) {
+    .playstation-products-container-2 {
+        width: 95%;
+        margin: auto;
+    }
+
+    .playstation-product-list {
+        gap: 25px;
+    }
+
+    .playstation-products-container {
+        padding: 0rem;
+    }
+
+    .playstation-product-card {
+        height: 380px;
+        width: 280px;
+    }
+}
