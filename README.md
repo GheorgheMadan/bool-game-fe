@@ -11,3 +11,10 @@ Librerie installate:
     npm install react-icons
 
      npm install lucide-react
+
+     <!-- Bot react -->
+     npm install react-simple-chatbot
+     <!-- Se non si installa -->
+     npm install react-simple-chatbot --legacy-peer-deps
+     npm audit fix --force
+
